@@ -5,7 +5,7 @@ import { academicsIntro, graduationDate, milestoneLabels, milestones } from '@/c
 import type { Milestone } from '@/content/schema';
 import { formatShortDate, termLabel } from '@/lib/dates';
 import { revealProps } from '@/lib/reveal';
-import { drawSteps, segmentKinds } from '@/lib/timeline';
+import { drawStepCount, drawSteps, segmentKinds } from '@/lib/timeline';
 import type { CSSProperties } from 'react';
 
 const WAVE = 'M0 64V32Q90 4 180 32T360 32T540 32T720 32T900 32T1080 32T1260 32T1440 32V64Z';
@@ -76,10 +76,14 @@ const step = (n: number) => ({ '--step': n }) as CSSProperties;
  * Timeline. Each item draws its own dot and both halves of the line around
  * it (review M7), so nothing depends on % positions: vertical on phones and
  * tablets, horizontal in four columns from 1024px. The halves are a squiggle
- * (travelled) or flat (ahead), and they draw in one after another when the
- * list scrolls into view, like a pen moving along the road.
+ * (travelled) or flat (ahead), and the line follows the scroll like a pen
+ * moving along the road: scroll down and it draws on, scroll up and it
+ * retracts. Phones: each half and dot tracks the pen by its own position
+ * (`data-scroll-draw`). The horizontal rail can't, as every half sits at the
+ * same height, so it splits the list's own progress into `--steps` parts.
  */
 export function Academics() {
+  const reveal = revealProps();
   return (
     <section id="academics" aria-labelledby="academics-title">
       <Wave />
@@ -93,7 +97,11 @@ export function Academics() {
           />
           <ol
             aria-label={milestoneLabels.listLabel}
-            {...revealProps()}
+            {...reveal}
+            data-scroll-draw="row"
+            style={
+              { ...reveal.style, '--steps': drawStepCount(milestones.length) } as CSSProperties
+            }
             className="timeline m-0 grid list-none gap-4 p-0 lg:grid-cols-4"
           >
             {milestones.map((milestone, i) => {
@@ -108,15 +116,22 @@ export function Academics() {
                 >
                   <span
                     aria-hidden="true"
+                    data-scroll-draw=""
                     className={`tl-seg tl-before tl-${kinds.before}`}
                     style={step(steps.before)}
                   />
                   <span
                     aria-hidden="true"
+                    data-scroll-draw=""
                     className={`tl-seg tl-after tl-${kinds.after}`}
                     style={step(steps.after)}
                   />
-                  <span aria-hidden="true" className="timeline-dot" style={step(steps.dot)} />
+                  <span
+                    aria-hidden="true"
+                    data-scroll-draw=""
+                    className="timeline-dot"
+                    style={step(steps.dot)}
+                  />
                   <MilestoneCard milestone={milestone} />
                 </li>
               );

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { RevealOnScroll } from '@/components/layout/RevealOnScroll';
+import { ScrollDraw } from '@/components/layout/ScrollDraw';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { ShapeSprite } from '@/components/ui/Shape';
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
         <Footer />
         <RevealOnScroll />
+        <ScrollDraw />
       </body>
     </html>
   );

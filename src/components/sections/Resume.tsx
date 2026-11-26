@@ -3,7 +3,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shape } from '@/components/ui/Shape';
 import { StatusPill } from '@/components/ui/StatusPill';
 import {
-  careerPath,
+  careerNodeCount,
   education,
   resumeHeadings,
   resumeIntro,
@@ -16,8 +16,10 @@ import { revealProps } from '@/lib/reveal';
 /**
  * The hand-drawn line from this step's node to the next one. pathLength="1"
  * makes the path's length exactly 1 whatever its real size, so CSS can hide
- * it with stroke-dashoffset: 1 and draw it by animating to 0. Two drawings:
- * across on wide screens, down between stacked steps on phones.
+ * it with stroke-dashoffset: 1 and draw it with 0; the scroll position picks
+ * the value in between (see .career-path in globals.css). Two drawings:
+ * across on wide screens, down between stacked steps on phones, where the
+ * curve follows the pen by its own position (`data-scroll-draw`).
  */
 function CareerCurve() {
   const stroke = {
@@ -45,6 +47,7 @@ function CareerCurve() {
         aria-hidden="true"
         viewBox="0 0 40 100"
         preserveAspectRatio="none"
+        data-scroll-draw=""
         className="career-curve career-curve-y md:hidden"
       >
         <path
@@ -151,29 +154,33 @@ export function Resume() {
             </div>
           </div>
 
+          {/* "Where I'm headed": text cleared for now (content/resume.ts), so
+              the banner only holds the drawn path and is hidden from screen
+              readers. The row draws as the page scrolls; each step's --step
+              says which part of the scroll belongs to its curve. */}
           <div {...revealProps(0)} className="flex lg:col-span-2">
-            <div className="card bg-primary-c text-on-primary-c flex flex-1 flex-col gap-7">
-              <h3 className="m-0 text-[34px] leading-none font-extrabold">{resumeHeadings.path}</h3>
+            <div
+              aria-hidden="true"
+              className="card bg-primary-c text-on-primary-c flex flex-1 flex-col"
+            >
               <ol
-                aria-label={resumeHeadings.path}
-                className="m-0 grid list-none gap-8 p-0 md:grid-cols-3 md:gap-6"
+                data-scroll-draw="row"
+                style={{ '--steps': careerNodeCount - 1 } as CSSProperties}
+                className="career-path m-0 grid list-none gap-8 p-0 md:grid-cols-3 md:gap-6"
               >
-                {careerPath.map((step, i) => (
+                {Array.from({ length: careerNodeCount }, (_, i) => (
                   <li
-                    key={step.title}
-                    className="career-step relative flex items-center gap-4 md:flex-col md:gap-2.5 md:text-center"
+                    key={i}
+                    data-scroll-draw=""
+                    className="career-step relative flex items-center gap-4 md:flex-col md:gap-2.5"
                     style={{ '--step': i } as CSSProperties}
                   >
-                    {i < careerPath.length - 1 ? <CareerCurve /> : null}
+                    {i < careerNodeCount - 1 ? <CareerCurve /> : null}
                     <Shape
                       name="cookie9"
                       color="var(--primary)"
                       className="career-node relative h-16 w-16 flex-none"
                     />
-                    <span className="flex flex-col gap-1 md:gap-2.5">
-                      <span className="text-[24px] leading-tight font-bold">{step.title}</span>
-                      <span className="text-lg leading-snug">{step.detail}</span>
-                    </span>
                   </li>
                 ))}
               </ol>

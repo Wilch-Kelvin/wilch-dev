@@ -1,4 +1,4 @@
-import type { CareerStep, Education, SectionIntro, SkillGroup } from './schema';
+import type { Education, SectionIntro, SkillGroup } from './schema';
 
 export const resumeIntro: SectionIntro = {
   eyebrow: 'Resume',
@@ -37,11 +37,10 @@ export const skillGroups: readonly SkillGroup[] = [
 export const resumeHeadings = {
   education: 'Education',
   skills: 'Skills',
-  path: "Where I'm headed",
 } as const;
 
-export const careerPath: readonly CareerStep[] = [
-  { title: 'Software engineering', detail: 'Web, extensions and iOS' },
-  { title: 'DevOps', detail: 'Into Linux and self-hosting' },
-  { title: 'Cybersecurity', detail: 'The long-term goal' },
-];
+// "Where I'm headed": Kelvin cleared the heading and the three steps on
+// 2026-11-26 and asked for the banner to stay empty for now. Only the drawn
+// path is left (cookie nodes joined by a curve), so the card is decorative.
+// TODO(Kelvin): new wording for this banner; see docs/COPY.md.
+export const careerNodeCount = 3;

@@ -1,6 +1,6 @@
 import { graduationDate, milestones } from './academics';
 import { projects } from './projects';
-import { careerPath, education, skillGroups } from './resume';
+import { careerNodeCount, education, skillGroups } from './resume';
 import { contact, hero, nav } from './site';
 import { skillSamples } from './skills4u.samples';
 
@@ -12,13 +12,18 @@ const allText = JSON.stringify({
   milestones,
   education,
   skillGroups,
-  careerPath,
   hero,
   contact,
   nav,
 });
 
 describe('content', () => {
+  it('keeps the empty career banner drawable: at least two nodes for a curve', () => {
+    expect(Number.isInteger(careerNodeCount)).toBe(true);
+    expect(careerNodeCount).toBeGreaterThanOrEqual(2);
+  });
+
+
   it('has four projects with unique ids, at most one open by default', () => {
     expect(projects).toHaveLength(4);
     expect(new Set(projects.map((p) => p.id)).size).toBe(4);
