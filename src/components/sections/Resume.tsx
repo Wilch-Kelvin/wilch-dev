@@ -10,10 +10,53 @@ import {
   resumePdf,
   skillGroups,
 } from '@/content/resume';
-import type { ShapeName } from '@/lib/shapes';
+import type { CSSProperties } from 'react';
 import { revealProps } from '@/lib/reveal';
 
-const pathShapes: readonly ShapeName[] = ['cookie9', 'clover4', 'burst8'];
+/**
+ * The hand-drawn line from this step's node to the next one. pathLength="1"
+ * makes the path's length exactly 1 whatever its real size, so CSS can hide
+ * it with stroke-dashoffset: 1 and draw it by animating to 0. Two drawings:
+ * across on wide screens, down between stacked steps on phones.
+ */
+function CareerCurve() {
+  const stroke = {
+    fill: 'none',
+    stroke: 'var(--primary)',
+    strokeWidth: 3,
+    strokeLinecap: 'round',
+  } as const;
+  return (
+    <>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 200 40"
+        preserveAspectRatio="none"
+        className="career-curve career-curve-x hidden md:block"
+      >
+        <path
+          className="path-draw"
+          pathLength={1}
+          d="M0 18C30 4 70 2 110 16S170 34 200 20"
+          style={stroke}
+        />
+      </svg>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 40 100"
+        preserveAspectRatio="none"
+        className="career-curve career-curve-y md:hidden"
+      >
+        <path
+          className="path-draw"
+          pathLength={1}
+          d="M20 0C6 25 34 50 20 70S14 92 20 100"
+          style={stroke}
+        />
+      </svg>
+    </>
+  );
+}
 
 function DownloadPdf() {
   if (!resumePdf.href) {
@@ -97,7 +140,7 @@ export function Resume() {
                     {group.items.map((skill) => (
                       <li
                         key={skill}
-                        className="bg-inverse-raised inline-flex min-h-11 items-center rounded-[14px] px-[18px] text-lg font-semibold"
+                        className="chip-spring bg-inverse-raised inline-flex min-h-11 items-center rounded-[14px] px-[18px] text-lg font-semibold"
                       >
                         {skill}
                       </li>
@@ -113,25 +156,24 @@ export function Resume() {
               <h3 className="m-0 text-[34px] leading-none font-extrabold">{resumeHeadings.path}</h3>
               <ol
                 aria-label={resumeHeadings.path}
-                className="career m-0 grid list-none gap-8 p-0 md:grid-cols-3 md:gap-6"
+                className="m-0 grid list-none gap-8 p-0 md:grid-cols-3 md:gap-6"
               >
                 {careerPath.map((step, i) => (
                   <li
                     key={step.title}
-                    className="career-step flex flex-col items-center gap-2.5 text-center"
+                    className="career-step relative flex items-center gap-4 md:flex-col md:gap-2.5 md:text-center"
+                    style={{ '--step': i } as CSSProperties}
                   >
-                    <span className="inline-grid h-20 w-20">
-                      <Shape
-                        name={pathShapes[i % pathShapes.length]!}
-                        color="var(--primary)"
-                        className="h-full w-full [grid-area:1/1]"
-                      />
-                      <span className="text-on-primary relative place-self-center font-mono text-base font-semibold [grid-area:1/1]">
-                        {i + 1}
-                      </span>
+                    {i < careerPath.length - 1 ? <CareerCurve /> : null}
+                    <Shape
+                      name="cookie9"
+                      color="var(--primary)"
+                      className="career-node relative h-16 w-16 flex-none"
+                    />
+                    <span className="flex flex-col gap-1 md:gap-2.5">
+                      <span className="text-[24px] leading-tight font-bold">{step.title}</span>
+                      <span className="text-lg leading-snug">{step.detail}</span>
                     </span>
-                    <span className="text-[24px] leading-tight font-bold">{step.title}</span>
-                    <span className="text-lg leading-snug">{step.detail}</span>
                   </li>
                 ))}
               </ol>

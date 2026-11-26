@@ -88,6 +88,12 @@ export const pairs: readonly Pair[] = [
   ui('Input border on demo card', 'outline', 'surface-high'),
   ui('Primary button edge on canvas', 'primary', 'surface'),
   ui('Selected swatch ring', 'on-surface', 'surface-high'),
+  // Revamp 2026-11-26: lines that carry meaning (travelled vs ahead).
+  ui('Timeline squiggle on academics band', 'primary', 'surface-c'),
+  ui('Timeline dot on its card ring', 'primary', 'primary-c'),
+  ui('Career curve and nodes on headed card', 'primary', 'primary-c'),
+  ui('Nav underline on glass fallback', 'primary', 'glass-solid'),
+  ui('Project chevron button on inverse card', 'on-inverse', 'inverse'),
 ];
 
 // Two-ring focus indicator: an outer `focus-a` ring and an inner `focus-b`

@@ -529,19 +529,30 @@
     }
   }
 
-  /* Career path: a dashed connector between neighbouring shapes, per item. */
-  @media (min-width: 768px) {
-    .career-step {
-      position: relative;
-    }
-    .career-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 39px;
-      left: calc(50% + 52px);
-      width: calc(100% + 24px - 104px);
-      border-top: 3px dashed var(--primary);
-    }
+  /* Career path: each step owns the curve to the next node (review M7).
+     Nodes are 64px. Wide: the curve runs from this node's right edge to the
+     next node's left edge across the 24px column gap. Phones: it runs down
+     from this node to the next stacked one. */
+  .career-curve {
+    position: absolute;
+    overflow: visible;
+  }
+  .career-curve-x {
+    top: 14px;
+    left: calc(50% + 36px);
+    width: calc(100% + 24px - 72px);
+    height: 36px;
+  }
+  .career-curve-y {
+    /* Phones: node on the left, text beside it; the curve has the left
+       rail to itself, from below this node to the top of the next one. */
+    top: calc(50% + 34px);
+    left: 12px;
+    width: 40px;
+    height: calc(100% - 68px + 32px);
+  }
+  .path-draw {
+    stroke-dasharray: 1;
   }
 
   .skip-link {
@@ -702,6 +713,11 @@
   }
   to {
     d: var(--morph-to);
+  }
+}
+@keyframes dash-draw {
+  from {
+    stroke-dashoffset: 1;
   }
 }
 @keyframes wipe-right {
@@ -893,6 +909,17 @@
     [data-reveal='shown'] .tl-seg {
       animation-name: wipe-right;
     }
+  }
+
+  /* Career path: node 1 pops, the line draws to node 2 (stroke-dashoffset
+     1 → 0), node 2 pops as the pen arrives, and so on. */
+  [data-reveal='shown'] .career-node {
+    animation: pop 0.7s var(--ease-bounce) backwards;
+    animation-delay: calc(300ms + var(--step, 0) * 700ms);
+  }
+  [data-reveal='shown'] .path-draw {
+    animation: dash-draw 0.6s var(--ease-emph) backwards;
+    animation-delay: calc(450ms + var(--step, 0) * 700ms);
   }
 
   /* Demos: a new SKILL.md slides in when its tab is picked (the element is
