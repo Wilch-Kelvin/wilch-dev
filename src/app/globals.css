@@ -636,6 +636,12 @@
     d: var(--morph-to);
   }
 }
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
 @keyframes pop-in {
   from {
     scale: 0.5;
@@ -787,6 +793,20 @@
     .chip-spring:hover {
       translate: 0 -3px;
     }
+  }
+
+  /* Demos: a new SKILL.md slides in when its tab is picked (the element is
+     keyed, so React mounts a fresh one and the entrance replays), and the
+     live button eases between fills instead of snapping. */
+  .swap-in {
+    animation: swap-in 0.45s var(--ease-spring) backwards;
+  }
+  .btn-live {
+    transition:
+      border-radius var(--dur-medium) var(--ease-bounce),
+      scale var(--dur-medium) var(--ease-bounce),
+      background-color var(--dur-medium) var(--ease-emph),
+      color var(--dur-medium) var(--ease-emph);
   }
 
   /* Arrows nudge in their direction on hover. */

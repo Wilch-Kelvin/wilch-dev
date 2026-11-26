@@ -50,7 +50,7 @@ export function ButtonBuilder() {
       <div className="card-inner bg-surface grid min-h-[168px] place-items-center p-4">
         <button
           type="button"
-          className="btn state-layer min-h-14 px-8 text-xl"
+          className="btn btn-live state-layer min-h-14 px-8 text-xl"
           style={{
             borderRadius: `${choice.radius}px`,
             background: `var(--${fill.bg})`,

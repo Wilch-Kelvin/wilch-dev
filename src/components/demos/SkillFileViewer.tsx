@@ -51,13 +51,15 @@ export function SkillFileViewer() {
       <div className="card-inner bg-inverse text-on-inverse flex flex-col overflow-hidden">
         <div className="bg-inverse-raised flex items-center gap-2.5 px-[18px] py-3 font-mono text-[13px] [overflow-wrap:anywhere]">
           <Icon name="file" size={18} className="text-ia flex-none" />
-          <span>{sample.path}</span>
+          <span key={sample.id} className="swap-in">
+            {sample.path}
+          </span>
         </div>
         <CodeView
           key={sample.id}
           lines={highlightSkill(sample.source)}
           label={`${sample.plugin} ${skillDemo.fileLabel}`}
-          className="h-[320px] p-[18px]"
+          className="swap-in h-[320px] p-[18px]"
           wrap
         />
         <div className="text-code-muted border-hairline border-t px-[18px] py-2.5 font-mono text-[13px]">
