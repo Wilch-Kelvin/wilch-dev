@@ -1,11 +1,18 @@
+import { Academics } from '@/components/sections/Academics';
+import { Contact } from '@/components/sections/Contact';
+import { Hero } from '@/components/sections/Hero';
+import { Projects } from '@/components/sections/Projects';
+import { Resume } from '@/components/sections/Resume';
+
+// The page only composes sections; content and logic live elsewhere.
 export default function Home() {
   return (
-    <main className="container-page py-16">
-      <h1 className="text-6xl font-extrabold">Kelvin Wilch</h1>
-      <section id="projects" className="min-h-[60vh]" />
-      <section id="academics" className="min-h-[60vh]" />
-      <section id="resume" className="min-h-[60vh]" />
-      <section id="contact" className="min-h-[60vh]" />
+    <main>
+      <Hero />
+      <Projects />
+      <Academics />
+      <Resume />
+      <Contact />
     </main>
   );
 }
