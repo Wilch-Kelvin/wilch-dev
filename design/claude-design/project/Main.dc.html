@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kelvin's Portfolio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&amp;family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--primary)}a:hover{color:var(--on-primary-c)}
+.kp{--spring:linear(0,0.006,0.025 2.8%,0.101 6.1%,0.539 18.9%,0.721 25.3%,0.849 31.5%,0.937 38.1%,0.968 41.8%,0.991 45.7%,1.006 50.1%,1.015 55%,1.017 63.9%,1.001 85.2%,1);--bounce:linear(0,0.014,0.055 2.1%,0.22 4.6%,0.906 15.4%,1.059 19.2%,1.124 22.6%,1.135 25.6%,1.11 29.3%,1.007 38.4%,0.973 43.6%,0.966 48.4%,0.991 61.4%,1.002 72%,1);--emph:cubic-bezier(.2,0,0,1);font-family:'Roboto Flex',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--surface);color:var(--on-surface);-webkit-font-smoothing:antialiased;overflow-x:clip}
+.t-indigo{--surface:#FBF8FF;--surface-c:#F0ECF8;--surface-high:#E6E1F1;--on-surface:#1C1A23;--on-surface-var:#48455A;--outline-var:#CBC5DB;--primary:#4F3FD9;--on-primary:#FFFFFF;--primary-c:#E3DFFF;--on-primary-c:#170F63;--tertiary-c:#D4F26A;--on-tertiary-c:#1F2B00;--secondary-c:#FFDCCD;--on-secondary-c:#3A1405;--inverse:#25232D;--on-inverse:#F3EFFA;--ia:#D4F26A;--on-ia:#1F2B00;--shadow:rgba(28,22,70,.22)}
+.t-indigo.dark{--surface:#131218;--surface-c:#1E1C25;--surface-high:#2A2732;--on-surface:#E6E1EE;--on-surface-var:#C9C4D8;--outline-var:#4A4658;--primary:#C6BFFF;--on-primary:#20168A;--primary-c:#3527B0;--on-primary-c:#E6E2FF;--tertiary-c:#3E5200;--on-tertiary-c:#D7F47A;--secondary-c:#6B2E14;--on-secondary-c:#FFDCCD;--inverse:#E6E1EE;--on-inverse:#1C1A23;--ia:#4F3FD9;--on-ia:#FFFFFF;--shadow:rgba(0,0,0,.55)}
+.t-ocean{--surface:#F5FAFB;--surface-c:#E8F0F2;--surface-high:#DCE7EA;--on-surface:#151D1F;--on-surface-var:#3F4A4D;--outline-var:#BFC8CB;--primary:#00677F;--on-primary:#FFFFFF;--primary-c:#BDEBFF;--on-primary-c:#001F29;--tertiary-c:#FFC9B3;--on-tertiary-c:#380D00;--secondary-c:#D6ECC6;--on-secondary-c:#112005;--inverse:#1D2A2D;--on-inverse:#ECF3F5;--ia:#FFC9B3;--on-ia:#380D00;--shadow:rgba(0,40,50,.22)}
+.t-ocean.dark{--surface:#0F1416;--surface-c:#1A2124;--surface-high:#252D30;--on-surface:#DEE3E6;--on-surface-var:#BFC8CB;--outline-var:#3F4A4D;--primary:#5FD4FA;--on-primary:#003544;--primary-c:#004D61;--on-primary-c:#BDEBFF;--tertiary-c:#7A2E12;--on-tertiary-c:#FFDBCF;--secondary-c:#2C4A1B;--on-secondary-c:#D6ECC6;--inverse:#DEE3E6;--on-inverse:#151D1F;--ia:#00677F;--on-ia:#FFFFFF;--shadow:rgba(0,0,0,.55)}
+.t-ember{--surface:#FFF8F5;--surface-c:#F8EBE5;--surface-high:#F0DFD8;--on-surface:#221A16;--on-surface-var:#53433C;--outline-var:#D8C2B9;--primary:#A33B00;--on-primary:#FFFFFF;--primary-c:#FFDBCC;--on-primary-c:#370E00;--tertiary-c:#F0DBFF;--on-tertiary-c:#2B0A46;--secondary-c:#FFE28F;--on-secondary-c:#261A00;--inverse:#382E2A;--on-inverse:#FFEDE6;--ia:#FFB596;--on-ia:#370E00;--shadow:rgba(70,25,0,.22)}
+.t-ember.dark{--surface:#1A110E;--surface-c:#271D19;--surface-high:#332723;--on-surface:#F0DFD8;--on-surface-var:#D8C2B9;--outline-var:#53433C;--primary:#FFB596;--on-primary:#5A1B00;--primary-c:#7E2C00;--on-primary-c:#FFDBCC;--tertiary-c:#4E2A6E;--on-tertiary-c:#F0DBFF;--secondary-c:#5A4300;--on-secondary-c:#FFE28F;--inverse:#F0DFD8;--on-inverse:#221A16;--ia:#A33B00;--on-ia:#FFFFFF;--shadow:rgba(0,0,0,.55)}
+.kp a:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.skip{position:absolute;left:16px;top:-120px;z-index:100;padding:12px 20px;border-radius:999px;background:var(--primary);color:var(--on-primary);font-weight:600;text-decoration:none}
+.skip:focus{top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.01em;text-decoration:none;cursor:pointer;touch-action:manipulation;transition:border-radius .45s var(--bounce),transform .45s var(--bounce),box-shadow .2s var(--emph)}
+.btn:hover{box-shadow:0 8px 20px -10px var(--shadow)}
+.btn:active{border-radius:16px;transform:scale(.96)}
+.nl{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;transition:background-color .2s var(--emph),border-radius .45s var(--bounce)}
+.nl:hover{background:var(--primary-c)}
+.nl:active{border-radius:12px}
+.card{border-radius:36px;transition:border-radius .6s var(--spring),transform .6s var(--spring),box-shadow .4s var(--emph)}
+.card:hover{border-radius:56px;transform:translateY(-6px);box-shadow:0 28px 56px -32px var(--shadow)}
+.more{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .65s var(--spring),opacity .35s var(--emph)}
+.more-in{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:20px}
+.card:hover .more,.card:focus-within .more{grid-template-rows:1fr;opacity:1}
+.more .btn:focus-visible{outline:3px solid currentColor;outline-offset:-7px}
+.hint{transition:transform .55s var(--bounce)}
+.card:hover .hint,.card:focus-within .hint{transform:rotate(180deg)}
+@media (hover:none){.more{grid-template-rows:1fr;opacity:1}.hint{display:none}}
+.chip{transition:border-radius .45s var(--bounce),transform .45s var(--bounce)}
+.chip:hover{border-radius:999px;transform:translateY(-2px)}
+.wig{transition:transform .8s var(--bounce)}
+.card:hover .wig{transform:rotate(28deg) scale(1.08)}
+.card:hover .wig.w2{transform:rotate(-22deg) scale(.94)}
+.tile{transition:transform .7s var(--bounce)}
+.t1{transform:rotate(-7deg) translate(-10px,4px)}.t2{transform:rotate(-2deg) translate(4px,0)}.t3{transform:rotate(3deg) translate(-4px,0)}.t4{transform:rotate(8deg) translate(10px,-2px)}
+.card:hover .t1{transform:rotate(-12deg) translate(-36px,0)}.card:hover .t2{transform:rotate(-4deg) translate(-12px,-2px)}.card:hover .t3{transform:rotate(5deg) translate(14px,-2px)}.card:hover .t4{transform:rotate(13deg) translate(38px,-4px)}
+.prog{display:none}
+@media (max-width:900px){.wbar{display:none}}
+@keyframes up{from{opacity:0;transform:translateY(28px)}}
+@keyframes flexin{from{font-variation-settings:'wdth' 30,'opsz' 144;letter-spacing:.06em}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{to{transform:translateY(-14px)}}
+@keyframes ping{0%{transform:scale(.35);opacity:.85}100%{transform:scale(1.3);opacity:0}}
+@keyframes wave{to{transform:translateX(-40px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--primary)}100%{box-shadow:0 0 0 16px transparent}}
+@keyframes dot{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(-5px);opacity:1}}
+@keyframes rv{from{opacity:0;transform:translateY(64px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes px1{to{transform:translate(-40px,-170px) rotate(-40deg) scale(.85)}}
+@keyframes px2{to{transform:translate(70px,-90px) rotate(50deg)}}
+@keyframes px3{to{transform:translateY(-120px) scale(1.06)}}
+.kp.motion .up{animation:up .9s var(--emph) both}
+.kp.motion .d1{animation-delay:.08s}.kp.motion .d2{animation-delay:.18s}.kp.motion .d3{animation-delay:.28s}
+.kp.motion .flexin{animation:flexin 1.6s var(--spring) .25s both}
+.kp.motion .spin{animation:spin 48s linear infinite}
+.kp.motion .spin-r{animation:spin 26s linear infinite reverse}
+.kp.motion .spin-f{animation:spin 16s linear infinite}
+.kp.motion .bob{animation:bob 3.2s ease-in-out infinite alternate}
+.kp.motion .ping{animation:ping 3s var(--emph) infinite}
+.kp.motion .p2{animation-delay:1s}.kp.motion .p3{animation-delay:2s}
+.kp.motion .wave{animation:wave 1.4s linear infinite}
+.kp.motion .pulse{animation:pulse 1.8s ease-out infinite}
+.kp.motion .dot{animation:dot 1.2s ease-in-out infinite}
+.kp.motion .dot2{animation-delay:.15s}.kp.motion .dot3{animation-delay:.3s}
+@supports (animation-timeline: scroll()){
+.kp.motion .prog{display:block;transform-origin:0 50%;animation:grow linear both;animation-timeline:scroll(root)}
+.kp.motion .px1{animation:px1 linear both;animation-timeline:scroll(root);animation-range:0px 1000px}
+.kp.motion .px2{animation:px2 linear both;animation-timeline:scroll(root);animation-range:0px 1000px}
+.kp.motion .px3{animation:px3 linear both;animation-timeline:scroll(root);animation-range:0px 1000px}
+}
+@supports (animation-timeline: view()){
+.kp.motion .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 5% cover 30%}
+.kp.motion .rv.s2{animation-range:entry 15% cover 36%}
+.kp.motion .rv.s3{animation-range:entry 25% cover 42%}
+.kp.motion .wipe{animation:wipe linear both;animation-timeline:view();animation-range:entry 30% cover 50%}
+.kp.motion .draw{stroke-dasharray:1;animation:draw linear both;animation-timeline:view();animation-range:entry 25% cover 50%}
+}
+@media (prefers-reduced-motion:reduce){.kp *{animation:none !important;transition-duration:.01ms !important}}
+</style>
+</helmet>
+<div id="top" class="{{rootClass}}" style="position: relative">
+<svg width="0" height="0" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<path id="s-cookie12" d="M100.0 16.0A34.8 34.8 0 0 1 142.0 27.3A34.8 34.8 0 0 1 172.7 58.0A34.8 34.8 0 0 1 184.0 100.0A34.8 34.8 0 0 1 172.7 142.0A34.8 34.8 0 0 1 142.0 172.7A34.8 34.8 0 0 1 100.0 184.0A34.8 34.8 0 0 1 58.0 172.7A34.8 34.8 0 0 1 27.3 142.0A34.8 34.8 0 0 1 16.0 100.0A34.8 34.8 0 0 1 27.3 58.0A34.8 34.8 0 0 1 58.0 27.3A34.8 34.8 0 0 1 100.0 16.0Z"></path>
+<path id="s-cookie9" d="M100.0 20.0A41.0 41.0 0 0 1 151.4 38.7A41.0 41.0 0 0 1 178.8 86.1A41.0 41.0 0 0 1 169.3 140.0A41.0 41.0 0 0 1 127.4 175.2A41.0 41.0 0 0 1 72.6 175.2A41.0 41.0 0 0 1 30.7 140.0A41.0 41.0 0 0 1 21.2 86.1A41.0 41.0 0 0 1 48.6 38.7A41.0 41.0 0 0 1 100.0 20.0Z"></path>
+<path id="s-clover4" d="M143.8 56.2A44.7 44.7 0 0 1 143.8 143.8A44.7 44.7 0 0 1 56.2 143.8A44.7 44.7 0 0 1 56.2 56.2A44.7 44.7 0 0 1 143.8 56.2Z"></path>
+<path id="s-flower6" d="M100.0 30.0A38.5 38.5 0 0 1 160.6 65.0A38.5 38.5 0 0 1 160.6 135.0A38.5 38.5 0 0 1 100.0 170.0A38.5 38.5 0 0 1 39.4 135.0A38.5 38.5 0 0 1 39.4 65.0A38.5 38.5 0 0 1 100.0 30.0Z"></path>
+<path id="s-burst8" d="M100.0 22.0A37.3 37.3 0 0 1 155.2 44.8A37.3 37.3 0 0 1 178.0 100.0A37.3 37.3 0 0 1 155.2 155.2A37.3 37.3 0 0 1 100.0 178.0A37.3 37.3 0 0 1 44.8 155.2A37.3 37.3 0 0 1 22.0 100.0A37.3 37.3 0 0 1 44.8 44.8A37.3 37.3 0 0 1 100.0 22.0Z"></path>
+</defs>
+</svg>
+<a class="skip" href="#work">Skip to projects</a>
+
+<header style="position: sticky; top: 0; z-index: 40; display: flex; justify-content: center; padding: 16px; pointer-events: none">
+<nav aria-label="Main" style="pointer-events: auto; position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; padding: 8px; border-radius: 32px; background: var(--surface-high); box-shadow: 0 12px 32px -16px var(--shadow); max-width: 100%; box-sizing: border-box">
+<a class="nl" href="#top" style="gap: 10px; font-weight: 700; font-size: 17px; color: var(--on-surface)">
+<svg class="spin" viewBox="0 0 200 200" width="28" height="28" aria-hidden="true" style="overflow: visible"><use href="#s-cookie9" style="fill: var(--primary); stroke: var(--primary); stroke-width: 12; stroke-linejoin: round"></use></svg>
+Kelvin
+</a>
+<a class="nl" href="#work" style="color: var(--on-surface)">Projects</a>
+<a class="nl" href="#academics" style="color: var(--on-surface)">Academics</a>
+<a class="nl" href="#resume" style="color: var(--on-surface)">Resume</a>
+<a class="nl" href="#contact" style="color: var(--on-surface)">Contact</a>
+<a class="btn" href="https://github.com/Wilch-Kelvin" style="min-height: 44px; padding: 0 18px; font-size: 15px; background: var(--primary); color: var(--on-primary)">
+GitHub
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+<span class="prog" aria-hidden="true" style="position: absolute; left: 28px; right: 28px; bottom: 3px; height: 3px; border-radius: 3px; background: var(--primary)"></span>
+</nav>
+</header>
+
+<main>
+<section aria-labelledby="hero-title" style="padding: 40px 0 88px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 48px; align-items: center">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 28px">
+<span class="up" style="display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 16px; border-radius: 999px; background: var(--tertiary-c); color: var(--on-tertiary-c); font: 500 14px/1 'Google Sans Code', ui-monospace, monospace">
+<svg viewBox="0 0 200 200" width="16" height="16" aria-hidden="true" style="overflow: visible"><use href="#s-flower6" style="fill: currentColor"></use></svg>
+CS + Cybersecurity @ USM
+</span>
+<h1 id="hero-title" class="up d1" style="margin: 0; font-size: clamp(56px, 7.6vw, 116px); line-height: 0.94; font-weight: 800; letter-spacing: -0.035em; font-variation-settings: 'wdth' 116, 'opsz' 144; text-wrap: balance">Hi, I'm <span class="flexin" style="color: var(--primary); font-variation-settings: 'wdth' 116, 'opsz' 144">Kelvin.</span></h1>
+<p class="up d2" style="margin: 0; max-width: 44ch; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; color: var(--on-surface-var); text-wrap: pretty">I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I build for the web, the browser and iOS, and I'm working my way toward DevOps and security.</p>
+<div class="up d3" style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="#work" style="background: var(--primary); color: var(--on-primary)">
+See my projects
+<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+</a>
+<a class="btn" href="#resume" style="background: var(--surface-high); color: var(--on-surface)">Resume</a>
+</div>
+</div>
+
+<div aria-hidden="true" style="position: relative; width: 100%; max-width: 560px; aspect-ratio: 1 / 1; justify-self: center">
+<div class="px3" style="position: absolute; inset: 9%">
+<div class="up d2" style="width: 100%; height: 100%; display: grid">
+<svg class="spin" viewBox="0 0 200 200" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-cookie12" style="fill: var(--primary-c); stroke: var(--primary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font-size: clamp(130px, 15vw, 220px); line-height: 1; font-weight: 900; font-variation-settings: 'wdth' 125, 'opsz' 144; color: var(--on-primary-c)">K</span>
+</div>
+</div>
+<div class="px1" style="position: absolute; right: -2%; top: -3%; width: 36%; aspect-ratio: 1 / 1">
+<svg class="spin-r" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-clover4" style="fill: var(--tertiary-c); stroke: var(--tertiary-c); stroke-width: 14; stroke-linejoin: round"></use></svg>
+</div>
+<div class="px2" style="position: absolute; left: -4%; bottom: 3%; width: 30%; aspect-ratio: 1 / 1">
+<svg class="spin-f" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-flower6" style="fill: var(--secondary-c); stroke: var(--secondary-c); stroke-width: 12; stroke-linejoin: round"></use></svg>
+</div>
+<div class="bob" style="position: absolute; right: 7%; bottom: -1%; width: 19%; aspect-ratio: 1 / 1">
+<svg class="spin" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-burst8" style="fill: var(--inverse); stroke: var(--inverse); stroke-width: 10; stroke-linejoin: round"></use></svg>
+</div>
+<div style="position: absolute; left: 5%; top: 11%; width: 24%; height: 9%; border-radius: 999px; background: var(--primary); transform: rotate(-24deg)"></div>
+</div>
+</div>
+</section>
+
+<section id="work" aria-labelledby="work-title" style="padding: 72px 0 120px; scroll-margin-top: 96px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 56px; position: relative">
+<div class="rv" style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="display: inline-grid; width: 56px; height: 56px">
+<svg class="spin" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-cookie9" style="fill: var(--primary-c); stroke: var(--primary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-primary-c)">01</span>
+</span>
+<span style="font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-var)">Projects</span>
+</div>
+<h2 id="work-title" style="margin: 0; font-size: clamp(40px, 5.6vw, 80px); line-height: 1; font-weight: 800; letter-spacing: -0.03em; font-variation-settings: 'wdth' 112, 'opsz' 144; text-wrap: balance">Stuff I'm building</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: var(--on-surface-var); max-width: 56ch">Four projects I'm putting real hours into right now, from a campus app to an offline AI mentor.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 24px; align-items: start">
+
+<div class="rv" style="display: flex">
+<article class="card" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; background: var(--primary-c); color: var(--on-primary-c); overflow: hidden">
+<div aria-hidden="true" style="position: relative; height: 260px; border-radius: 24px; background: var(--primary); overflow: hidden; display: grid; place-items: center">
+<span class="ping" style="grid-area: 1 / 1; width: 240px; height: 240px; border-radius: 50%; border: 2px solid var(--primary-c); opacity: 0.5; transform: scale(0.55)"></span>
+<span class="ping p2" style="grid-area: 1 / 1; width: 240px; height: 240px; border-radius: 50%; border: 2px solid var(--primary-c); opacity: 0.3; transform: scale(0.85)"></span>
+<span class="ping p3" style="grid-area: 1 / 1; width: 240px; height: 240px; border-radius: 50%; border: 2px solid var(--primary-c); opacity: 0.15; transform: scale(1.15)"></span>
+<div style="grid-area: 1 / 1; width: 124px; height: 124px; display: grid">
+<svg class="spin" viewBox="0 0 200 200" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-cookie12" style="fill: var(--primary-c); stroke: var(--primary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<svg viewBox="0 0 24 24" style="grid-area: 1 / 1; place-self: center; width: 46px; height: 46px; fill: none; stroke: var(--on-primary-c); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></svg>
+</div>
+<span class="bob" style="position: absolute; top: 26%; left: 58%; padding: 8px 14px; border-radius: 999px; background: var(--tertiary-c); color: var(--on-tertiary-c); font: 600 14px/1 'Google Sans Code', ui-monospace, monospace">ping!</span>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase">Flagship · classping.space</span>
+<h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">ClassPing</h3>
+</div>
+<span class="hint" aria-hidden="true" style="flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid color-mix(in srgb, currentColor 32%, transparent)"><svg viewBox="0 0 24 24" width="20" height="20" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 9l6 6 6-6"></path></svg></span>
+</div>
+<div class="more"><div class="more-in">
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 54ch">My main project. ClassPing is built for students around campus. It started as a web app and now has a Chrome extension, a native iOS app I'm writing in SwiftUI, and Android early access.</p>
+<ul aria-label="Platforms" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Web app</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Chrome extension</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">iOS · SwiftUI</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Android early access</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="https://classping.space/welcome" style="background: var(--primary); color: var(--on-primary)">
+Visit ClassPing
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</div></div>
+</article>
+</div>
+
+<div class="rv s2" style="display: flex">
+<article class="card" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; background: var(--inverse); color: var(--on-inverse); overflow: hidden">
+<div aria-hidden="true" style="position: relative; height: 260px; border-radius: 24px; background: color-mix(in srgb, var(--on-inverse) 7%, var(--inverse)); overflow: hidden">
+<span style="position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 58%; height: 34px; border-radius: 999px; background: color-mix(in srgb, var(--on-inverse) 14%, var(--inverse))"></span>
+<div class="wig" style="position: absolute; left: 7%; top: 82px; width: 124px; height: 124px">
+<svg class="spin-r" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-clover4" style="fill: var(--ia); stroke: var(--ia); stroke-width: 14; stroke-linejoin: round"></use></svg>
+</div>
+<div class="wig w2" style="position: absolute; left: 39%; top: 100px; width: 100px; height: 100px">
+<svg viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-cookie9" style="fill: var(--primary-c); stroke: var(--primary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+</div>
+<span class="wig" style="position: absolute; right: 7%; top: 92px; width: 132px; height: 62px; border-radius: 999px; background: var(--secondary-c)"></span>
+<div class="wig w2" style="position: absolute; right: 13%; bottom: 14px; width: 70px; height: 70px">
+<svg class="spin-f" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-flower6" style="fill: var(--tertiary-c); stroke: var(--tertiary-c); stroke-width: 12; stroke-linejoin: round"></use></svg>
+</div>
+<span style="position: absolute; left: 31%; bottom: 22px; width: 34px; height: 34px; border-radius: 50%; background: var(--primary)"></span>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase">Chrome extension · JavaScript</span>
+<h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">Ro5n3R</h3>
+</div>
+<span class="hint" aria-hidden="true" style="flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid color-mix(in srgb, currentColor 32%, transparent)"><svg viewBox="0 0 24 24" width="20" height="20" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 9l6 6 6-6"></path></svg></span>
+</div>
+<div class="more"><div class="more-in">
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 54ch">Ro5n3R replaces Chrome's new tab page with Material-inspired widgets in fun, irregular shapes. A lot of this site's style comes straight from it.</p>
+<ul aria-label="Highlights" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">New tab page</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Irregular widgets</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Material-inspired</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="https://github.com/Wilch-Kelvin/Ro5n3R" style="background: var(--ia); color: var(--on-ia)">
+View on GitHub
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</div></div>
+</article>
+</div>
+
+<div class="rv" style="display: flex">
+<article class="card" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; background: var(--tertiary-c); color: var(--on-tertiary-c); overflow: hidden">
+<div aria-hidden="true" style="height: 260px; box-sizing: border-box; border-radius: 24px; background: color-mix(in srgb, var(--on-tertiary-c) 8%, var(--tertiary-c)); overflow: hidden; padding: 22px; display: flex; flex-direction: column; justify-content: center; gap: 12px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: var(--on-tertiary-c); color: var(--tertiary-c); font: 500 13px/1 'Google Sans Code', ui-monospace, monospace">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: currentColor"></span>
+runs offline
+</span>
+<div style="align-self: flex-start; width: 62%; box-sizing: border-box; padding: 14px 16px; border-radius: 22px 22px 22px 6px; background: var(--surface); display: flex; flex-direction: column; gap: 8px">
+<span style="height: 10px; width: 92%; border-radius: 5px; background: color-mix(in srgb, var(--on-surface) 18%, var(--surface))"></span>
+<span style="height: 10px; width: 58%; border-radius: 5px; background: color-mix(in srgb, var(--on-surface) 18%, var(--surface))"></span>
+</div>
+<div style="align-self: flex-end; width: 52%; box-sizing: border-box; padding: 14px 16px; border-radius: 22px 22px 6px 22px; background: var(--on-tertiary-c); display: flex; flex-direction: column; gap: 8px">
+<span style="height: 10px; width: 86%; border-radius: 5px; background: color-mix(in srgb, var(--tertiary-c) 45%, var(--on-tertiary-c))"></span>
+<span style="height: 10px; width: 64%; border-radius: 5px; background: color-mix(in srgb, var(--tertiary-c) 45%, var(--on-tertiary-c))"></span>
+</div>
+<div style="align-self: flex-start; display: flex; gap: 6px; padding: 14px 18px; border-radius: 22px 22px 22px 6px; background: var(--surface)">
+<span class="dot" style="width: 8px; height: 8px; border-radius: 50%; background: var(--on-surface-var)"></span>
+<span class="dot dot2" style="width: 8px; height: 8px; border-radius: 50%; background: var(--on-surface-var)"></span>
+<span class="dot dot3" style="width: 8px; height: 8px; border-radius: 50%; background: var(--on-surface-var)"></span>
+</div>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase">Desktop app · In progress</span>
+<h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">NativeX</h3>
+</div>
+<span class="hint" aria-hidden="true" style="flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid color-mix(in srgb, currentColor 32%, transparent)"><svg viewBox="0 0 24 24" width="20" height="20" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 9l6 6 6-6"></path></svg></span>
+</div>
+<div class="more"><div class="more-in">
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 54ch">An offline coding mentor for people new to agentic coding. It runs a local LLM behind a chat UI and ships with skills and agents you can customize, starting with web design.</p>
+<ul aria-label="Highlights" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Local LLM</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Skills + agents</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Windows + macOS</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="https://github.com/Wilch-Kelvin/NativeX" style="background: var(--on-tertiary-c); color: var(--tertiary-c)">
+View on GitHub
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</div></div>
+</article>
+</div>
+
+<div class="rv s2" style="display: flex">
+<article class="card" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; background: var(--secondary-c); color: var(--on-secondary-c); overflow: hidden">
+<div aria-hidden="true" style="height: 260px; box-sizing: border-box; border-radius: 24px; background: color-mix(in srgb, var(--on-secondary-c) 8%, var(--secondary-c)); overflow: hidden; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+<div class="tile t1" style="display: flex; align-items: center; gap: 12px; width: 300px; max-width: 92%; height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 18px; background: var(--surface); color: var(--on-surface); font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; box-shadow: 0 8px 18px -12px var(--shadow)">
+<svg viewBox="0 0 200 200" width="22" height="22" style="flex: none; overflow: visible"><use href="#s-flower6" style="fill: var(--primary)"></use></svg>
+ui-ux
+</div>
+<div class="tile t2" style="display: flex; align-items: center; gap: 12px; width: 300px; max-width: 92%; height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 18px; background: var(--surface); color: var(--on-surface); font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; box-shadow: 0 8px 18px -12px var(--shadow)">
+<svg viewBox="0 0 200 200" width="22" height="22" style="flex: none; overflow: visible"><use href="#s-cookie9" style="fill: var(--inverse)"></use></svg>
+project-documentation
+</div>
+<div class="tile t3" style="display: flex; align-items: center; gap: 12px; width: 300px; max-width: 92%; height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 18px; background: var(--surface); color: var(--on-surface); font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; box-shadow: 0 8px 18px -12px var(--shadow)">
+<svg viewBox="0 0 200 200" width="22" height="22" style="flex: none; overflow: visible"><use href="#s-clover4" style="fill: var(--primary)"></use></svg>
+wiki-health
+</div>
+<div class="tile t4" style="display: flex; align-items: center; gap: 12px; width: 300px; max-width: 92%; height: 48px; box-sizing: border-box; padding: 0 16px; border-radius: 18px; background: var(--surface); color: var(--on-surface); font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; box-shadow: 0 8px 18px -12px var(--shadow)">
+<svg viewBox="0 0 200 200" width="22" height="22" style="flex: none; overflow: visible"><use href="#s-burst8" style="fill: var(--inverse)"></use></svg>
+inventory-auditor
+</div>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase">Plugin marketplace · Python</span>
+<h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">Skills4u</h3>
+</div>
+<span class="hint" aria-hidden="true" style="flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid color-mix(in srgb, currentColor 32%, transparent)"><svg viewBox="0 0 24 24" width="20" height="20" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 9l6 6 6-6"></path></svg></span>
+</div>
+<div class="more"><div class="more-in">
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 54ch">A marketplace of Claude plugins I design. Each one packs skills, agents or scripts for a real job, like UI/UX design and review, project docs, wiki health checks and inventory audits, with evals to check they work.</p>
+<ul aria-label="Highlights" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Claude plugins</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Agent skills</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 32%, transparent); font-size: 14px; font-weight: 500">Evals + tests</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="https://github.com/Wilch-Kelvin/skills4u" style="background: var(--on-secondary-c); color: var(--secondary-c)">
+View on GitHub
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</div></div>
+</article>
+</div>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 24px">
+<div class="rv" style="display: flex; align-items: center; gap: 14px">
+<span style="font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-var)">Try it live</span>
+<span aria-hidden="true" style="flex: 1; height: 1px; background: var(--outline-var)"></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 24px; align-items: start">
+
+<div class="rv" style="display: flex">
+<article aria-labelledby="demo-code-title" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; border-radius: 36px; background: var(--surface-high); color: var(--on-surface)">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary)">Live code · edit me</span>
+<h3 id="demo-code-title" style="margin: 0; font-size: clamp(28px, 2.8vw, 36px); line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">Build an expressive button</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--on-surface-var)">Change the label, corner radius and fill. The preview and the code update as you go.</p>
+</div>
+<div style="min-height: 168px; box-sizing: border-box; padding: 16px; border-radius: 24px; background: var(--surface); display: grid; place-items: center">
+<button type="button" class="btn" style="border: 0; min-height: 56px; padding: 0 32px; font-size: 18px; border-radius: {{radius}}px; background: {{fillBg}}; color: {{fillFg}}">{{labelShown}}</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px">
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600">
+Label
+<input type="text" value="{{label}}" onChange="{{setLabel}}" maxlength="24" style="min-height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 14px; border: 1px solid var(--outline-var); background: var(--surface); color: var(--on-surface); font: 500 16px/1 'Roboto Flex', system-ui, sans-serif">
+</label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600">
+Corner radius: {{radius}}px
+<input type="range" min="0" max="40" step="1" value="{{radius}}" onChange="{{setRadius}}" style="min-height: 48px; margin: 0; accent-color: var(--primary)">
+</label>
+</div>
+<fieldset style="margin: 0; padding: 0; border: 0; min-width: 0">
+<legend style="padding: 0; margin: 0 0 10px; font-size: 14px; font-weight: 600">Fill</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-for list="{{fills}}" as="f" hint-placeholder-count="4">
+<button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" aria-label="{{f.name}} fill" style="width: 48px; height: 48px; padding: 0; border: 0; cursor: pointer; border-radius: {{f.radius}}; background: {{f.bg}}; box-shadow: {{f.ring}}; transition: border-radius .45s var(--bounce)"></button>
+</sc-for>
+</div>
+</fieldset>
+<pre tabindex="0" aria-label="Generated code" style="margin: 0; padding: 20px; border-radius: 20px; background: var(--inverse); color: var(--on-inverse); font: 500 14px/1.6 'Google Sans Code', ui-monospace, monospace; white-space: pre; overflow-x: auto"><code><sc-for list="{{codeLines}}" as="line" hint-placeholder-count="6"><span style="display: block"><sc-for list="{{line.parts}}" as="part" hint-placeholder-count="3"><span style="color: {{part.c}}">{{part.t}}</span></sc-for></span></sc-for></code></pre>
+</article>
+</div>
+
+<div class="rv s2" style="display: flex">
+<article aria-labelledby="demo-skill-title" style="flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; border-radius: 36px; background: var(--surface-high); color: var(--on-surface)">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font: 500 13px/1.3 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary)">Skill file · from Skills4u</span>
+<h3 id="demo-skill-title" style="margin: 0; font-size: clamp(28px, 2.8vw, 36px); line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: 'wdth' 110, 'opsz' 144">Read a real SKILL.md</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--on-surface-var)">Every Skills4u plugin is built around a file like this. The description is what tells Claude when to load it.</p>
+</div>
+<div role="group" aria-label="Pick a plugin" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{skillTabs}}" as="tab" hint-placeholder-count="4">
+<button type="button" onClick="{{tab.pick}}" aria-pressed="{{tab.pressed}}" style="min-height: 44px; padding: 0 16px; border: 0; cursor: pointer; font: 600 14px/1 'Google Sans Code', ui-monospace, monospace; border-radius: {{tab.radius}}; background: {{tab.bg}}; color: {{tab.fg}}; transition: border-radius .45s var(--bounce), background-color .2s var(--emph)">{{tab.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--inverse); color: var(--on-inverse)">
+<div style="display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: color-mix(in srgb, var(--on-inverse) 10%, var(--inverse)); font: 500 13px/1.4 'Google Sans Code', ui-monospace, monospace; overflow-wrap: anywhere">
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex: none; fill: none; stroke: var(--ia); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg>
+<span>{{skill.path}}</span>
+</div>
+<pre tabindex="0" aria-label="SKILL.md contents" style="margin: 0; height: 300px; box-sizing: border-box; overflow: auto; padding: 18px; font: 500 13.5px/1.65 'Google Sans Code', ui-monospace, monospace; white-space: pre-wrap"><code><sc-for list="{{skillLines}}" as="line" hint-placeholder-count="6"><span style="display: block; min-height: 1.65em"><sc-for list="{{line.parts}}" as="part" hint-placeholder-count="2"><span style="color: {{part.c}}">{{part.t}}</span></sc-for></span></sc-for></code></pre>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<span style="font: 500 13px/1.45 'Google Sans Code', ui-monospace, monospace; color: var(--on-surface-var)">Also in this plugin: {{skill.extras}}</span>
+<a class="btn" href="https://github.com/Wilch-Kelvin/skills4u" style="background: var(--primary); color: var(--on-primary)">
+Open the repo
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</article>
+</div>
+
+</div>
+</div>
+
+<div class="rv" style="display: flex; justify-content: center">
+<a class="btn" href="https://github.com/Wilch-Kelvin" style="background: var(--surface-high); color: var(--on-surface)">
+See everything on GitHub
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+</a>
+</div>
+</div>
+</section>
+
+<section id="academics" aria-labelledby="acad-title" style="scroll-margin-top: 96px">
+<svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 64px; fill: var(--surface-c)"><path d="M0 64V32Q90 4 180 32T360 32T540 32T720 32T900 32T1080 32T1260 32T1440 32V64Z"></path></svg>
+<div style="background: var(--surface-c); padding: 48px 0 64px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 48px">
+<div class="rv" style="display: flex; flex-direction: column; gap: 16px; max-width: 760px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="display: inline-grid; width: 56px; height: 56px">
+<svg class="spin" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-clover4" style="fill: var(--tertiary-c); stroke: var(--tertiary-c); stroke-width: 14; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-tertiary-c)">02</span>
+</span>
+<span style="font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-var)">Academics</span>
+</div>
+<h2 id="acad-title" style="margin: 0; font-size: clamp(40px, 5.6vw, 80px); line-height: 1; font-weight: 800; letter-spacing: -0.03em; font-variation-settings: 'wdth' 112, 'opsz' 144; text-wrap: balance">The Journey</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: var(--on-surface-var); max-width: 58ch">I finished my associate degree at Southern Maine Community College, then transferred to the University of Southern Maine. Here's where things stand.</p>
+</div>
+
+<div class="wbar" aria-hidden="true" style="position: relative; height: 28px">
+<span style="position: absolute; left: calc(62.5% + 14px); right: 0; top: 12px; height: 4px; border-radius: 4px; background: var(--outline-var)"></span>
+<div class="wipe" style="position: absolute; left: 0; top: 0; width: 62.5%; height: 28px; overflow: hidden">
+<svg class="wave" viewBox="0 0 1000 20" style="position: absolute; left: 0; top: 4px; width: 1000px; height: 20px; overflow: visible; fill: none; stroke: var(--primary); stroke-width: 4; stroke-linecap: round"><path d="M0 10Q10 3 20 10T40 10T60 10T80 10T100 10T120 10T140 10T160 10T180 10T200 10T220 10T240 10T260 10T280 10T300 10T320 10T340 10T360 10T380 10T400 10T420 10T440 10T460 10T480 10T500 10T520 10T540 10T560 10T580 10T600 10T620 10T640 10T660 10T680 10T700 10T720 10T740 10T760 10T780 10T800 10T820 10T840 10T860 10T880 10T900 10T920 10T940 10T960 10T980 10T1000 10"></path></svg>
+</div>
+<span style="position: absolute; left: 12.5%; top: 14px; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--primary)"></span>
+<span style="position: absolute; left: 37.5%; top: 14px; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--primary)"></span>
+<span class="pulse" style="position: absolute; left: 62.5%; top: 14px; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--primary); border: 4px solid var(--surface-c); box-sizing: border-box"></span>
+<span style="position: absolute; left: 87.5%; top: 14px; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--outline-var)"></span>
+</div>
+
+<ol aria-label="Academic progress" style="list-style: none; margin: -24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px">
+<li class="rv" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 28px; background: var(--surface); color: var(--on-surface)">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 12px; border-radius: 999px; background: var(--tertiary-c); color: var(--on-tertiary-c); font: 600 13px/1 'Google Sans Code', ui-monospace, monospace">
+<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+Done
+</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 750">Associate Degree</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--on-surface-var)">Southern Maine Community College</p>
+</div>
+</li>
+<li class="rv s2" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 28px; background: var(--surface); color: var(--on-surface)">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 12px; border-radius: 999px; background: var(--tertiary-c); color: var(--on-tertiary-c); font: 600 13px/1 'Google Sans Code', ui-monospace, monospace">
+<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+Done
+</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 750">Transferred to USM</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--on-surface-var)">B.S. in Computer Science with a minor in Cybersecurity</p>
+</div>
+</li>
+<li class="rv s3" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 28px; background: var(--primary-c); color: var(--on-primary-c)">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 30px; padding: 0 12px; border-radius: 999px; background: var(--primary); color: var(--on-primary); font: 600 13px/1 'Google Sans Code', ui-monospace, monospace">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: currentColor"></span>
+Now
+</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 750">Fall 2026</h3>
+<ul aria-label="Fall 2026 courses" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; flex-direction: column; gap: 2px"><span style="font: 600 13px/1.2 'Google Sans Code', ui-monospace, monospace">COS 322</span><span style="font-size: 15px; line-height: 1.4">Foundations of Machine Learning</span></li>
+<li style="display: flex; flex-direction: column; gap: 2px"><span style="font: 600 13px/1.2 'Google Sans Code', ui-monospace, monospace">ITT 451</span><span style="font-size: 15px; line-height: 1.4">Cyber Laws, Policies and Ethics</span></li>
+<li style="display: flex; flex-direction: column; gap: 2px"><span style="font: 600 13px/1.2 'Google Sans Code', ui-monospace, monospace">ITT 272</span><span style="font-size: 15px; line-height: 1.4">Networking I</span></li>
+<li style="display: flex; flex-direction: column; gap: 2px"><span style="font: 600 13px/1.2 'Google Sans Code', ui-monospace, monospace">MAT 295</span><span style="font-size: 15px; line-height: 1.4">Linear Algebra</span></li>
+</ul>
+</div>
+</li>
+<li class="rv s3" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 28px; background: var(--surface); color: var(--on-surface)">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--on-surface-var); color: var(--on-surface-var); font: 600 13px/1 'Google Sans Code', ui-monospace, monospace; box-sizing: border-box">Next</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 750">B.S. Computer Science</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--on-surface-var)">Cybersecurity minor. Graduating [EXPECTED DATE]</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 64px; fill: var(--surface-c); transform: scaleY(-1)"><path d="M0 64V32Q90 4 180 32T360 32T540 32T720 32T900 32T1080 32T1260 32T1440 32V64Z"></path></svg>
+</section>
+
+<section id="resume" aria-labelledby="resume-title" style="padding: 88px 0 120px; scroll-margin-top: 96px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div class="rv" style="display: flex; flex-direction: column; gap: 16px; max-width: 700px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="display: inline-grid; width: 56px; height: 56px">
+<svg class="spin" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-burst8" style="fill: var(--secondary-c); stroke: var(--secondary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-secondary-c)">03</span>
+</span>
+<span style="font: 500 14px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-surface-var)">Resume</span>
+</div>
+<h2 id="resume-title" style="margin: 0; font-size: clamp(40px, 5.6vw, 80px); line-height: 1; font-weight: 800; letter-spacing: -0.03em; font-variation-settings: 'wdth' 112, 'opsz' 144; text-wrap: balance">The short version</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: var(--on-surface-var); max-width: 56ch">Where I've studied and the tools I actually use. Grab the PDF for the full thing.</p>
+</div>
+<div class="rv s2" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<a class="btn" href="#resume" style="background: var(--primary); color: var(--on-primary)">
+<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>
+Download PDF
+</a>
+<span style="font: 500 12px/1.3 'Google Sans Code', ui-monospace, monospace; color: var(--on-surface-var)">[ADD PDF LINK]</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 24px">
+<div class="rv" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 32px; background: var(--surface-high); color: var(--on-surface)">
+<h3 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 800; font-variation-settings: 'wdth' 110, 'opsz' 144">Education</h3>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--outline-var)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<span style="font-size: 20px; line-height: 1.3; font-weight: 700">B.S. Computer Science</span>
+<span style="display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; background: var(--primary-c); color: var(--on-primary-c); font: 600 12px/1 'Google Sans Code', ui-monospace, monospace">In progress</span>
+</div>
+<span style="font-size: 16px; line-height: 1.5; color: var(--on-surface-var)">University of Southern Maine · Minor in Cybersecurity</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<span style="font-size: 20px; line-height: 1.3; font-weight: 700">Associate Degree</span>
+<span style="display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; background: var(--tertiary-c); color: var(--on-tertiary-c); font: 600 12px/1 'Google Sans Code', ui-monospace, monospace">Completed</span>
+</div>
+<span style="font-size: 16px; line-height: 1.5; color: var(--on-surface-var)">Southern Maine Community College</span>
+</div>
+</div>
+</div>
+
+<div class="rv s2" style="display: flex">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 32px; background: var(--inverse); color: var(--on-inverse)">
+<h3 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 800; font-variation-settings: 'wdth' 110, 'opsz' 144">Skills</h3>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font: 500 13px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ia)">Languages</span>
+<ul aria-label="Languages" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">Python</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">Java</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">JavaScript</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">TypeScript</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font: 500 13px/1 'Google Sans Code', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ia)">Web</span>
+<ul aria-label="Web" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px">
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">React 18</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">HTML5</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">CSS3</li>
+<li class="chip" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 14px; background: color-mix(in srgb, var(--on-inverse) 11%, var(--inverse)); font-size: 16px; font-weight: 600">Tailwind CSS</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="rv" style="display: flex; grid-column: 1 / -1">
+<div class="card" style="flex: 1; display: flex; flex-direction: column; gap: 28px; padding: 32px; background: var(--primary-c); color: var(--on-primary-c)">
+<h3 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 800; font-variation-settings: 'wdth' 110, 'opsz' 144">Where I'm headed</h3>
+<div style="position: relative">
+<svg class="wbar" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 80px; overflow: visible; fill: none; stroke: var(--primary); stroke-width: 3; stroke-linecap: round"><path class="draw" pathLength="1" d="M166 40C300 -6 366 86 500 40S700 -6 834 40" style="vector-effect: non-scaling-stroke"></path></svg>
+<ol aria-label="Career path" style="position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 24px">
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+<span style="display: inline-grid; width: 80px; height: 80px">
+<svg class="spin" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-cookie9" style="fill: var(--primary); stroke: var(--primary); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-primary)">1</span>
+</span>
+<span style="font-size: 20px; font-weight: 750; line-height: 1.25">Software engineering</span>
+<span style="font-size: 15px; line-height: 1.45">Web, extensions and iOS</span>
+</li>
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+<span style="display: inline-grid; width: 80px; height: 80px">
+<svg class="spin-r" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-clover4" style="fill: var(--primary); stroke: var(--primary); stroke-width: 14; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-primary)">2</span>
+</span>
+<span style="font-size: 20px; font-weight: 750; line-height: 1.25">DevOps</span>
+<span style="font-size: 15px; line-height: 1.45">Into Linux and self-hosting</span>
+</li>
+<li style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+<span style="display: inline-grid; width: 80px; height: 80px">
+<svg class="spin" viewBox="0 0 200 200" aria-hidden="true" style="grid-area: 1 / 1; width: 100%; height: 100%; overflow: visible"><use href="#s-burst8" style="fill: var(--primary); stroke: var(--primary); stroke-width: 10; stroke-linejoin: round"></use></svg>
+<span style="grid-area: 1 / 1; place-self: center; font: 600 16px/1 'Google Sans Code', ui-monospace, monospace; color: var(--on-primary)">3</span>
+</span>
+<span style="font-size: 20px; font-weight: 750; line-height: 1.25">Cybersecurity</span>
+<span style="font-size: 15px; line-height: 1.45">The long-term goal</span>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" aria-labelledby="contact-title" style="padding: 0 0 32px; scroll-margin-top: 96px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 24px">
+<div class="rv" style="display: flex">
+<div class="card" style="flex: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; padding: clamp(32px, 6vw, 88px); background: var(--inverse); color: var(--on-inverse)">
+<div aria-hidden="true" style="position: absolute; right: -60px; top: -60px; width: clamp(150px, 24vw, 320px); aspect-ratio: 1 / 1">
+<svg class="spin-r" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-clover4" style="fill: var(--ia); stroke: var(--ia); stroke-width: 14; stroke-linejoin: round"></use></svg>
+</div>
+<div aria-hidden="true" style="position: absolute; right: clamp(70px, 18vw, 250px); top: clamp(90px, 16vw, 230px); width: clamp(48px, 7vw, 96px); aspect-ratio: 1 / 1">
+<svg class="spin" viewBox="0 0 200 200" style="width: 100%; height: 100%; overflow: visible"><use href="#s-cookie9" style="fill: var(--primary-c); stroke: var(--primary-c); stroke-width: 10; stroke-linejoin: round"></use></svg>
+</div>
+<h2 id="contact-title" style="position: relative; margin: 0; max-width: calc(100% - clamp(70px, 16vw, 300px)); font-size: clamp(44px, 7vw, 104px); line-height: 0.95; font-weight: 800; letter-spacing: -0.035em; font-variation-settings: 'wdth' 116, 'opsz' 144; text-wrap: balance">Let's build something.</h2>
+<p style="position: relative; margin: 0; max-width: 46ch; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; color: color-mix(in srgb, var(--on-inverse) 82%, var(--inverse))">Got a project, a role, or a question about something on here? Hit me up.</p>
+<div style="position: relative; display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn" href="https://github.com/Wilch-Kelvin" style="background: var(--ia); color: var(--on-ia)">
+<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"></path></svg>
+github.com/Wilch-Kelvin
+</a>
+<a class="btn" href="#contact" style="background: color-mix(in srgb, var(--on-inverse) 12%, var(--inverse)); color: var(--on-inverse)">
+<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4 7 8 6 8-6"></path></svg>
+[YOUR EMAIL]
+</a>
+</div>
+</div>
+</div>
+<footer style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 16px 4px; font-size: 14px; color: var(--on-surface-var)">
+<span>© 2026 Kelvin</span>
+<span>Built with a lot of rounded corners.</span>
+<a href="#top" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; text-decoration: none">
+Back to top
+<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>
+</a>
+</footer>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"palette":{"editor":"enum","options":["Indigo + Lime","Ocean + Coral","Ember + Plum"],"default":"Indigo + Lime","section":"Theme"},"dark":{"editor":"boolean","default":false,"section":"Theme"},"motion":{"editor":"boolean","default":true,"section":"Motion"},"$preview":{"width":1440,"height":6200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const themes = { 'Indigo + Lime': 't-indigo', 'Ocean + Coral': 't-ocean', 'Ember + Plum': 't-ember' };
+    const palette = this.props.palette ?? 'Indigo + Lime';
+    const dark = this.props.dark ?? false;
+    const motion = this.props.motion ?? true;
+    const parts = ['kp', themes[palette] || 't-indigo'];
+    if (dark) parts.push('dark');
+    parts.push(motion ? 'motion' : 'still');
+    const s = this.state || {};
+    const label = s.label ?? 'Ping me';
+    const radius = s.radius ?? 24;
+    const shown = label.trim() === '' ? 'Button' : label;
+    const fillDefs = [
+      { id: 'primary', name: 'Primary', bg: 'var(--primary)', fg: 'var(--on-primary)' },
+      { id: 'tertiary', name: 'Tertiary', bg: 'var(--tertiary-c)', fg: 'var(--on-tertiary-c)' },
+      { id: 'secondary', name: 'Secondary', bg: 'var(--secondary-c)', fg: 'var(--on-secondary-c)' },
+      { id: 'inverse', name: 'Inverse', bg: 'var(--inverse)', fg: 'var(--on-inverse)' }
+    ];
+    const fill = fillDefs.find((f) => f.id === s.fill) || fillDefs[0];
+    const fills = fillDefs.map((f) => ({
+      name: f.name,
+      bg: f.bg,
+      pressed: f.id === fill.id,
+      radius: f.id === fill.id ? '14px' : '50%',
+      ring: f.id === fill.id ? '0 0 0 3px var(--surface-high), 0 0 0 6px var(--on-surface)' : 'inset 0 0 0 1px var(--outline-var)',
+      pick: () => this.setState({ fill: f.id })
+    }));
+    const T = 'var(--ia)';
+    const A = 'var(--primary-c)';
+    const S = 'var(--secondary-c)';
+    const P = 'var(--on-inverse)';
+    const M = 'color-mix(in srgb, var(--on-inverse) 55%, var(--inverse))';
+    const toLines = (rows) => rows.map((row) => ({ parts: row.map((p) => ({ t: p[0], c: p[1] })) }));
+    const codeLines = toLines([
+      [['<', P], ['button', T], [' class', A], ['=', P], ['"btn"', S]],
+      [['  style', A], ['=', P], ['"border-radius: ' + radius + 'px;', S]],
+      [['         background: ' + fill.bg + ';', S]],
+      [['         color: ' + fill.fg + '"', S], ['>', P]],
+      [['  ' + shown, P]],
+      [['</', P], ['button', T], ['>', P]]
+    ]);
+    const skillDefs = [
+      {
+        id: 'ui-ux', label: 'ui-ux', name: 'ui-ux-design', title: '# UI/UX design',
+        path: 'ui-ux/skills/ui-ux-design/SKILL.md',
+        extras: '2 agents, 7 references, contrast.py, 2 assets, evals',
+        desc: `Use when designing, building, restyling, mocking up or reviewing any screen, component, flow, form, list, sheet, onboarding, landing page or dashboard, on web or mobile, even when no style is mentioned ("build the settings screen", "make this look premium", "it looks generic", "pick our colours", "design the onboarding", "review this UI"). Finds or creates the project's design system first, proposes distinctive directions instead of template defaults, builds light and dark tokens checked with a contrast script, and runs a priority-ranked quality pass (accessibility, touch, layout, navigation, forms, type, motion, states) before anything ships.`
+      },
+      {
+        id: 'docs', label: 'docs', name: 'project-documentation', title: '# Project documentation',
+        path: 'project-documentation/skills/project-documentation/SKILL.md',
+        extras: 'style.md, readme.md, word-document.md',
+        desc: `Use when the user asks to document a project, "write the docs", "make the project documentation", "a Word doc about the project", "a README for GitHub", "explain the whole app", "the docs are out of date", or to prepare a handoff, review or submission copy. Produces two files in the project's docs/ folder, a professional, well-formatted Word document covering every aspect of the project (with diagrams where they help) and a GitHub README.md, both checked against the repo before they're written.`
+      },
+      {
+        id: 'wiki', label: 'wiki-health', name: 'wiki-health', title: '# Wiki health',
+        path: 'wiki-health/skills/wiki-health/SKILL.md',
+        extras: 'config.md, audit_wiki.py + tests, evals',
+        desc: `Use when the user asks to audit, health-check or tidy a Markdown wiki, an Obsidian vault, a docs folder or a repo's agent files (CLAUDE.md, AGENTS.md, SKILL.md), or asks "which notes are too long?", "is this file over budget?", "find orphaned notes", "find broken links", "what needs splitting?" or "/wiki-health". Runs a bundled script that measures every Markdown file against a size budget, finds notes nothing links to and broken links or headings, then writes a numbered fix plan and changes nothing until the user approves it.`
+      },
+      {
+        id: 'inv', label: 'inventory', name: 'inventory-auditor', title: '# Inventory auditor',
+        path: 'inventory-auditor/skills/inventory-auditor/SKILL.md',
+        extras: 'schema.md, inventory.py + tests',
+        desc: `"Inventories the skills, subagents and hooks an agent can load, measures what each costs in context every turn and how often session transcripts show it used, flags duplicate, overlapping or vague triggers, and proposes keep, refactor, merge, defer or retire verdicts without changing anything. Use when the user asks to audit their skills or agents, asks which skills overlap, cost the most context or go unused, asks whether two skills are duplicates or should be merged, or whether to retire one, or says /inventory-auditor. For file sizes, orphans and broken links in docs or a wiki, use wiki-health instead."`
+      }
+    ];
+    const skill = skillDefs.find((d) => d.id === s.skill) || skillDefs[0];
+    const skillTabs = skillDefs.map((d) => ({
+      label: d.label,
+      pressed: d.id === skill.id,
+      radius: d.id === skill.id ? '999px' : '12px',
+      bg: d.id === skill.id ? 'var(--primary)' : 'var(--surface)',
+      fg: d.id === skill.id ? 'var(--on-primary)' : 'var(--on-surface)',
+      pick: () => this.setState({ skill: d.id })
+    }));
+    const skillLines = toLines([
+      [['---', M]],
+      [['name', T], [': ', P], [skill.name, P]],
+      [['description', T], [': ', P], [skill.desc, P]],
+      [['---', M]],
+      [[' ', P]],
+      [[skill.title, A]]
+    ]);
+    return {
+      rootClass: parts.join(' '),
+      label: label,
+      radius: radius,
+      labelShown: shown,
+      fillBg: fill.bg,
+      fillFg: fill.fg,
+      fills: fills,
+      codeLines: codeLines,
+      setLabel: (e) => this.setState({ label: e.target.value.slice(0, 24) }),
+      setRadius: (e) => this.setState({ radius: Number(e.target.value) }),
+      skill: skill,
+      skillTabs: skillTabs,
+      skillLines: skillLines
+    };
+  }
+}
+</script>
+</body>
+</html>
