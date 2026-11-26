@@ -16,7 +16,7 @@
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "contrast": "node scripts/check-contrast.mjs"
+    "contrast": "CONTRAST_REPORT=1 vitest run src/theme/contrast.test.ts --silent=false"
   },
   "dependencies": {
     "next": "15.5.29",
