@@ -18,7 +18,7 @@ into **Change to**.
 | nav.2 | Academics | |
 | nav.3 | Resume | |
 | nav.4 | Contact | |
-| nav.cta | GitHub | |
+| nav.cta | GitHub | Resume (filled button, review M4); GitHub becomes an icon link |
 | nav.skip | Skip to projects | |
 
 ## Hero
@@ -29,8 +29,12 @@ into **Change to**.
 | hero.body | I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I enjoy WebDev, Agentic Engineering, and I'm working my way toward DevOps and security. | |
 | hero.cta1 | Curious | |
 | hero.cta2 | Resume | |
+| hero.seeking (new, B3) | | Seeking internships in software engineering, DevOps and security. ⚠ add season + year |
 
 ## 01 Projects
+
+Project cards now show a summary (first sentence(s)) and chips always, with the
+rest of the text behind a "More" button (review M1). The words are unchanged.
 
 | ID | Current | Change to |
 |---|---|---|
@@ -39,7 +43,7 @@ into **Change to**.
 | work.body | Four projects I'm putting hours into right now, from a campus app to an offline AI mentor. | |
 | classping.meta | Flagship · classping.space | |
 | classping.body | My main project. ClassPing is built for students around campus. It started as a web app and now has a Chrome extension, a native iOS app I'm writing in SwiftUI, and Android early access. | |
-| classping.chips | Web app · Chrome extension · iOS · SwiftUI · Android early access | |
+| classping.chips | Web app · Chrome extension · iOS · SwiftUI · Android early access | Web app · Chrome extension · iOS · SwiftUI · Android early access (4 chips, as in the design) |
 | classping.cta | Visit ClassPing | |
 | ro5n3r.meta | Chrome extension · JavaScript | |
 | ro5n3r.body | Ro5n3R replaces Chrome's new tab page with Material-inspired widgets in fun, irregular shapes. A lot of this site's style comes straight from it. | |
@@ -50,7 +54,7 @@ into **Change to**.
 | skills4u.meta | Plugin marketplace · Python | |
 | skills4u.body | A marketplace of Claude plugins I design. Each one packs skills, agents or scripts for a real job, like UI/UX design and review, project docs, wiki health checks and inventory audits, with evals to check they work. | |
 | skills4u.chips | Claude plugins · Agent skills · Evals + tests | |
-| card.cta | View on GitHub | |
+| card.cta | View on GitHub | View Ro5n3R on GitHub / View NativeX on GitHub / View Skills4u on GitHub (unique labels, review m4) |
 | demos.eyebrow | Try it live | |
 | demo1.meta | Live code · edit me | |
 | demo1.title | Build an expressive button | |
@@ -59,7 +63,7 @@ into **Change to**.
 | demo2.meta | Skill file · from Skills4u | |
 | demo2.title | Read a real SKILL.md | |
 | demo2.body | Every Skills4u plugin is built around a file like this. The description is what tells Claude when to load it. | |
-| demo2.extras | Also in this plugin: … | |
+| demo2.extras | Also in this plugin: … | Also in this plugin: (lists come from the real repo files) |
 | demo2.cta | Open the repo | |
 | work.more | See everything on GitHub | |
 
@@ -68,11 +72,11 @@ into **Change to**.
 | ID | Current | Change to |
 |---|---|---|
 | acad.title | The Journey | |
-| acad.body | Persuing a Bachelors Degree in University of Southern Maine. Here's where things stand. | |
+| acad.body | Persuing a Bachelors Degree in University of Southern Maine. Here's where things stand. | Pursuing a Bachelor's degree at the University of Southern Maine. Here's where things stand. (spelling fixed) |
 | acad.1 | Done · Associate Degree · Southern Maine Community College | |
 | acad.2 | Done · Transferred to USM · B.S. in Computer Science with a minor in Cybersecurity | |
-| acad.3 | Now · Fall 2026 · COS 322 Foundations of Machine Learning, ITT 451 Cyber Laws, Policies and Ethics, ITT 272 Networking I, MAT 295 Linear Algebra | |
-| acad.4 ⚠ | Next · B.S. Computer Science · Cybersecurity minor. Graduating [Dec 17th 2027] | |
+| acad.3 | Now · Fall 2026 · COS 322 Foundations of Machine Learning, ITT 451 Cyber Laws, Policies and Ethics, ITT 272 Networking I, MAT 295 Linear Algebra | Term heading and courses come from data (`academics.ts`), review m7 |
+| acad.4 ⚠ | Next · B.S. Computer Science · Cybersecurity minor. Graduating [Dec 17th 2027] | Next · B.S. Computer Science · Cybersecurity minor. Graduating Dec 17, 2027 |
 
 ## 03 Resume
 
@@ -80,10 +84,11 @@ into **Change to**.
 |---|---|---|
 | resume.title | The short version | |
 | resume.body | Where I've studied and the tools I actually use. Grab the PDF for the full thing. | |
-| resume.cta ⚠ | Download PDF ([ADD PDF LINK]) | |
+| resume.cta ⚠ | Download PDF ([ADD PDF LINK]) | Download PDF ⚠ shows "PDF coming soon" until public/resume.pdf exists |
 | resume.edu | Education: B.S. Computer Science (In progress) · Associate Degree (Completed) | |
-| resume.skills.lang | Languages: Python, Java, JavaScript, TypeScript | |
+| resume.skills.lang | Languages: Python, Java, JavaScript, TypeScript | Languages: Python, Java, JavaScript, TypeScript, Swift ⚠ confirm |
 | resume.skills.web | Web: React 18, HTML5, CSS3, Tailwind CSS | |
+| resume.skills.tools (new, M3) | | Tools: SwiftUI, Git, Chrome extensions ⚠ confirm; Linux / Security group still open |
 | resume.path.title | Where I'm headed | |
 | resume.path.1 | Software engineering · Web, extensions and iOS | |
 | resume.path.2 | DevOps · Into Linux and self-hosting | |
@@ -96,7 +101,8 @@ into **Change to**.
 | contact.title | Let's build something! | |
 | contact.body | Got a project, a role, or a question? Hit me up. | |
 | contact.github | github.com/Wilch-Kelvin | |
-| contact.email ⚠ | [kelvinmusiomi99@gmail.com] | |
-| footer.copy | © 2026 Kelvin | |
+| contact.email ⚠ | [kelvinmusiomi99@gmail.com] | Shown after the page loads (address assembled in the browser to slow scrapers), plus a Copy button |
+| contact.linkedin (new, B1) | | LinkedIn → linkedin.com/in/kelvin-wilch-5705b1405 |
+| footer.copy | © 2026 Kelvin | © 2026 Kelvin Wilch (full name, review B2) |
 | footer.tagline | Design Inspired by Flow | |
 | footer.top | Back to top | |
