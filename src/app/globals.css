@@ -794,6 +794,13 @@
 
 /* ---------- Print: a clean one-colour résumé-style page ---------- */
 @media print {
+  /* Paper has no scroll timeline: show everything in its final state. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
   :root {
     --surface: #fff;
     --on-surface: #000;
@@ -808,6 +815,7 @@
   [data-print='hide'],
   .skip-link,
   header,
+  button,
   [aria-hidden='true'] {
     display: none !important;
   }
@@ -821,6 +829,12 @@
   }
   .disclosure {
     grid-template-rows: 1fr !important;
+  }
+  /* Lime and lavender accents vanish on white paper. */
+  .text-ia,
+  .text-primary,
+  .label-mono {
+    color: #000 !important;
   }
   a[href^='http']::after,
   a[href^='mailto']::after {

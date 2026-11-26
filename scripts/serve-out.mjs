@@ -37,7 +37,9 @@ createServer(async (req, res) => {
   const { file, status } = await resolveFile(new URL(req.url ?? '/', 'http://x').pathname);
   try {
     const body = await readFile(file);
-    res.writeHead(status, { 'content-type': types[extname(file)] ?? 'application/octet-stream' });
+    // The OG image is exported without an extension (vercel.json sets its type too).
+    const type = file.endsWith('opengraph-image') ? 'image/png' : types[extname(file)];
+    res.writeHead(status, { 'content-type': type ?? 'application/octet-stream' });
     res.end(body);
   } catch {
     res.writeHead(500).end('Build the site first: npm run build');

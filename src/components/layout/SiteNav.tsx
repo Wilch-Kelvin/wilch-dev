@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import { Shape } from '@/components/ui/Shape';
@@ -55,21 +56,21 @@ export function SiteNav() {
         aria-label="Main"
         className="glass pointer-events-auto relative flex w-full max-w-[880px] items-center gap-1 rounded-[32px] p-2 md:w-auto"
       >
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           className="nav-link state-layer gap-2.5 text-[20px] font-extrabold"
           aria-label={nav.homeLabel}
         >
           <Shape name="cookie9" color="var(--primary)" className="h-7 w-7" />
           <span aria-hidden="true">{nav.brand}</span>
-        </a>
+        </Link>
 
         <ul className="m-0 hidden list-none items-center gap-1 p-0 md:flex">
           {desktopItems.map((item) => (
             <li key={item.target}>
               <a
                 className="nav-link state-layer"
-                href={`#${item.target}`}
+                href={`/#${item.target}`}
                 aria-current={active === item.target ? 'true' : undefined}
               >
                 {item.label}
@@ -91,7 +92,7 @@ export function SiteNav() {
           </a>
           <a
             className="btn btn-sm state-layer bg-primary text-on-primary"
-            href={`#${nav.cta.target}`}
+            href={`/#${nav.cta.target}`}
             aria-current={active === nav.cta.target ? 'true' : undefined}
           >
             {nav.cta.label}
@@ -125,7 +126,7 @@ export function SiteNav() {
               <li key={item.target}>
                 <a
                   className="nav-link state-layer min-h-12 w-full text-[20px]"
-                  href={`#${item.target}`}
+                  href={`/#${item.target}`}
                   aria-current={active === item.target ? 'true' : undefined}
                   onClick={() => setOpen(false)}
                 >
