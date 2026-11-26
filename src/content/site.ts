@@ -38,6 +38,8 @@ export const nav = {
 } as const;
 
 export const hero = {
+  /** Lime mono chip above the greeting (from the 2026-11-26 mockups). */
+  eyebrow: 'CS + Cybersecurity @ USM',
   greeting: "Hi, I'm",
   name: 'Kelvin.',
   body: "I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I enjoy WebDev, Agentic Engineering, and I'm working my way toward DevOps and security.",
@@ -48,6 +50,10 @@ export const hero = {
   secondaryCta: { label: 'Resume', target: 'resume' } satisfies NavItem,
   /** Glass name tag over the hero art (decorative; the name is also in <title>). */
   nameTag: 'Kelvin Wilch',
+  /** The portrait in the cookie frame (photo on Vercel Blob, see profile-photo.ts). */
+  portraitAlt: 'Kelvin Wilch smiling, with shoulder-length locs and a black headband',
+  /** Shown in the frame when the photo is missing or fails to load. */
+  monogram: 'K',
 } as const;
 
 export const contact = {

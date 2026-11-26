@@ -6,6 +6,8 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { ShapeSprite } from '@/components/ui/Shape';
 import { MOTION_STORAGE_KEY } from '@/lib/motion';
+import { photoOrigin } from '@/lib/profile-photo';
+import { profilePhoto } from '@/content/profile-photo';
 import { safeJson, personJsonLd } from '@/lib/seo';
 import { themeInitScript } from '@/lib/theme';
 import { SITE_ORIGIN } from '@/lib/url';
@@ -46,12 +48,16 @@ export const viewport: Viewport = {
   ],
 };
 
+// The hero portrait lives on Vercel Blob: open that connection early.
+const photoHost = photoOrigin(profilePhoto);
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // suppressHydrationWarning: the pre-paint script adds data-theme / data-motion
     // to <html> before React loads, which is expected, not a bug.
     <html lang="en" className={`${barlow.variable} ${code.variable}`} suppressHydrationWarning>
       <head>
+        {photoHost ? <link rel="preconnect" href={photoHost} /> : null}
         <style id="tokens" dangerouslySetInnerHTML={{ __html: tokensCss() }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript(MOTION_STORAGE_KEY) }} />
         <script

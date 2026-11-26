@@ -15,12 +15,16 @@ function fakeWebp(chunks: readonly [string, number][]): Uint8Array {
 
 describe('webpChunks', () => {
   it('lists every chunk, including odd-sized (padded) ones', () => {
-    expect(webpChunks(fakeWebp([['VP8X', 10], ['ICCP', 3], ['VP8 ', 20], ['EXIF', 7]]))).toEqual([
-      'VP8X',
-      'ICCP',
-      'VP8 ',
-      'EXIF',
-    ]);
+    expect(
+      webpChunks(
+        fakeWebp([
+          ['VP8X', 10],
+          ['ICCP', 3],
+          ['VP8 ', 20],
+          ['EXIF', 7],
+        ]),
+      ),
+    ).toEqual(['VP8X', 'ICCP', 'VP8 ', 'EXIF']);
   });
 
   it('rejects files that are not WebP', () => {
@@ -30,7 +34,11 @@ describe('webpChunks', () => {
 
 describe('metadataChunks', () => {
   it('flags EXIF, XMP and ICC profile chunks only', () => {
-    expect(metadataChunks(['VP8X', 'ICCP', 'VP8 ', 'EXIF', 'XMP '])).toEqual(['ICCP', 'EXIF', 'XMP ']);
+    expect(metadataChunks(['VP8X', 'ICCP', 'VP8 ', 'EXIF', 'XMP '])).toEqual([
+      'ICCP',
+      'EXIF',
+      'XMP ',
+    ]);
     expect(metadataChunks(['VP8 '])).toEqual([]);
   });
 });

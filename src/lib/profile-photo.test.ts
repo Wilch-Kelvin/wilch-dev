@@ -69,6 +69,8 @@ describe('profilePhotoModule', () => {
   });
 
   it('writes null when there is nothing uploaded', () => {
-    expect(profilePhotoModule([])).toContain('export const profilePhoto: ProfilePhoto | null = null;');
+    expect(profilePhotoModule([])).toContain(
+      'export const profilePhoto: ProfilePhoto | null = null;',
+    );
   });
 });

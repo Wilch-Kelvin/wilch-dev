@@ -1,4 +1,10 @@
-import { isOnScreen, MAX_STAGGER_STEP, revealProps, shouldAnimateEntrances, staggerIndex } from './reveal';
+import {
+  isOnScreen,
+  MAX_STAGGER_STEP,
+  revealProps,
+  shouldAnimateEntrances,
+  staggerIndex,
+} from './reveal';
 
 describe('isOnScreen', () => {
   it('is true when any part of the box is inside the viewport', () => {

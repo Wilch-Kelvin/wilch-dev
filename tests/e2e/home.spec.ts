@@ -107,16 +107,43 @@ test('loading the page causes almost no layout shift (CLS < 0.1)', async ({ page
   expect(cls).toBeLessThan(0.1);
 });
 
-test('the hero K stays above its spinning shape', async ({ page }) => {
+test('the hero photo sits above its spinning frame and stays upright', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
-  const k = page.getByText('K', { exact: true });
-  const box = (await k.boundingBox())!;
-  const topmost = await page.evaluate(
-    ({ x, y }) => document.elementFromPoint(x, y)?.textContent?.trim(),
-    { x: box.x + box.width * 0.2, y: box.y + box.height * 0.5 },
+  const photo = page.getByRole('img', { name: /^Kelvin Wilch smiling/ });
+  await expect(photo).toBeVisible();
+  // Topmost thing at the centre of the frame is the photo, not the mat.
+  const box = (await page.locator('[data-portrait]').boundingBox())!;
+  const onTop = await page.evaluate(
+    ({ x, y }) => document.elementFromPoint(x, y)?.closest('[data-portrait-face]') !== null,
+    { x: box.x + box.width / 2, y: box.y + box.height / 2 },
   );
-  expect(topmost).toBe('K');
+  expect(onTop).toBe(true);
+  // The frame spins and the photo counter-spins at the same speed, so the
+  // photo's net rotation stays ~0 even halfway through the loop.
+  await page.evaluate(() => {
+    for (const a of document.getAnimations())
+      if (a.animationName === 'spin') a.currentTime = 24_000;
+  });
+  const net = await photo.evaluate((img) => {
+    const angle = (el: Element) => {
+      const m = new DOMMatrix(
+        getComputedStyle(el).rotate === 'none'
+          ? undefined
+          : `rotate(${getComputedStyle(el).rotate})`,
+      );
+      return Math.atan2(m.b, m.a) * (180 / Math.PI);
+    };
+    return angle(img) + angle(img.parentElement!);
+  });
+  expect(Math.abs(net) % 360).toBeLessThan(1);
+});
+
+test('if the photo cannot load, the K monogram takes its place', async ({ page }) => {
+  await page.route('**/*.public.blob.vercel-storage.com/**', (route) => route.abort());
+  await page.goto('/');
+  await expect(page.locator('[data-portrait]').getByText('K', { exact: true })).toBeVisible();
+  await expect(page.getByRole('img', { name: /^Kelvin Wilch smiling/ })).toHaveCount(0);
 });
 
 test('unknown pages get the friendly 404 with a way home', async ({ page }) => {

@@ -43,7 +43,15 @@ try {
   mkdirSync(OUT_DIR, { recursive: true });
   const square = join(work, 'square.png');
   run('sips', ['-s', 'format', 'png', '--matchTo', SRGB, SOURCE, '--out', square]);
-  run('sips', ['-c', String(CROP.size), String(CROP.size), '--cropOffset', String(CROP.top), String(CROP.left), square]);
+  run('sips', [
+    '-c',
+    String(CROP.size),
+    String(CROP.size),
+    '--cropOffset',
+    String(CROP.top),
+    String(CROP.left),
+    square,
+  ]);
 
   for (const width of WIDTHS) {
     const png = join(work, `${width}.png`);
