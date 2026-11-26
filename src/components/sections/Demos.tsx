@@ -4,7 +4,7 @@ import { demosIntro } from '@/content/demos';
 
 export function Demos() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6" data-print="hide">
       <div className="reveal flex items-center gap-3.5">
         <span className="label-mono text-on-surface-var">{demosIntro.eyebrow}</span>
         <span aria-hidden="true" className="bg-outline-var h-px flex-1" />

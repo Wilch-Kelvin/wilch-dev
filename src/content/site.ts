@@ -76,3 +76,10 @@ export const footer = {
   pauseMotion: 'Pause motion',
   playMotion: 'Play motion',
 } as const;
+
+export const notFound = {
+  title: 'Nothing here.',
+  body: "That page doesn't exist, or it moved. The rest of the site is one tap away.",
+  cta: 'Back to the home page',
+  metaTitle: 'Page not found',
+} as const;

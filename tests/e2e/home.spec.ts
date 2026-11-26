@@ -118,3 +118,25 @@ test('the hero K stays above its spinning shape', async ({ page }) => {
   );
   expect(topmost).toBe('K');
 });
+
+test('unknown pages get the friendly 404 with a way home', async ({ page }) => {
+  const response = await page.goto('/this-does-not-exist/');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Nothing here.');
+  await page.getByRole('link', { name: 'Back to the home page' }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toContainText("Hi, I'm Kelvin.");
+});
+
+test('metadata: title, description, OG image, sitemap and robots', async ({ page, request }) => {
+  await page.goto('/');
+  await expect(page).toHaveTitle('Kelvin Wilch | Computer Science and Cybersecurity student');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Kelvin Wilch/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://wilch.dev/');
+  const og = await page.locator('meta[property="og:image"]').getAttribute('content');
+  const image = await request.get(new URL(og!).pathname);
+  expect(image.headers()['content-type']).toBe('image/png');
+  expect((await request.get('/sitemap.xml')).ok()).toBe(true);
+  expect(await (await request.get('/robots.txt')).text()).toContain(
+    'Sitemap: https://wilch.dev/sitemap.xml',
+  );
+});
