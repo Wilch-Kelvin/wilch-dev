@@ -1,11 +1,13 @@
 'use client';
 
-import { useId, useState, type CSSProperties } from 'react';
+import { useId, useState, type CSSProperties, type FocusEvent } from 'react';
 import { ChipList } from '@/components/ui/Chip';
 import { Icon } from '@/components/ui/Icon';
 import { projectCard } from '@/content/projects';
+import { projectVideos } from '@/content/project-videos';
 import type { Project } from '@/content/schema';
 import { ProjectArt } from './ProjectArt';
+import { ProjectVideo } from './ProjectVideo';
 import { toneClasses } from './tones';
 
 const step = (i: number) => ({ '--i': i }) as CSSProperties;
@@ -19,20 +21,35 @@ const step = (i: number) => ({ '--i': i }) as CSSProperties;
  */
 export function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(project.openByDefault);
+  // Hover anywhere on the card (like the lift), or keyboard focus inside it.
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
   const detailsId = useId();
   const titleId = useId();
   const tone = toneClasses[project.tone];
+  const video = projectVideos[project.id];
+
+  // Focus moving between the card's own buttons and links is not a blur.
+  const onBlur = (event: FocusEvent<HTMLElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+  };
 
   return (
     <article
       aria-labelledby={titleId}
       className={`card card-interactive flex min-w-0 flex-1 flex-col overflow-hidden ${tone.card}`}
+      onPointerEnter={(event) => event.pointerType === 'mouse' && setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={onBlur}
     >
       <div
         aria-hidden="true"
         className={`card-inner relative h-[240px] overflow-hidden md:h-[260px] ${tone.panel}`}
       >
-        {project.screenshot ? (
+        {video ? (
+          <ProjectVideo video={video} engaged={hovered || focused} />
+        ) : project.screenshot ? (
           // Static export: plain <img> with fixed size reserved by the panel.
           // eslint-disable-next-line @next/next/no-img-element
           <img src={project.screenshot.src} alt="" className="h-full w-full object-cover" />
