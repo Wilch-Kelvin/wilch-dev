@@ -30,6 +30,51 @@ test('home page: hero, projects, disclosure, contact', async ({ page }) => {
   );
 });
 
+test('the hero has no eyebrow chip or "seeking" line (removed 2026-11-26)', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('CS + Cybersecurity @ USM')).toHaveCount(0);
+  await expect(page.getByText(/Seeking internships/)).toHaveCount(0);
+  await expect(page.getByText("Where I'm headed")).toHaveCount(0);
+});
+
+test('the drawn lines follow the scroll: on going down, back off going up', async ({ page }) => {
+  await page.goto('/');
+  const drawOf = (selector: string) =>
+    page
+      .locator(selector)
+      .evaluate((el) => Number(getComputedStyle(el).getPropertyValue('--draw')));
+  const scrollTo = (y: number) => page.evaluate((top) => window.scrollTo(0, top), y);
+  // Page y of an element's top, so we can park it just above the pen line.
+  const pageTop = (selector: string) =>
+    page.locator(selector).evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  const viewport = page.viewportSize()!.height;
+
+  for (const row of ['ol.timeline', 'ol.career-path']) {
+    await expect.poll(() => drawOf(row)).toBe(0); // at the top: not drawn yet
+
+    // Pen line is 65% down the viewport; put the row's top 60px above it.
+    await scrollTo((await pageTop(row)) - viewport * 0.65 + 60);
+    await expect.poll(() => drawOf(row)).toBeGreaterThan(0);
+    await expect.poll(() => drawOf(row)).toBeLessThan(1);
+
+    await scrollTo(1e6); // far below: fully drawn
+    await expect.poll(() => drawOf(row)).toBe(1);
+
+    await scrollTo(0); // back up: retracted
+    await expect.poll(() => drawOf(row)).toBe(0);
+  }
+});
+
+test('paused motion shows the lines fully drawn whatever the scroll', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => (document.documentElement.dataset.motion = 'paused'));
+  const clip = await page
+    .locator('ol.timeline .tl-seg')
+    .last()
+    .evaluate((el) => getComputedStyle(el).clipPath);
+  expect(clip).toBe('none');
+});
+
 test('static HTML does not contain the email address', async ({ request }) => {
   const html = await (await request.get('/')).text();
   expect(html).not.toMatch(/kelvinmusiomi99@gmail\.com/);
