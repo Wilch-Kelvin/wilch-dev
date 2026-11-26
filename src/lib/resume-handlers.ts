@@ -89,10 +89,18 @@ export async function handleResumeDownload(req: Request, deps: DownloadDeps): Pr
 
   const token = new URL(req.url).searchParams.get('t') ?? '';
   const result = verifyResumeToken(token, config.linkSecret, deps.now);
-  if (!result.ok) return backToForm(req, result.reason === 'expired' ? 'expired' : 'invalid');
+  if (!result.ok) {
+    console.warn(`Resume download: link refused (${result.reason})`);
+    return backToForm(req, result.reason === 'expired' ? 'expired' : 'invalid');
+  }
 
   const pdf = await deps.loadPdf(config);
-  if (!pdf?.ok || !pdf.body) return backToForm(req, 'unavailable');
+  if (!pdf?.ok || !pdf.body) {
+    console.error(
+      `Resume download: no PDF to send (Blob answered ${pdf ? pdf.status : 'nothing'})`,
+    );
+    return backToForm(req, 'unavailable');
+  }
 
   const visitor = result.payload.email;
   if (deps.notices.take(visitor, deps.now)) {
