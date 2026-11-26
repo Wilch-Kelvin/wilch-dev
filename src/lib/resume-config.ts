@@ -20,17 +20,42 @@ export type ResumeConfig = {
 
 type Env = Readonly<Record<string, string | undefined>>;
 
+const NAMES = {
+  resendApiKey: 'RESEND_API_KEY',
+  from: 'RESUME_FROM_EMAIL',
+  notifyTo: 'RESUME_NOTIFY_EMAIL',
+  linkSecret: 'RESUME_LINK_SECRET',
+  blobToken: 'BLOB_READ_WRITE_TOKEN',
+} as const satisfies Record<keyof ResumeConfig, string>;
+
+const valueOf = (env: Env, name: string) => env[name]?.trim() ?? '';
+
+/**
+ * Names (never values) of settings that are missing or unusable, so the
+ * server logs can say exactly what to fix in Vercel.
+ */
+export function missingResumeEnv(env: Env): string[] {
+  return Object.values(NAMES).filter((name) => {
+    const value = valueOf(env, name);
+    return name === NAMES.linkSecret ? value.length < 32 : !value;
+  });
+}
+
 /** The config, or null if anything is missing (the site then hides the form). */
 export function readResumeConfig(env: Env): ResumeConfig | null {
-  const config = {
-    resendApiKey: env.RESEND_API_KEY?.trim() ?? '',
-    from: env.RESUME_FROM_EMAIL?.trim() ?? '',
-    notifyTo: env.RESUME_NOTIFY_EMAIL?.trim() ?? '',
-    linkSecret: env.RESUME_LINK_SECRET?.trim() ?? '',
-    blobToken: env.BLOB_READ_WRITE_TOKEN?.trim() ?? '',
+  if (missingResumeEnv(env).length > 0) return null;
+  return {
+    resendApiKey: valueOf(env, NAMES.resendApiKey),
+    from: valueOf(env, NAMES.from),
+    notifyTo: valueOf(env, NAMES.notifyTo),
+    linkSecret: valueOf(env, NAMES.linkSecret),
+    blobToken: valueOf(env, NAMES.blobToken),
   };
-  const complete = Object.values(config).every(Boolean) && config.linkSecret.length >= 32;
-  return complete ? config : null;
+}
+
+/** The store id inside a Blob token. Not a secret: it is in every public Blob URL. */
+export function blobStoreIdOf(token: string): string {
+  return token.split('_')[3] ?? 'unknown';
 }
 
 /**

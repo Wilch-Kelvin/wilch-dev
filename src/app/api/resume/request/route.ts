@@ -1,4 +1,4 @@
-import { readResumeConfig } from '@/lib/resume-config';
+import { missingResumeEnv, readResumeConfig } from '@/lib/resume-config';
 import { createRequestLimits, handleResumeRequest } from '@/lib/resume-handlers';
 import { sendEmail } from '@/lib/send-email';
 
@@ -13,6 +13,11 @@ const limits = createRequestLimits();
 
 export async function POST(req: Request): Promise<Response> {
   const config = readResumeConfig(process.env);
+  if (!config) {
+    console.error(
+      `Resume request: not configured, missing ${missingResumeEnv(process.env).join(', ')}`,
+    );
+  }
   return handleResumeRequest(req, {
     config,
     now: Date.now(),

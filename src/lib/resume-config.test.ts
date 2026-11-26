@@ -1,4 +1,10 @@
-import { clientIp, linkOrigin, readResumeConfig } from './resume-config';
+import {
+  blobStoreIdOf,
+  clientIp,
+  linkOrigin,
+  missingResumeEnv,
+  readResumeConfig,
+} from './resume-config';
 
 const full = {
   RESEND_API_KEY: 're_test',
@@ -45,5 +51,21 @@ describe('linkOrigin', () => {
   it('uses the request origin on previews and locally', () => {
     expect(linkOrigin('http://localhost:3000/api/x', undefined)).toBe('http://localhost:3000');
     expect(linkOrigin('https://p.vercel.app/api/x', 'preview')).toBe('https://p.vercel.app');
+  });
+});
+
+describe('missingResumeEnv', () => {
+  it('names (never values) what is missing or too short', () => {
+    expect(missingResumeEnv(full)).toEqual([]);
+    expect(missingResumeEnv({ ...full, RESEND_API_KEY: ' ', RESUME_LINK_SECRET: 'short' })).toEqual(
+      ['RESEND_API_KEY', 'RESUME_LINK_SECRET'],
+    );
+  });
+});
+
+describe('blobStoreIdOf', () => {
+  it('reads the public store id out of a read-write token', () => {
+    expect(blobStoreIdOf('vercel_blob_rw_AbC123_secretpart')).toBe('AbC123');
+    expect(blobStoreIdOf('junk')).toBe('unknown');
   });
 });

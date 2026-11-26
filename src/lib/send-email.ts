@@ -16,10 +16,18 @@ export async function sendEmail(
       headers: { Authorization: `Bearer ${opts.apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ from: opts.from, ...message }),
     });
-    if (!res.ok) console.error(`Resend refused the email (${res.status})`);
+    if (!res.ok) {
+      // Resend explains itself, e.g. "The wilch.dev domain is not verified".
+      const body = (await res.json().catch(() => null)) as {
+        name?: unknown;
+        message?: unknown;
+      } | null;
+      const reason = [body?.name, body?.message].filter((v) => typeof v === 'string').join(': ');
+      console.error(`Resend refused the email (${res.status}) ${reason.slice(0, 200)}`);
+    }
     return res.ok;
-  } catch {
-    console.error('Could not reach Resend');
+  } catch (error) {
+    console.error('Could not reach Resend:', error instanceof Error ? error.message : 'unknown');
     return false;
   }
 }
