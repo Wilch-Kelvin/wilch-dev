@@ -10,11 +10,11 @@ export function Hero() {
         <div className="flex flex-col items-start gap-6 md:gap-7">
           <h1
             id="hero-title"
-            className="rise rise-1 m-0 text-[clamp(84px,19vw,176px)] leading-[0.86] font-extrabold tracking-[-0.015em]"
+            className="rise rise-solid rise-1 m-0 text-[clamp(84px,19vw,176px)] leading-[0.86] font-extrabold tracking-[-0.015em]"
           >
             {hero.greeting} <span className="stretch-in text-primary">{hero.name}</span>
           </h1>
-          <p className="rise rise-2 text-on-surface-var m-0 max-w-[44ch] text-[clamp(19px,1.6vw,22px)] leading-relaxed">
+          <p className="rise rise-solid rise-2 text-on-surface-var m-0 max-w-[44ch] text-[clamp(19px,1.6vw,22px)] leading-relaxed">
             {hero.body}
           </p>
           <div className="rise rise-3 flex flex-wrap gap-3">

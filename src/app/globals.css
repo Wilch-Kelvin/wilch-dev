@@ -531,6 +531,13 @@
     translate: 0 28px;
   }
 }
+/* Hero text rises without fading: text at opacity 0 doesn't count as
+   painted, which would push Largest Contentful Paint back by the animation. */
+@keyframes rise-solid {
+  from {
+    translate: 0 28px;
+  }
+}
 @keyframes stretch-in {
   from {
     opacity: 0;
@@ -630,6 +637,9 @@
 @media (prefers-reduced-motion: no-preference) {
   .rise {
     animation: rise 0.9s var(--ease-emph) backwards;
+  }
+  .rise-solid {
+    animation-name: rise-solid;
   }
   .rise-1 {
     animation-delay: 80ms;
