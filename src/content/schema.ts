@@ -72,8 +72,6 @@ export type Education = {
 
 export type SkillGroup = { label: string; items: readonly string[] };
 
-export type CareerStep = { title: string; detail: string };
-
 // ---------- Demos ----------
 
 export type CodeToken = {

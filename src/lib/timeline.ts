@@ -33,3 +33,12 @@ export function drawSteps(index: number): { before: number; dot: number; after: 
   const base = Math.max(0, Math.floor(index)) * 2;
   return { before: base, dot: base + 1, after: base + 1 };
 }
+
+/**
+ * How many draw steps the whole line has: two halves per milestone. On the
+ * horizontal rail the scroll progress is split into this many equal parts,
+ * one per half, so the pen still travels left to right.
+ */
+export function drawStepCount(milestoneCount: number): number {
+  return Math.max(0, Math.floor(milestoneCount)) * 2;
+}

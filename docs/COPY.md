@@ -125,6 +125,15 @@ second table).
 | project summary + chips + link | Always visible (review M1), ClassPing open by default | Behind the chevron for every card (mockup 2). `openByDefault` in `projects.ts` re-opens one |
 | resume.path numbers | 1 / 2 / 3 inside mixed shapes | Removed; three identical cookie nodes joined by a curve |
 
+## Removed on Kelvin's request (2026-11-26, branch `feat/scroll-drawn-lines`)
+
+| ID | Before | Now |
+|---|---|---|
+| hero.eyebrow | CS + Cybersecurity @ USM | Removed |
+| hero.seeking | Seeking internships in software engineering, DevOps and security. | Removed |
+| resume.path.title | Where I'm headed | Removed; banner kept empty (nodes + curve only) ⚠ new wording later |
+| resume.path.1–3 | Software engineering · DevOps · Cybersecurity, with details | Removed |
+
 ### Mockup wording **not** applied (Kelvin to decide)
 
 | ID | Live (kept) | Mockup shows |

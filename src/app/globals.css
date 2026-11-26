@@ -715,21 +715,6 @@
     d: var(--morph-to);
   }
 }
-@keyframes dash-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-}
-@keyframes wipe-right {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-}
-@keyframes wipe-down {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-}
 @keyframes swap-in {
   from {
     opacity: 0;
@@ -818,9 +803,6 @@
   :root:not([data-motion='paused']) .typing-3 {
     animation-delay: 300ms;
   }
-  :root:not([data-motion='paused']) .pulse {
-    animation: pulse-ring 1.8s ease-out infinite;
-  }
 
   :root:not([data-motion='paused']) .timeline-item[data-state='now'] .timeline-dot {
     animation: pulse-ring 1.8s ease-out infinite;
@@ -850,7 +832,8 @@
      moves by its --depth. The spring transition turns jumpy pointer data
      into a soft drift. */
   :root:not([data-motion='paused']) .parallax {
-    translate: calc(var(--mx, 0) * var(--depth, 1) * 16px) calc(var(--my, 0) * var(--depth, 1) * 16px);
+    translate: calc(var(--mx, 0) * var(--depth, 1) * 16px)
+      calc(var(--my, 0) * var(--depth, 1) * 16px);
     transition: translate 1.2s var(--ease-spring);
   }
 
@@ -889,37 +872,58 @@
     }
   }
 
-  /* Timeline draw-in: when the list scrolls into view, each half of the
-     line wipes open (clip-path inset) in --step order and each dot pops as
-     the line reaches it, then the cards rise. Vertical on phones wipes top
-     to bottom; the horizontal rail wipes left to right. */
-  [data-reveal='shown'] .tl-seg {
-    animation: wipe-down 0.32s var(--ease-emph) backwards;
-    animation-delay: calc(250ms + var(--step, 0) * 260ms);
-  }
-  [data-reveal='shown'] .timeline-dot {
-    animation: pop 0.6s var(--ease-bounce) backwards;
-    animation-delay: calc(250ms + var(--step, 0) * 260ms);
-  }
+  /* Timeline cards rise once the list scrolls into view. */
   [data-reveal='shown'] .tl-card {
     animation: reveal 0.9s var(--ease-spring) backwards;
     animation-delay: calc(200ms + var(--i, 0) * 120ms);
   }
-  @media (min-width: 1024px) {
-    [data-reveal='shown'] .tl-seg {
-      animation-name: wipe-right;
+
+  /* Scroll-drawn lines (lib/scroll-draw.ts + useScrollDraw). The hook keeps
+     --draw (0 → 1) on every [data-scroll-draw] element as the page scrolls:
+     scroll down and the line draws toward its end, scroll up and it
+     retracts. Only here, with motion allowed and not paused; everywhere
+     else the rules below never apply and the lines are simply drawn.
+
+     Vertical lines (phones) follow the pen by their own position: each half
+     clips to its own --draw, and each dot or node pops (scale 0 → 1, with
+     a spring transition) when the pen reaches its middle.
+
+     Horizontal rows can't: every half sits at the same height. So the row
+     turns its own --draw into --x, from just under 0 to just over --steps
+     (the small lead-in lets the first node pop and the last one land), and
+     each half draws over its own slice [--step, --step + 1] of --x. --x is
+     declared on the row, so it carries the row's progress down to the
+     children even though they each have their own --draw. */
+  :root:not([data-motion='paused']) .timeline,
+  :root:not([data-motion='paused']) .career-path {
+    --x: calc(var(--draw, 1) * (var(--steps, 1) + 0.1) - 0.05);
+  }
+  :root:not([data-motion='paused']) .tl-seg {
+    clip-path: inset(0 0 calc((1 - var(--draw, 1)) * 100%) 0);
+  }
+  :root:not([data-motion='paused']) .timeline-dot,
+  :root:not([data-motion='paused']) .career-node {
+    scale: clamp(0, calc((var(--draw, 1) - 0.5) * 1000), 1);
+    transition: scale 0.55s var(--ease-bounce);
+  }
+  :root:not([data-motion='paused']) .career-curve-y .path-draw {
+    stroke-dashoffset: calc(1 - var(--draw, 1));
+  }
+  @media (min-width: 768px) {
+    :root:not([data-motion='paused']) .career-curve-x .path-draw {
+      stroke-dashoffset: calc(1 - clamp(0, var(--x) - var(--step, 0), 1));
+    }
+    :root:not([data-motion='paused']) .career-node {
+      scale: clamp(0, calc((var(--x) - var(--step, 0)) * 1000), 1);
     }
   }
-
-  /* Career path: node 1 pops, the line draws to node 2 (stroke-dashoffset
-     1 → 0), node 2 pops as the pen arrives, and so on. */
-  [data-reveal='shown'] .career-node {
-    animation: pop 0.7s var(--ease-bounce) backwards;
-    animation-delay: calc(300ms + var(--step, 0) * 700ms);
-  }
-  [data-reveal='shown'] .path-draw {
-    animation: dash-draw 0.6s var(--ease-emph) backwards;
-    animation-delay: calc(450ms + var(--step, 0) * 700ms);
+  @media (min-width: 1024px) {
+    :root:not([data-motion='paused']) .tl-seg {
+      clip-path: inset(0 calc((1 - clamp(0, var(--x) - var(--step, 0), 1)) * 100%) 0 0);
+    }
+    :root:not([data-motion='paused']) .timeline-dot {
+      scale: clamp(0, calc((var(--x) - var(--step, 0)) * 1000), 1);
+    }
   }
 
   /* Demos: a new SKILL.md slides in when its tab is picked (the element is

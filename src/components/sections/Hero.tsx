@@ -43,20 +43,16 @@ export function Hero() {
     <section aria-labelledby="hero-title" className="overflow-x-clip pt-6 pb-16 md:pt-10 md:pb-24">
       <div className="container-page grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         <div className="flex flex-col items-start gap-6 md:gap-7">
-          <p className="rise rise-solid label-mono bg-tertiary-c text-on-tertiary-c m-0 inline-flex items-center gap-2.5 rounded-full py-2 pr-4 pl-3 normal-case">
-            <Shape name="cookie12" color="currentColor" flat className="h-4 w-4 flex-none" />
-            {hero.eyebrow}
-          </p>
           <h1
             id="hero-title"
-            className="rise rise-solid rise-1 m-0 text-[clamp(84px,19vw,176px)] leading-[0.86] font-extrabold tracking-[-0.015em]"
+            className="rise rise-solid m-0 text-[clamp(84px,19vw,176px)] leading-[0.86] font-extrabold tracking-[-0.015em]"
           >
             {hero.greeting} <span className="stretch-in text-primary">{hero.name}</span>
           </h1>
-          <p className="rise rise-solid rise-2 text-on-surface-var m-0 max-w-[44ch] text-[clamp(19px,1.6vw,22px)] leading-relaxed">
+          <p className="rise rise-solid rise-1 text-on-surface-var m-0 max-w-[44ch] text-[clamp(19px,1.6vw,22px)] leading-relaxed">
             {hero.body}
           </p>
-          <div className="rise rise-3 flex flex-wrap gap-3">
+          <div className="rise rise-2 flex flex-wrap gap-3">
             <a
               className="btn state-layer bg-primary text-on-primary"
               href={`#${hero.primaryCta.target}`}
@@ -71,13 +67,6 @@ export function Hero() {
               {hero.secondaryCta.label}
             </a>
           </div>
-          <p className="rise rise-3 text-on-surface-var m-0 inline-flex items-center gap-2.5 text-base font-semibold">
-            <span
-              aria-hidden="true"
-              className="pulse bg-primary h-2.5 w-2.5 flex-none rounded-full"
-            />
-            {hero.seeking}
-          </p>
         </div>
 
         <PointerParallax className="relative mx-auto w-full max-w-[360px] md:max-w-[460px] lg:max-w-[560px]">

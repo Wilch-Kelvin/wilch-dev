@@ -38,14 +38,9 @@ export const nav = {
 } as const;
 
 export const hero = {
-  /** Lime mono chip above the greeting (from the 2026-11-26 mockups). */
-  eyebrow: 'CS + Cybersecurity @ USM',
   greeting: "Hi, I'm",
   name: 'Kelvin.',
   body: "I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I enjoy WebDev, Agentic Engineering, and I'm working my way toward DevOps and security.",
-  // Review B3: say what Kelvin is looking for.
-  // TODO(Kelvin): add the season and year, e.g. "Seeking summer 2027 internships…".
-  seeking: 'Seeking internships in software engineering, DevOps and security.',
   primaryCta: { label: 'Curious', target: 'projects' } satisfies NavItem,
   secondaryCta: { label: 'Resume', target: 'resume' } satisfies NavItem,
   /** Glass name tag over the hero art (decorative; the name is also in <title>). */
