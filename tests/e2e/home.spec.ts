@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 // One smoke journey over the real static build: a recruiter lands, scans the
 // projects, opens one, and finds how to get in touch.
@@ -236,4 +236,67 @@ test('metadata: title, description, OG image, sitemap and robots', async ({ page
   expect(await (await request.get('/robots.txt')).text()).toContain(
     'Sitemap: https://wilch.dev/sitemap.xml',
   );
+});
+
+// Demo videos. Playwright's Chromium has no H.264 decoder (real Chrome,
+// Safari, Edge and Firefox all do), so these check the wiring by recording
+// play()/pause() calls rather than watching frames.
+async function recordPlayback(page: Page) {
+  await page.addInitScript(() => {
+    const calls: string[] = [];
+    (window as unknown as { videoCalls: string[] }).videoCalls = calls;
+    HTMLMediaElement.prototype.play = function () {
+      calls.push(`play:${this.getAttribute('src')?.split('/').pop()}`);
+      // Like the real thing, a play() call flips `paused` straight away.
+      Object.defineProperty(this, 'paused', { value: false, configurable: true });
+      return Promise.resolve();
+    };
+    HTMLMediaElement.prototype.pause = function () {
+      calls.push(`pause:${this.getAttribute('src')?.split('/').pop()}`);
+      Object.defineProperty(this, 'paused', { value: true, configurable: true });
+    };
+  });
+}
+const videoCalls = (page: Page) =>
+  page.evaluate(() => (window as unknown as { videoCalls: string[] }).videoCalls);
+
+test('a project video plays on hover and stops on leave', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'Hover is a desktop thing; phones play while on screen.');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await recordPlayback(page);
+  await page.goto('/');
+  const card = page.getByRole('article', { name: 'ClassPing' });
+  await card.scrollIntoViewIfNeeded();
+  expect(await videoCalls(page)).toEqual([]);
+
+  await card.hover();
+  await expect.poll(() => videoCalls(page)).toEqual(['play:classping-1280.mp4']);
+  // Fake play() never fires "playing", so the poster stays up; just check it's there.
+  await expect(card.locator('img.video-poster')).toHaveAttribute('src', /classping-poster\.webp$/);
+
+  await page.mouse.move(0, 0);
+  await expect.poll(() => videoCalls(page)).toContain('pause:classping-1280.mp4');
+});
+
+test('project videos stay still with reduced motion', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'Covered by the hover case on desktop.');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await recordPlayback(page);
+  await page.goto('/');
+  const card = page.getByRole('article', { name: 'Ro5n3R' });
+  await card.hover();
+  await page.waitForTimeout(300);
+  expect(await videoCalls(page)).toEqual([]);
+});
+
+test('on a phone, a project video plays while its card is on screen', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!isMobile, 'Desktop plays on hover instead.');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await recordPlayback(page);
+  await page.goto('/');
+  await page.getByRole('article', { name: 'ClassPing' }).locator('video').scrollIntoViewIfNeeded();
+  await expect.poll(() => videoCalls(page)).toContain('play:classping-1280.mp4');
 });
