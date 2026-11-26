@@ -1,0 +1,10 @@
+.next
+out
+node_modules
+design
+coverage
+playwright-report
+test-results
+package-lock.json
+docs
+design-review
