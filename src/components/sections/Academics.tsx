@@ -5,6 +5,8 @@ import { academicsIntro, graduationDate, milestoneLabels, milestones } from '@/c
 import type { Milestone } from '@/content/schema';
 import { formatShortDate, termLabel } from '@/lib/dates';
 import { revealProps } from '@/lib/reveal';
+import { drawSteps, segmentKinds } from '@/lib/timeline';
+import type { CSSProperties } from 'react';
 
 const WAVE = 'M0 64V32Q90 4 180 32T360 32T540 32T720 32T900 32T1080 32T1260 32T1440 32V64Z';
 
@@ -26,7 +28,7 @@ function MilestoneCard({ milestone }: { milestone: Milestone }) {
   if (milestone.state === 'now') {
     const term = termLabel(milestone.term);
     return (
-      <div className="card bg-primary-c text-on-primary-c flex flex-1 flex-col gap-3">
+      <div className="card tl-card bg-primary-c text-on-primary-c flex flex-1 flex-col gap-3">
         <StatusPill className="bg-primary text-on-primary">
           <span className="h-2 w-2 rounded-full bg-current" />
           {milestoneLabels.now}
@@ -51,7 +53,7 @@ function MilestoneCard({ milestone }: { milestone: Milestone }) {
     ? `${milestone.detail} ${formatShortDate(graduationDate)}`
     : milestone.detail;
   return (
-    <div className="card bg-surface text-on-surface flex flex-1 flex-col gap-3">
+    <div className="card tl-card bg-surface text-on-surface flex flex-1 flex-col gap-3">
       {isNext ? (
         <StatusPill className="border-on-surface-var text-on-surface-var border-[1.5px]">
           {milestoneLabels.next}
@@ -68,10 +70,14 @@ function MilestoneCard({ milestone }: { milestone: Milestone }) {
   );
 }
 
+const step = (n: number) => ({ '--step': n }) as CSSProperties;
+
 /**
- * Timeline. Each item draws its own dot and its own connector to the next
- * item (review M7), so nothing depends on % positions: vertical on phones and
- * tablets, horizontal in four columns from 1024px.
+ * Timeline. Each item draws its own dot and both halves of the line around
+ * it (review M7), so nothing depends on % positions: vertical on phones and
+ * tablets, horizontal in four columns from 1024px. The halves are a squiggle
+ * (travelled) or flat (ahead), and they draw in one after another when the
+ * list scrolls into view, like a pen moving along the road.
  */
 export function Academics() {
   return (
@@ -87,19 +93,34 @@ export function Academics() {
           />
           <ol
             aria-label={milestoneLabels.listLabel}
+            {...revealProps()}
             className="timeline m-0 grid list-none gap-4 p-0 lg:grid-cols-4"
           >
-            {milestones.map((milestone, i) => (
-              <li
-                key={i}
-                data-state={milestone.state}
-                {...revealProps(i)}
-                className="timeline-item flex"
-              >
-                <span aria-hidden="true" className="timeline-dot" />
-                <MilestoneCard milestone={milestone} />
-              </li>
-            ))}
+            {milestones.map((milestone, i) => {
+              const kinds = segmentKinds(milestone.state);
+              const steps = drawSteps(i);
+              return (
+                <li
+                  key={i}
+                  data-state={milestone.state}
+                  className="timeline-item flex"
+                  style={{ '--i': i } as CSSProperties}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`tl-seg tl-before tl-${kinds.before}`}
+                    style={step(steps.before)}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className={`tl-seg tl-after tl-${kinds.after}`}
+                    style={step(steps.after)}
+                  />
+                  <span aria-hidden="true" className="timeline-dot" style={step(steps.dot)} />
+                  <MilestoneCard milestone={milestone} />
+                </li>
+              );
+            })}
           </ol>
         </div>
       </div>

@@ -396,20 +396,32 @@
     }
   }
 
-  /* Academics timeline (review M7): each item owns its dot and the
-     connector to the next item, so nothing is positioned by percentages. */
+  /* Academics timeline (review M7). Every item draws its own dot and the two
+     halves of the line around it (.tl-before / .tl-after), so nothing is
+     positioned by percentages across the row. Phones: a vertical rail on
+     the left. From 1024px: a horizontal rail above four cards.
+
+     The squiggle is a mask: a tiny SVG wave tiled along the segment, painted
+     with the --primary token (the SVG's own colour is ignored by a mask, so
+     no hex sneaks in). "before" halves tile from their start and "after"
+     halves from their end, so the wave lines up across item boundaries; the
+     only phase jumps sit under the dots, which cover them. */
   .timeline {
     --tl-gap: 16px;
+    --tl-wave-x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='12'%3E%3Cpath d='M0 6Q8 0 16 6T32 6' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    --tl-wave-y: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='32'%3E%3Cpath d='M6 0Q0 8 6 16T6 32' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
     gap: var(--tl-gap);
   }
   .timeline-item {
+    --rail: 13px; /* centre of the rail, from the item's start edge */
+    --dot-at: 38px; /* centre of the dot, along the rail */
     position: relative;
     padding-left: 36px;
   }
   .timeline-dot {
     position: absolute;
-    left: 5px;
-    top: 30px;
+    left: calc(var(--rail) - 8px);
+    top: calc(var(--dot-at) - 8px);
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -418,46 +430,102 @@
     z-index: 1;
   }
   .timeline-item[data-state='now'] .timeline-dot {
-    left: 2px;
-    top: 27px;
-    width: 22px;
-    height: 22px;
-    border: 4px solid var(--surface-c);
+    left: calc(var(--rail) - 13px);
+    top: calc(var(--dot-at) - 13px);
+    width: 26px;
+    height: 26px;
+    border: 5px solid var(--primary-c);
   }
   .timeline-item[data-state='next'] .timeline-dot {
     background: var(--outline);
   }
-  .timeline-item:not(:last-child)::after {
-    content: '';
+
+  /* Vertical rail (phones, tablets). */
+  .tl-seg {
     position: absolute;
-    left: 11px;
-    top: 38px;
-    width: 4px;
-    height: calc(100% + var(--tl-gap));
-    border-radius: 4px;
+    left: calc(var(--rail) - 6px);
+    width: 12px;
+  }
+  .tl-before {
+    top: 0;
+    height: var(--dot-at);
+  }
+  .tl-after {
+    top: var(--dot-at);
+    height: calc(100% - var(--dot-at) + var(--tl-gap));
+  }
+  .timeline-item:last-child .tl-after {
+    height: calc(100% - var(--dot-at));
+  }
+  .tl-wave {
     background: var(--primary);
+    -webkit-mask: var(--tl-wave-y) repeat-y;
+    mask: var(--tl-wave-y) repeat-y;
+    -webkit-mask-size: 12px 32px;
+    mask-size: 12px 32px;
   }
-  .timeline-item[data-state='now']:not(:last-child)::after {
-    background: var(--outline-var);
+  .tl-before.tl-wave {
+    -webkit-mask-position: center top;
+    mask-position: center top;
   }
+  .tl-after.tl-wave {
+    -webkit-mask-position: center bottom;
+    mask-position: center bottom;
+  }
+  .tl-flat {
+    background: linear-gradient(var(--outline-var), var(--outline-var)) center / 4px 100% no-repeat;
+  }
+
+  /* Horizontal rail above four columns. */
   @media (min-width: 1024px) {
     .timeline-item {
+      --rail: 14px;
       padding-left: 0;
-      padding-top: 44px;
+      padding-top: 48px;
     }
     .timeline-dot {
       left: calc(50% - 8px);
-      top: 6px;
+      top: calc(var(--rail) - 8px);
     }
     .timeline-item[data-state='now'] .timeline-dot {
-      left: calc(50% - 11px);
-      top: 3px;
+      left: calc(50% - 13px);
+      top: calc(var(--rail) - 13px);
     }
-    .timeline-item:not(:last-child)::after {
+    .tl-seg {
+      top: calc(var(--rail) - 6px);
+      left: auto;
+      width: auto;
+      height: 12px;
+    }
+    .tl-before {
+      left: 0;
+      width: 50%;
+    }
+    .tl-after,
+    .timeline-item:last-child .tl-after {
       left: 50%;
-      top: 12px;
-      width: calc(100% + var(--tl-gap));
-      height: 4px;
+      height: 12px;
+      width: calc(50% + var(--tl-gap));
+    }
+    .timeline-item:last-child .tl-after {
+      width: 50%;
+    }
+    .tl-wave {
+      -webkit-mask: var(--tl-wave-x) repeat-x;
+      mask: var(--tl-wave-x) repeat-x;
+      -webkit-mask-size: 32px 12px;
+      mask-size: 32px 12px;
+    }
+    .tl-before.tl-wave {
+      -webkit-mask-position: left center;
+      mask-position: left center;
+    }
+    .tl-after.tl-wave {
+      -webkit-mask-position: right center;
+      mask-position: right center;
+    }
+    .tl-flat {
+      background-size: 100% 4px;
     }
   }
 
@@ -636,6 +704,16 @@
     d: var(--morph-to);
   }
 }
+@keyframes wipe-right {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes wipe-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+}
 @keyframes swap-in {
   from {
     opacity: 0;
@@ -792,6 +870,28 @@
   @media (hover: hover) {
     .chip-spring:hover {
       translate: 0 -3px;
+    }
+  }
+
+  /* Timeline draw-in: when the list scrolls into view, each half of the
+     line wipes open (clip-path inset) in --step order and each dot pops as
+     the line reaches it, then the cards rise. Vertical on phones wipes top
+     to bottom; the horizontal rail wipes left to right. */
+  [data-reveal='shown'] .tl-seg {
+    animation: wipe-down 0.32s var(--ease-emph) backwards;
+    animation-delay: calc(250ms + var(--step, 0) * 260ms);
+  }
+  [data-reveal='shown'] .timeline-dot {
+    animation: pop 0.6s var(--ease-bounce) backwards;
+    animation-delay: calc(250ms + var(--step, 0) * 260ms);
+  }
+  [data-reveal='shown'] .tl-card {
+    animation: reveal 0.9s var(--ease-spring) backwards;
+    animation-delay: calc(200ms + var(--i, 0) * 120ms);
+  }
+  @media (min-width: 1024px) {
+    [data-reveal='shown'] .tl-seg {
+      animation-name: wipe-right;
     }
   }
 
