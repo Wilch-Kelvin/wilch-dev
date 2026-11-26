@@ -9,11 +9,10 @@ const fullPage = !process.argv.includes('--viewport-only');
 const widths = [390, 768, 1440];
 const themes = ['light', 'dark'];
 
-const server = spawn('node', ['scripts/serve-out.mjs'], {
+const server = spawn('npx', ['next', 'start', '-H', '127.0.0.1', '-p', '4174'], {
   stdio: 'ignore',
-  env: { ...process.env, PORT: '4174' },
 });
-await new Promise((r) => setTimeout(r, 600));
+await new Promise((r) => setTimeout(r, 2500));
 await mkdir(outDir, { recursive: true });
 const browser = await chromium.launch();
 try {

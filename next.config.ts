@@ -1,12 +1,13 @@
 import type { NextConfig } from 'next';
 
-// Static export: a portfolio has no server data, so every page is plain HTML
-// built ahead of time. That is the fastest and cheapest thing to host.
+// Every page is still prerendered to plain HTML at build time (fast and
+// cheap). Static export is off since 2026-11-26 only so Vercel can also run
+// the two resume API routes (src/app/api/resume); nothing else uses a server.
 const nextConfig: NextConfig = {
-  output: 'export',
-  // Directory-style URLs (/404/index.html) so any static host serves them.
+  // Directory-style URLs (/projects/), kept from the static-export days so
+  // no existing link changes.
   trailingSlash: true,
-  // The static export has no image optimiser server, so images ship as-is.
+  // Images are already sized WebP on Vercel Blob, so no optimiser needed.
   images: { unoptimized: true },
   reactStrictMode: true,
   poweredByHeader: false,

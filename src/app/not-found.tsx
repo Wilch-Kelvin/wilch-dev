@@ -6,7 +6,7 @@ import { notFound } from '@/content/site';
 
 export const metadata: Metadata = { title: notFound.metaTitle, robots: { index: false } };
 
-// The static export writes this as 404.html; Vercel serves it for any
+// Next.js serves this (prerendered) for any
 // unknown path. Friendly line + one next step, never blaming the visitor.
 export default function NotFound() {
   return (
