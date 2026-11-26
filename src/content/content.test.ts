@@ -23,7 +23,6 @@ describe('content', () => {
     expect(careerNodeCount).toBeGreaterThanOrEqual(2);
   });
 
-
   it('has four projects with unique ids, at most one open by default', () => {
     expect(projects).toHaveLength(4);
     expect(new Set(projects.map((p) => p.id)).size).toBe(4);
