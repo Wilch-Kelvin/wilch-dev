@@ -25,10 +25,9 @@ into **Change to**.
 
 | ID | Current | Change to |
 |---|---|---|
-| hero.badge | CS + Cybersecurity @ USM | |
 | hero.title | Hi, I'm Kelvin. | |
-| hero.body | I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I build for the web, the browser and iOS, and I'm working my way toward DevOps and security. | |
-| hero.cta1 | See my projects | |
+| hero.body | I study Computer Science at the University of Southern Maine with a minor in Cybersecurity. I enjoy WebDev, Agentic Engineering, and I'm working my way toward DevOps and security. | |
+| hero.cta1 | Curious | |
 | hero.cta2 | Resume | |
 
 ## 01 Projects
@@ -37,7 +36,7 @@ into **Change to**.
 |---|---|---|
 | work.eyebrow | Projects | |
 | work.title | Stuff I'm building | |
-| work.body | Four projects I'm putting real hours into right now, from a campus app to an offline AI mentor. | |
+| work.body | Four projects I'm putting hours into right now, from a campus app to an offline AI mentor. | |
 | classping.meta | Flagship · classping.space | |
 | classping.body | My main project. ClassPing is built for students around campus. It started as a web app and now has a Chrome extension, a native iOS app I'm writing in SwiftUI, and Android early access. | |
 | classping.chips | Web app · Chrome extension · iOS · SwiftUI · Android early access | |
@@ -69,11 +68,11 @@ into **Change to**.
 | ID | Current | Change to |
 |---|---|---|
 | acad.title | The Journey | |
-| acad.body | I finished my associate degree at Southern Maine Community College, then transferred to the University of Southern Maine. Here's where things stand. | |
+| acad.body | Persuing a Bachelors Degree in University of Southern Maine. Here's where things stand. | |
 | acad.1 | Done · Associate Degree · Southern Maine Community College | |
 | acad.2 | Done · Transferred to USM · B.S. in Computer Science with a minor in Cybersecurity | |
 | acad.3 | Now · Fall 2026 · COS 322 Foundations of Machine Learning, ITT 451 Cyber Laws, Policies and Ethics, ITT 272 Networking I, MAT 295 Linear Algebra | |
-| acad.4 ⚠ | Next · B.S. Computer Science · Cybersecurity minor. Graduating [EXPECTED DATE] | |
+| acad.4 ⚠ | Next · B.S. Computer Science · Cybersecurity minor. Graduating [Dec 17th 2027] | |
 
 ## 03 Resume
 
@@ -94,10 +93,10 @@ into **Change to**.
 
 | ID | Current | Change to |
 |---|---|---|
-| contact.title | Let's build something. | |
-| contact.body | Got a project, a role, or a question about something on here? Hit me up. | |
+| contact.title | Let's build something! | |
+| contact.body | Got a project, a role, or a question? Hit me up. | |
 | contact.github | github.com/Wilch-Kelvin | |
-| contact.email ⚠ | [YOUR EMAIL] | |
+| contact.email ⚠ | [kelvinmusiomi99@gmail.com] | |
 | footer.copy | © 2026 Kelvin | |
-| footer.tagline | Built with a lot of rounded corners. | |
+| footer.tagline | Design Inspired by Flow | |
 | footer.top | Back to top | |
