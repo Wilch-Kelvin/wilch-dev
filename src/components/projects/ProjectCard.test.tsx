@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { projectVideos } from '@/content/project-videos';
 import { projects } from '@/content/projects';
 import { ProjectCard } from './ProjectCard';
 
@@ -29,6 +30,22 @@ describe('ProjectCard', () => {
       'href',
       nativex.link.href,
     );
+  });
+
+  it('shows the demo video (with its poster) when one is uploaded, else the art', () => {
+    const classping = projects.find((p) => p.id === 'classping')!;
+    const video = projectVideos.classping!;
+    const { container, unmount } = render(<ProjectCard project={classping} />);
+    const el = container.querySelector('video')!;
+    expect(el).toHaveAttribute('src', video.src);
+    expect(el).toHaveAttribute('preload', 'none');
+    expect(el.muted).toBe(true);
+    expect(container.querySelector('img')).toHaveAttribute('src', video.poster);
+    unmount();
+
+    expect(projectVideos.nativex).toBeUndefined();
+    const art = render(<ProjectCard project={nativex} />);
+    expect(art.container.querySelector('video')).toBeNull();
   });
 
   it('honours openByDefault', () => {

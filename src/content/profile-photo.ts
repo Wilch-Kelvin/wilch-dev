@@ -4,7 +4,13 @@ import type { ProfilePhoto } from '@/lib/profile-photo';
 
 export const profilePhoto: ProfilePhoto | null = {
   sources: [
-    { url: 'https://pjeguraojuzs7qtz.public.blob.vercel-storage.com/profile/kelvin-400.webp', width: 400 },
-    { url: 'https://pjeguraojuzs7qtz.public.blob.vercel-storage.com/profile/kelvin-800.webp', width: 800 },
+    {
+      url: 'https://pjeguraojuzs7qtz.public.blob.vercel-storage.com/profile/kelvin-400.webp',
+      width: 400,
+    },
+    {
+      url: 'https://pjeguraojuzs7qtz.public.blob.vercel-storage.com/profile/kelvin-800.webp',
+      width: 800,
+    },
   ],
 };

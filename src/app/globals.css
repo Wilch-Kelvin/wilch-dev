@@ -998,6 +998,15 @@
     }
   }
 
+  /* Project demo videos: the poster fades away once frames are playing and
+     back when the video stops (ProjectVideo.tsx). */
+  .video-poster {
+    transition: opacity var(--dur-medium) var(--ease-emph);
+  }
+  .video-poster[data-playing='true'] {
+    opacity: 0;
+  }
+
   /* Scroll-driven: progress bar and hero parallax (scrubbed on purpose:
      they *should* track the scrollbar). Without support nothing is hidden. */
   @supports (animation-timeline: scroll()) {
