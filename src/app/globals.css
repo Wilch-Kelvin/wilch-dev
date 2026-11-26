@@ -211,6 +211,17 @@
     opacity: 0.12;
   }
 
+  /* Springy press on every tappable control (signature: ~0.97). The
+     standalone `scale` property composes with any transform already there. */
+  .state-layer,
+  .press {
+    transition: scale var(--dur-medium) var(--ease-bounce);
+  }
+  .state-layer:active,
+  .press:active {
+    scale: 0.97;
+  }
+
   /* Expressive button: pill at rest, squishes to a rounded square on press. */
   .btn {
     display: inline-flex;
@@ -277,7 +288,8 @@
     text-decoration: none;
     transition:
       background-color var(--dur-short) var(--ease-emph),
-      border-radius var(--dur-medium) var(--ease-bounce);
+      border-radius var(--dur-medium) var(--ease-bounce),
+      scale var(--dur-medium) var(--ease-bounce);
   }
   .nav-link[aria-current='true'] {
     background: var(--primary-c);
@@ -772,7 +784,9 @@
     transition-duration: 0.01ms !important;
   }
   .btn:active,
-  .icon-btn:active {
+  .icon-btn:active,
+  .state-layer:active,
+  .press:active {
     scale: none;
     opacity: 0.85;
   }

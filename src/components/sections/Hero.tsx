@@ -50,7 +50,8 @@ export function Hero() {
                   color="var(--primary-c)"
                   className="spin h-full w-full [grid-area:1/1]"
                 />
-                <span className="text-on-primary-c place-self-center text-[clamp(150px,32vw,260px)] leading-none font-black [grid-area:1/1]">
+                {/* relative: the spinning shape gets its own layer; this keeps the K above it. */}
+                <span className="text-on-primary-c relative place-self-center text-[clamp(150px,32vw,260px)] leading-none font-black [grid-area:1/1]">
                   K
                 </span>
               </div>

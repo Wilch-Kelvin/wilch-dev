@@ -26,7 +26,7 @@ function ClassPingArt() {
         <Icon
           name="bell"
           size={46}
-          className="text-on-primary-c place-self-center [grid-area:1/1]"
+          className="text-on-primary-c relative place-self-center [grid-area:1/1]"
           strokeWidth={2}
         />
       </div>

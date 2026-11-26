@@ -36,7 +36,7 @@ export function SkillFileViewer() {
               type="button"
               aria-pressed={selected}
               onClick={() => setSelectedId(s.id)}
-              className={`state-layer min-h-11 cursor-pointer border-0 px-4 font-mono text-sm font-semibold transition-[border-radius,background-color] duration-[450ms] ease-[var(--ease-bounce)] ${
+              className={`state-layer min-h-11 cursor-pointer border-0 px-4 font-mono text-sm font-semibold transition-[border-radius,background-color,scale] duration-[450ms] ease-[var(--ease-bounce)] ${
                 selected
                   ? 'bg-primary text-on-primary rounded-full'
                   : 'bg-surface text-on-surface rounded-xl'

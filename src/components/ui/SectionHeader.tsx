@@ -19,7 +19,7 @@ export function SectionHeader({ intro, titleId, shape, badge, className = '' }: 
         <span className="inline-grid h-14 w-14">
           <Shape name={shape} color={badge.fill} className="[grid-area:1/1] h-full w-full" />
           <span
-            className="font-mono text-base font-semibold [grid-area:1/1] place-self-center"
+            className="relative font-mono text-base font-semibold [grid-area:1/1] place-self-center"
             style={{ color: badge.ink }}
           >
             {intro.number}
