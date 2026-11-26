@@ -83,7 +83,7 @@ export function Academics() {
             intro={academicsIntro}
             titleId="academics-title"
             shape="clover4"
-            badge={{ fill: 'var(--tertiary-c)', ink: 'var(--on-tertiary-c)' }}
+            badge="var(--tertiary-c)"
           />
           <ol
             aria-label={milestoneLabels.listLabel}

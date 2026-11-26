@@ -16,7 +16,6 @@ export type NavItem = {
 };
 
 export type SectionIntro = {
-  number: '01' | '02' | '03';
   eyebrow: string;
   title: string;
   body: string;
@@ -34,7 +33,7 @@ export type Project = {
   name: string;
   /** Mono line above the name: "Flagship · classping.space". */
   meta: string;
-  /** Always visible (review M1). */
+  /** First sentence(s), shown first when the card opens. */
   summary: string;
   /** Revealed by the "More" disclosure. */
   details: string;
@@ -42,7 +41,7 @@ export type Project = {
   chips: readonly string[];
   link: ExternalLink;
   tone: ProjectTone;
-  /** ClassPing starts expanded (review M1). */
+  /** Start expanded. All false since the 2026-11-26 mockups. */
   openByDefault: boolean;
   /** TODO(Kelvin): real screenshots (review M2). Null shows the shape art. */
   screenshot: { src: `/${string}`; alt: string } | null;

@@ -37,8 +37,10 @@ function Layer({
 }
 
 export function Hero() {
+  // overflow-x-clip: the rotating, drifting shapes may poke past the right
+  // edge; clip (unlike hidden) makes no scroll box, so nothing else changes.
   return (
-    <section aria-labelledby="hero-title" className="pt-6 pb-16 md:pt-10 md:pb-24">
+    <section aria-labelledby="hero-title" className="overflow-x-clip pt-6 pb-16 md:pt-10 md:pb-24">
       <div className="container-page grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         <div className="flex flex-col items-start gap-6 md:gap-7">
           <p className="rise rise-solid label-mono bg-tertiary-c text-on-tertiary-c m-0 inline-flex items-center gap-2.5 rounded-full py-2 pr-4 pl-3 normal-case">

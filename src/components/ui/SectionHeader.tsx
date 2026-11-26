@@ -1,31 +1,24 @@
 import type { SectionIntro } from '@/content/schema';
+import { revealProps } from '@/lib/reveal';
 import type { ShapeName } from '@/lib/shapes';
 import { Shape } from './Shape';
-import { revealProps } from '@/lib/reveal';
 
 type Props = {
   intro: SectionIntro;
   titleId: string;
   shape: ShapeName;
-  /** Token pair for the numbered badge, e.g. primary-c / on-primary-c. */
-  badge: { fill: string; ink: string };
+  /** Fill token for the shape badge, e.g. `var(--primary-c)`. */
+  badge: string;
   className?: string;
 };
 
-/** Numbered shape badge + mono eyebrow + big heading + intro line. */
+/** Shape badge + mono eyebrow + big heading + intro line (as in the mockups). */
 export function SectionHeader({ intro, titleId, shape, badge, className = '' }: Props) {
   return (
     <div {...revealProps()} className={`flex max-w-[760px] flex-col gap-4 ${className}`}>
       <div className="flex items-center gap-3.5">
-        <span className="inline-grid h-14 w-14">
-          <Shape name={shape} color={badge.fill} className="[grid-area:1/1] h-full w-full" />
-          <span
-            className="relative font-mono text-base font-semibold [grid-area:1/1] place-self-center"
-            style={{ color: badge.ink }}
-          >
-            {intro.number}
-          </span>
-        </span>
+        {/* The badge twirls in a beat after the heading rises (see .badge-pop). */}
+        <Shape name={shape} color={badge} className="badge-pop h-12 w-12 flex-none" />
         <span className="label-mono text-on-surface-var">{intro.eyebrow}</span>
       </div>
       <h2

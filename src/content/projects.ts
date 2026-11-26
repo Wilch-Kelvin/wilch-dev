@@ -1,14 +1,14 @@
 import type { Project, SectionIntro } from './schema';
 
 export const projectsIntro: SectionIntro = {
-  number: '01',
   eyebrow: 'Projects',
   title: "Stuff I'm building",
   body: "Four projects I'm putting hours into right now, from a campus app to an offline AI mentor.",
 };
 
-// Kelvin's card text, split into an always-visible summary and the sentence(s)
-// behind the "More" button (review M1). The words themselves are unchanged.
+// Kelvin's card text. Since the 2026-11-26 mockups the card shows only its
+// art, eyebrow and name; summary, details, chips and link open behind the
+// round chevron. The words themselves are unchanged.
 export const projects: readonly Project[] = [
   {
     id: 'classping',
@@ -21,7 +21,8 @@ export const projects: readonly Project[] = [
     chips: ['Web app', 'Chrome extension', 'iOS · SwiftUI', 'Android early access'],
     link: { label: 'Visit ClassPing', href: 'https://classping.space/welcome' },
     tone: 'primary',
-    openByDefault: true,
+    // Mockups 2026-11-26: every card starts collapsed. Set true to open one.
+    openByDefault: false,
     screenshot: null,
   },
   {
@@ -70,8 +71,6 @@ export const projects: readonly Project[] = [
 ];
 
 export const projectCard = {
-  more: 'More',
-  less: 'Less',
   /** Builds the disclosure's accessible name: "More about Ro5n3R". */
   moreAbout: (name: string) => `More about ${name}`,
 } as const;

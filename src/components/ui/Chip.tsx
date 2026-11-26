@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 /** Outline chip that takes the colour of the card it sits on. */
 export function Chip({ children }: { children: ReactNode }) {
-  return <li className="chip">{children}</li>;
+  return <li className="chip chip-spring">{children}</li>;
 }
 
 export function ChipList({ label, items }: { label: string; items: readonly string[] }) {

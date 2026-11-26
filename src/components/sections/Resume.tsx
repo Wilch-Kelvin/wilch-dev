@@ -47,7 +47,7 @@ export function Resume() {
             intro={resumeIntro}
             titleId="resume-title"
             shape="burst8"
-            badge={{ fill: 'var(--secondary-c)', ink: 'var(--on-secondary-c)' }}
+            badge="var(--secondary-c)"
           />
           <div {...revealProps(1)} data-print="hide">
             <DownloadPdf />

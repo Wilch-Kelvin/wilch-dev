@@ -17,11 +17,11 @@ export function Projects({ demos }: { demos?: ReactNode }) {
           intro={projectsIntro}
           titleId="projects-title"
           shape="cookie9"
-          badge={{ fill: 'var(--primary-c)', ink: 'var(--on-primary-c)' }}
+          badge="var(--primary-c)"
         />
         <div className="grid items-start gap-6 lg:grid-cols-2">
           {projects.map((project, i) => (
-            <div key={project.id} {...revealProps(i % 2)} className="flex">
+            <div key={project.id} {...revealProps(i % 2)} className="flex min-w-0">
               <ProjectCard project={project} />
             </div>
           ))}

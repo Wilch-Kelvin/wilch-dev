@@ -762,6 +762,33 @@
       opacity var(--dur-short) var(--ease-emph);
   }
 
+  /* Opening a project card: the height springs open (.disclosure), and its
+     contents rise in one after another. Re-runs on every open because the
+     selector only matches while data-open is true. */
+  .disclosure[data-open='true'] .disclosure-item {
+    animation: reveal 0.8s var(--ease-spring) backwards;
+    animation-delay: calc(120ms + var(--i, 0) * 70ms);
+  }
+
+  /* Section badges twirl in just after their header rises. */
+  [data-reveal='shown'] .badge-pop {
+    animation: pop 0.9s var(--ease-bounce) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms + 180ms);
+  }
+
+  /* Chips are not buttons, but a small springy lift on hover makes the
+     lists feel alive (no press state: nothing happens on click). */
+  .chip-spring {
+    transition:
+      translate var(--dur-medium) var(--ease-bounce),
+      background-color var(--dur-short) var(--ease-emph);
+  }
+  @media (hover: hover) {
+    .chip-spring:hover {
+      translate: 0 -3px;
+    }
+  }
+
   /* Arrows nudge in their direction on hover. */
   .nudge-diag {
     transition: translate var(--dur-medium) var(--ease-bounce);

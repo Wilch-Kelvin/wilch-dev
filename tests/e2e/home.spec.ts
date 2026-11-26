@@ -8,12 +8,12 @@ test('home page: hero, projects, disclosure, contact', async ({ page }) => {
   await expect(page).toHaveTitle(/Kelvin Wilch/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText("Hi, I'm Kelvin.");
 
-  // Four project cards, ClassPing open by default (review M1).
+  // Four project cards, all collapsed to art + name (mockups 2026-11-26).
   const more = page.getByRole('button', { name: /^More about/ });
   await expect(more).toHaveCount(4);
   await expect(page.getByRole('button', { name: 'More about ClassPing' })).toHaveAttribute(
     'aria-expanded',
-    'true',
+    'false',
   );
 
   const ro5n3r = page.getByRole('button', { name: 'More about Ro5n3R' });
@@ -158,6 +158,17 @@ test('the nav underline slides to the section being read', async ({ page, isMobi
   await page.waitForTimeout(900);
   const [l, b] = [(await link.boundingBox())!, (await bar.boundingBox())!];
   expect(Math.abs(l.x + l.width / 2 - (b.x + b.width / 2))).toBeLessThan(2);
+});
+
+test('no horizontal scroll at 375px, collapsed or open', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  const width = () => page.evaluate(() => document.documentElement.scrollWidth);
+  expect(await width()).toBeLessThanOrEqual(375);
+  for (const button of await page.getByRole('button', { name: /^More about/ }).all()) {
+    await button.click();
+  }
+  expect(await width()).toBeLessThanOrEqual(375);
 });
 
 test('unknown pages get the friendly 404 with a way home', async ({ page }) => {
