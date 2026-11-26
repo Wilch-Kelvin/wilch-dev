@@ -125,7 +125,7 @@ export function Resume() {
                         color="var(--primary)"
                         className="h-full w-full [grid-area:1/1]"
                       />
-                      <span className="text-on-primary place-self-center font-mono text-base font-semibold [grid-area:1/1]">
+                      <span className="text-on-primary relative place-self-center font-mono text-base font-semibold [grid-area:1/1]">
                         {i + 1}
                       </span>
                     </span>

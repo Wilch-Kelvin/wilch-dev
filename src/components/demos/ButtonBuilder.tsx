@@ -50,7 +50,7 @@ export function ButtonBuilder() {
       <div className="card-inner bg-surface grid min-h-[168px] place-items-center p-4">
         <button
           type="button"
-          className="btn min-h-14 px-8 text-xl"
+          className="btn state-layer min-h-14 px-8 text-xl"
           style={{
             borderRadius: `${choice.radius}px`,
             background: `var(--${fill.bg})`,
@@ -107,7 +107,7 @@ export function ButtonBuilder() {
                 aria-pressed={selected}
                 aria-label={`${f.name} fill`}
                 onClick={() => setChoice((c) => ({ ...c, fill: f.id }))}
-                className="h-12 w-12 cursor-pointer border-0 p-0 transition-[border-radius] duration-[450ms] ease-[var(--ease-bounce)]"
+                className="press h-12 w-12 cursor-pointer border-0 p-0 transition-[border-radius,scale] duration-[450ms] ease-[var(--ease-bounce)]"
                 style={{
                   background: `var(--${f.bg})`,
                   borderRadius: selected ? '14px' : '50%',

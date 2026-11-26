@@ -62,3 +62,59 @@ test('theme toggle switches to true black and remembers it', async ({ page, isMo
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
+
+test('motion can be paused and the choice is remembered', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const pause = page.getByRole('contentinfo').getByRole('button', { name: 'Pause motion' });
+  await pause.click();
+  await expect(page.locator('html')).toHaveAttribute('data-motion', 'paused');
+  const spinning = await page
+    .locator('.spin')
+    .first()
+    .evaluate((el) => getComputedStyle(el).animationName);
+  expect(spinning).toBe('none');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-motion', 'paused');
+});
+
+test('reduced motion stops every animation', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const running = await page.evaluate(() => document.getAnimations().length);
+  expect(running).toBe(0);
+});
+
+test('loading the page causes almost no layout shift (CLS < 0.1)', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(1500);
+  const cls = await page.evaluate(
+    () =>
+      new Promise<number>((resolve) => {
+        let total = 0;
+        new PerformanceObserver((list) => {
+          for (const entry of list.getEntries() as (PerformanceEntry & {
+            value: number;
+            hadRecentInput: boolean;
+          })[]) {
+            if (!entry.hadRecentInput) total += entry.value;
+          }
+        }).observe({ type: 'layout-shift', buffered: true });
+        setTimeout(() => resolve(total), 200);
+      }),
+  );
+  expect(cls).toBeLessThan(0.1);
+});
+
+test('the hero K stays above its spinning shape', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const k = page.getByText('K', { exact: true });
+  const box = (await k.boundingBox())!;
+  const topmost = await page.evaluate(
+    ({ x, y }) => document.elementFromPoint(x, y)?.textContent?.trim(),
+    { x: box.x + box.width * 0.2, y: box.y + box.height * 0.5 },
+  );
+  expect(topmost).toBe('K');
+});
