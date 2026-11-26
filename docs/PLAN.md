@@ -240,3 +240,12 @@ EXIF/XMP/ICC) then `node --env-file=.env.local scripts/upload-profile.ts`
 Open for Kelvin: the mockup headings are a wide heavy grotesk (Roboto Flex,
 the original design font); the site keeps Barlow Condensed (decision W-4).
 Mockup wording not applied is listed in `docs/COPY.md`.
+
+## 14. Scroll-drawn lines (2026-11-26, `feat/scroll-drawn-lines`)
+
+| Area | What changed |
+|---|---|
+| Hero | Eyebrow chip ("CS + Cybersecurity @ USM") and the "Seeking internships…" line removed at Kelvin's request |
+| Academics | The line now follows the scroll instead of playing once: down draws it toward its end, up retracts it (`lib/scroll-draw.ts`, `useScrollDraw`). Phones track a "pen" 65% down the viewport per segment; the horizontal rail splits the row's progress into `--steps` |
+| Resume | "Where I'm headed" text cleared; the banner keeps only the three cookie nodes and curve, scroll-drawn the same way, and is `aria-hidden` |
+| Motion | Scroll drawing only runs with OS motion allowed and the on-page pause off; otherwise (and without JS) the lines are simply drawn |
