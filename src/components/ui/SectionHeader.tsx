@@ -1,6 +1,7 @@
 import type { SectionIntro } from '@/content/schema';
 import type { ShapeName } from '@/lib/shapes';
 import { Shape } from './Shape';
+import { revealProps } from '@/lib/reveal';
 
 type Props = {
   intro: SectionIntro;
@@ -14,7 +15,7 @@ type Props = {
 /** Numbered shape badge + mono eyebrow + big heading + intro line. */
 export function SectionHeader({ intro, titleId, shape, badge, className = '' }: Props) {
   return (
-    <div className={`reveal flex max-w-[760px] flex-col gap-4 ${className}`}>
+    <div {...revealProps()} className={`flex max-w-[760px] flex-col gap-4 ${className}`}>
       <div className="flex items-center gap-3.5">
         <span className="inline-grid h-14 w-14">
           <Shape name={shape} color={badge.fill} className="[grid-area:1/1] h-full w-full" />

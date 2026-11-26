@@ -4,6 +4,7 @@ import { StatusPill } from '@/components/ui/StatusPill';
 import { academicsIntro, graduationDate, milestoneLabels, milestones } from '@/content/academics';
 import type { Milestone } from '@/content/schema';
 import { formatShortDate, termLabel } from '@/lib/dates';
+import { revealProps } from '@/lib/reveal';
 
 const WAVE = 'M0 64V32Q90 4 180 32T360 32T540 32T720 32T900 32T1080 32T1260 32T1440 32V64Z';
 
@@ -92,7 +93,8 @@ export function Academics() {
               <li
                 key={i}
                 data-state={milestone.state}
-                className={`timeline-item reveal ${i % 2 ? 'reveal-2' : ''} flex`}
+                {...revealProps(i)}
+                className="timeline-item flex"
               >
                 <span aria-hidden="true" className="timeline-dot" />
                 <MilestoneCard milestone={milestone} />

@@ -11,6 +11,7 @@ import {
   skillGroups,
 } from '@/content/resume';
 import type { ShapeName } from '@/lib/shapes';
+import { revealProps } from '@/lib/reveal';
 
 const pathShapes: readonly ShapeName[] = ['cookie9', 'clover4', 'burst8'];
 
@@ -48,13 +49,13 @@ export function Resume() {
             shape="burst8"
             badge={{ fill: 'var(--secondary-c)', ink: 'var(--on-secondary-c)' }}
           />
-          <div className="reveal reveal-2" data-print="hide">
+          <div {...revealProps(1)} data-print="hide">
             <DownloadPdf />
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="reveal flex">
+          <div {...revealProps(0)} className="flex">
             <div className="card bg-surface-high text-on-surface flex flex-1 flex-col gap-6">
               <h3 className="m-0 text-[34px] leading-none font-extrabold">
                 {resumeHeadings.education}
@@ -84,7 +85,7 @@ export function Resume() {
             </div>
           </div>
 
-          <div className="reveal reveal-2 flex">
+          <div {...revealProps(1)} className="flex">
             <div className="card bg-inverse text-on-inverse flex flex-1 flex-col gap-6">
               <h3 className="m-0 text-[34px] leading-none font-extrabold">
                 {resumeHeadings.skills}
@@ -107,7 +108,7 @@ export function Resume() {
             </div>
           </div>
 
-          <div className="reveal flex lg:col-span-2">
+          <div {...revealProps(0)} className="flex lg:col-span-2">
             <div className="card bg-primary-c text-on-primary-c flex flex-1 flex-col gap-7">
               <h3 className="m-0 text-[34px] leading-none font-extrabold">{resumeHeadings.path}</h3>
               <ol

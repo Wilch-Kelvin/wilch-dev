@@ -3,8 +3,7 @@ import { Icon } from '@/components/ui/Icon';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { projects, projectsIntro, projectsMore } from '@/content/projects';
 import type { ReactNode } from 'react';
-
-const revealSteps = ['reveal', 'reveal reveal-2'] as const;
+import { revealProps } from '@/lib/reveal';
 
 export function Projects({ demos }: { demos?: ReactNode }) {
   return (
@@ -22,13 +21,13 @@ export function Projects({ demos }: { demos?: ReactNode }) {
         />
         <div className="grid items-start gap-6 lg:grid-cols-2">
           {projects.map((project, i) => (
-            <div key={project.id} className={`${revealSteps[i % 2]} flex`}>
+            <div key={project.id} {...revealProps(i % 2)} className="flex">
               <ProjectCard project={project} />
             </div>
           ))}
         </div>
         {demos}
-        <div className="reveal flex justify-center">
+        <div {...revealProps()} className="flex justify-center">
           <a className="btn state-layer bg-surface-high text-on-surface" href={projectsMore.href}>
             {projectsMore.label}
             <Icon name="arrowUpRight" size={18} />

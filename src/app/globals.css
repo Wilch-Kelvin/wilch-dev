@@ -498,6 +498,12 @@
     rotate: 180deg;
   }
 
+  /* The Skills4u tiles are fanned at rest, motion or not (the fan is the
+     layout, not an animation). Hover spreads them further, in Motion. */
+  .fan-tile {
+    transform: rotate(var(--r)) translate(var(--x), var(--y));
+  }
+
   /* Theme icon: both icons are rendered, CSS shows the right one, so the
      server HTML never mismatches the client. */
   .theme-icon-dark {
@@ -592,8 +598,8 @@
 @keyframes reveal {
   from {
     opacity: 0;
-    translate: 0 48px;
-    scale: 0.96;
+    translate: 0 40px;
+    scale: 0.97;
   }
 }
 @keyframes grow-x {
@@ -602,14 +608,6 @@
   }
   to {
     transform: scaleX(1);
-  }
-}
-@keyframes draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
   }
 }
 @keyframes px1 {
@@ -730,7 +728,6 @@
 
   /* Skills4u tiles fan out further when the card is hovered. */
   .fan-tile {
-    transform: rotate(var(--r)) translate(var(--x), var(--y));
     transition: transform 0.7s var(--ease-bounce);
   }
   @media (hover: hover) {
@@ -739,8 +736,8 @@
     }
   }
 
-  /* Scroll-driven: progress bar, hero parallax and section reveals.
-     Without support (Firefox today) content simply shows; nothing is hidden. */
+  /* Scroll-driven: progress bar and hero parallax (scrubbed on purpose:
+     they *should* track the scrollbar). Without support nothing is hidden. */
   @supports (animation-timeline: scroll()) {
     .scroll-progress {
       display: block;
@@ -764,24 +761,18 @@
       animation-range: 0 1000px;
     }
   }
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: reveal linear backwards;
-      animation-timeline: view();
-      animation-range: entry 0% cover 25%;
-    }
-    .reveal-2 {
-      animation-range: entry 10% cover 31%;
-    }
-    .reveal-3 {
-      animation-range: entry 20% cover 37%;
-    }
-    .draw {
-      stroke-dasharray: 1;
-      animation: draw linear backwards;
-      animation-timeline: view();
-      animation-range: entry 25% cover 50%;
-    }
+  /* Springy entrances on scroll (lib/reveal.ts + useRevealOnScroll).
+     The hook marks off-screen elements "waiting" and flips them to "shown"
+     when they scroll in; a time-based spring then plays, staggered by --i.
+     Gated on the pause too: pressing Pause shows anything still waiting. */
+  :root:not([data-motion='paused']) [data-reveal='waiting'] {
+    opacity: 0;
+    translate: 0 40px;
+    scale: 0.97;
+  }
+  [data-reveal='shown'] {
+    animation: reveal 1s var(--ease-spring) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
   }
 }
 
@@ -821,6 +812,11 @@
     background: #fff !important;
     color: #000;
     font-size: 12pt;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
   }
   [data-print='hide'],
   .skip-link,

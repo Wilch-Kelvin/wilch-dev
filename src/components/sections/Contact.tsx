@@ -2,12 +2,13 @@ import { Icon } from '@/components/ui/Icon';
 import { Shape } from '@/components/ui/Shape';
 import { contact } from '@/content/site';
 import { EmailActions } from './EmailActions';
+import { revealProps } from '@/lib/reveal';
 
 export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="pb-6">
       <div className="container-page">
-        <div className="reveal flex">
+        <div {...revealProps()} className="flex">
           <div className="card bg-inverse text-on-inverse relative flex flex-1 flex-col items-start gap-7 overflow-hidden !p-[clamp(28px,6vw,88px)]">
             <div
               aria-hidden="true"
