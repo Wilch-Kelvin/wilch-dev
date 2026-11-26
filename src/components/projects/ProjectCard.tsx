@@ -28,6 +28,12 @@ export function ProjectCard({ project }: { project: Project }) {
   const titleId = useId();
   const tone = toneClasses[project.tone];
   const video = projectVideos[project.id];
+  // Phones (Kelvin, 2026-11-26): only cards with a demo video keep their
+  // panel, and that video autoplays while on screen (see ProjectVideo). The
+  // rest collapse to eyebrow + title, so the list reads short. md and up
+  // keep the art on every card.
+  const panelLayout = video ? '' : 'hidden md:block';
+  const titleGap = video ? 'pt-5' : 'md:pt-5';
 
   // Focus moving between the card's own buttons and links is not a blur.
   const onBlur = (event: FocusEvent<HTMLElement>) => {
@@ -45,7 +51,8 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       <div
         aria-hidden="true"
-        className={`card-inner relative h-[240px] overflow-hidden md:h-[260px] ${tone.panel}`}
+        data-testid="project-panel"
+        className={`card-inner relative h-[240px] overflow-hidden md:h-[260px] ${tone.panel} ${panelLayout}`}
       >
         {video ? (
           <ProjectVideo video={video} engaged={hovered || focused} />
@@ -58,7 +65,7 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <div className="flex items-end justify-between gap-4 pt-5">
+      <div className={`flex items-end justify-between gap-4 ${titleGap}`}>
         <div className="flex min-w-0 flex-col gap-2.5">
           <span className="label-mono">{project.meta}</span>
           <h3 id={titleId} className="m-0 text-[clamp(40px,5vw,56px)] leading-none font-extrabold">

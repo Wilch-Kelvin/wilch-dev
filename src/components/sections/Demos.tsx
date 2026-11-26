@@ -14,7 +14,9 @@ export function Demos() {
         <div {...revealProps(0)} className="flex">
           <ButtonBuilder />
         </div>
-        <div {...revealProps(1)} className="flex">
+        {/* Phones skip the SKILL.md viewer (Kelvin, 2026-11-26): a tall
+            code block is clutter on a small screen. */}
+        <div {...revealProps(1)} className="hidden md:flex">
           <SkillFileViewer />
         </div>
       </div>
