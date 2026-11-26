@@ -1,6 +1,7 @@
 # wilch.dev: codebase plan
 
-Status: **plan only, no app code yet** (2026-11-25).
+Status: **phases 0–6 built locally** (2026-11-26), not pushed or deployed.
+See *12. Build status* at the end.
 Design source: Claude Design canvas "Kelvin's Portfolio"
 (<https://claude.ai/artifact/4kxudMEvdKDjK27KzjNEEt>), saved in
 `design/claude-design/project/Main.dc.html`.
@@ -25,7 +26,7 @@ content folder, and it deploys to Vercel from `main`.
 | Framework | Next.js 15 App Router, React 19, **static output** | A portfolio has no server data. Static pages are the fastest and cheapest to host. |
 | Language | TypeScript strict, no `any` | Kelvin's rule; catches content typos at build time. |
 | Styling | Tailwind CSS v4 + CSS custom properties for tokens | Tokens stay as CSS variables so theme/dark switches are one class on `<html>`. |
-| Fonts | `next/font/google`: Roboto Flex (variable, `wdth` + `opsz` axes) and Google Sans Code | Self-hosted at build, no layout shift. Fallback: self-host the woff2 if `next/font` lacks Google Sans Code. |
+| Fonts | `next/font/google`: **Barlow Condensed** (all weights + italics; Kelvin's choice, replaces Roboto Flex) and Google Sans Code | Self-hosted at build, no layout shift. |
 | Tests | Vitest + Testing Library, one Playwright journey | Logic tests for the demos; one smoke test that the page renders and links work. |
 | Lint/format | ESLint 9, Prettier | |
 | Hosting | Vercel (preview per branch, prod from `main`) | A push to `main` is a release. |
@@ -120,14 +121,14 @@ the components are built.
 
 ## 6. Design role
 
-This site deliberately looks like **Material 3 Expressive / Ro5n3R** (Roboto
-Flex, playful shapes, indigo + lime), not ClassPing's look. In the wiki it
+This site deliberately looks like **Material 3 Expressive / Ro5n3R** (Barlow
+Condensed, playful shapes, indigo + lime), not ClassPing's look. In the wiki it
 should be `design_role: own`. It still meets the signature basics: AA contrast,
-44 px targets, reduced motion. Two places it differs from the signature on
-purpose and need a yes from Kelvin:
-
-1. Dark mode surface is `#131218`, not true black.
-2. No liquid glass; flat tonal surfaces instead.
+44 px targets, reduced motion. **Decided 2026-11-26 (Kelvin, §11):** dark mode is true black (`#000`), and
+liquid glass is used on floating chrome (sticky nav, mobile menu sheet, hero
+name tag and pause button) with hairlines and solid fallbacks for
+`prefers-reduced-transparency`, `prefers-contrast: more` and no
+`backdrop-filter`. In-flow cards stay tonal M3 fills with a 1px hairline.
 
 ## 7. Placeholders to fill before launch
 
@@ -195,3 +196,24 @@ Change || For the font change it to this one, it will match the roundness and pl
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+## 12. Build status (2026-11-26)
+
+| Phase | Branch | State |
+|---|---|---|
+| 0 | `chore/scaffold` | Done |
+| 1 | `feat/tokens-layout` | Done: tokens in `src/theme/colors.ts`, AA tests, glass nav |
+| 2 | `feat/content` | Done |
+| 3 | `feat/sections` | Done |
+| 4 | `feat/demos` | Done |
+| 5 | `feat/motion-polish` | Done |
+| 6 | `chore/seo-launch` (+ `perf/mobile-lcp`) | Done locally. Not done: Vercel project, Web Analytics, preview review |
+| 7 | release | Waiting for Kelvin |
+
+Each branch starts from the previous one, so `docs/build-notes` holds all of it.
+Lighthouse (local static build, gzip): mobile 94 / 100 / 100 / 100, desktop
+99 / 100 / 100 / 100. Re-measure on the Vercel preview.
+
+Still to fill (all marked `TODO(Kelvin)` in `src/content/`): résumé PDF,
+internship season and year, project screenshots, skills to confirm (Swift,
+SwiftUI, Git, Chrome extensions; Linux and a Security group still open).

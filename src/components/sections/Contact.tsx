@@ -17,7 +17,7 @@ export function Contact() {
             </div>
             <div
               aria-hidden="true"
-              className="absolute top-[clamp(90px,16vw,230px)] right-[clamp(40px,18vw,250px)] aspect-square w-[clamp(44px,7vw,96px)]"
+              className="absolute top-[clamp(90px,16vw,230px)] hidden md:block right-[clamp(40px,18vw,250px)] aspect-square w-[clamp(44px,7vw,96px)]"
             >
               <Shape name="cookie9" color="var(--primary-c)" className="spin h-full w-full" />
             </div>
