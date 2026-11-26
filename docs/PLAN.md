@@ -121,8 +121,8 @@ the components are built.
 
 ## 6. Design role
 
-This site deliberately looks like **Material 3 Expressive / Ro5n3R** (Roboto
-Flex, playful shapes, indigo + lime), not ClassPing's look. In the wiki it
+This site deliberately looks like **Material 3 Expressive / Ro5n3R** (Barlow
+Condensed, playful shapes, indigo + lime), not ClassPing's look. In the wiki it
 should be `design_role: own`. It still meets the signature basics: AA contrast,
 44 px targets, reduced motion. **Decided 2026-11-26 (Kelvin, §11):** dark mode is true black (`#000`), and
 liquid glass is used on floating chrome (sticky nav, mobile menu sheet, hero
