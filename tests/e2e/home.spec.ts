@@ -123,7 +123,7 @@ test('the hero photo sits above its spinning frame and stays upright', async ({ 
   // photo's net rotation stays ~0 even halfway through the loop.
   await page.evaluate(() => {
     for (const a of document.getAnimations())
-      if (a.animationName === 'spin') a.currentTime = 24_000;
+      if ((a as CSSAnimation).animationName === 'spin') a.currentTime = 24_000;
   });
   const net = await photo.evaluate((img) => {
     const angle = (el: Element) => {
@@ -144,6 +144,20 @@ test('if the photo cannot load, the K monogram takes its place', async ({ page }
   await page.goto('/');
   await expect(page.locator('[data-portrait]').getByText('K', { exact: true })).toBeVisible();
   await expect(page.getByRole('img', { name: /^Kelvin Wilch smiling/ })).toHaveCount(0);
+});
+
+test('the nav underline slides to the section being read', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'The underline is part of the desktop nav');
+  await page.goto('/#resume');
+  const nav = page.getByRole('navigation', { name: 'Main' });
+  const link = nav.getByRole('link', { name: 'Resume', exact: true });
+  await expect(link).toHaveAttribute('aria-current', 'true');
+  const bar = nav.locator('.nav-indicator');
+  await expect(bar).toHaveCSS('opacity', '1');
+  // Wait for the spring to settle, then the bar must sit under the link.
+  await page.waitForTimeout(900);
+  const [l, b] = [(await link.boundingBox())!, (await bar.boundingBox())!];
+  expect(Math.abs(l.x + l.width / 2 - (b.x + b.width / 2))).toBeLessThan(2);
 });
 
 test('unknown pages get the friendly 404 with a way home', async ({ page }) => {

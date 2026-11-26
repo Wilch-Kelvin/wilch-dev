@@ -298,6 +298,21 @@
   .nav-link:active {
     border-radius: var(--r-sm);
   }
+  /* Desktop links: the sliding underline marks the current section, so the
+     link itself keeps its ink and only gets the hover wash. */
+  .nav-link-underline[aria-current='true'] {
+    background: transparent;
+    color: var(--on-surface);
+  }
+  .nav-indicator {
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--primary);
+    pointer-events: none;
+  }
 
   /* Cards. Every card gets a hairline, so structure still reads on true
      black. `--card-r` animates, and nested corners use it minus the padding. */
@@ -739,6 +754,23 @@
     transition: translate 1.2s var(--ease-spring);
   }
 
+  /* The underline slides (and stretches) from link to link on a spring. */
+  .nav-indicator {
+    transition:
+      translate 0.7s var(--ease-spring),
+      width 0.7s var(--ease-spring),
+      opacity var(--dur-short) var(--ease-emph);
+  }
+
+  /* Arrows nudge in their direction on hover. */
+  .nudge-diag {
+    transition: translate var(--dur-medium) var(--ease-bounce);
+  }
+  @media (hover: hover) {
+    .btn:hover .nudge-diag {
+      translate: 2px -2px;
+    }
+  }
   /* The arrow in "See my projects" nudges down on hover. */
   .nudge-down {
     transition: translate var(--dur-medium) var(--ease-bounce);
