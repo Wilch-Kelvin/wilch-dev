@@ -6,82 +6,57 @@ import {
   careerNodeCount,
   education,
   resumeHeadings,
+  resumeGate,
   resumeIntro,
-  resumePdf,
   skillGroups,
 } from '@/content/resume';
 import type { CSSProperties } from 'react';
 import { revealProps } from '@/lib/reveal';
+import { readResumeConfig } from '@/lib/resume-config';
+import { ResumeRequest } from './ResumeRequest';
 
 /**
  * The hand-drawn line from this step's node to the next one. pathLength="1"
  * makes the path's length exactly 1 whatever its real size, so CSS can hide
  * it with stroke-dashoffset: 1 and draw it with 0; the scroll position picks
- * the value in between (see .career-path in globals.css). Two drawings:
- * across on wide screens, down between stacked steps on phones, where the
- * curve follows the pen by its own position (`data-scroll-draw`).
+ * the value in between (see .career-path in globals.css). It only runs
+ * across: the banner is hidden on phones (2026-11-26), so the old downward
+ * phone curve was removed with it.
  */
 function CareerCurve() {
-  const stroke = {
-    fill: 'none',
-    stroke: 'var(--primary)',
-    strokeWidth: 3,
-    strokeLinecap: 'round',
-  } as const;
   return (
-    <>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 200 40"
-        preserveAspectRatio="none"
-        className="career-curve career-curve-x hidden md:block"
-      >
-        <path
-          className="path-draw"
-          pathLength={1}
-          d="M0 18C30 4 70 2 110 16S170 34 200 20"
-          style={stroke}
-        />
-      </svg>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 40 100"
-        preserveAspectRatio="none"
-        data-scroll-draw=""
-        className="career-curve career-curve-y md:hidden"
-      >
-        <path
-          className="path-draw"
-          pathLength={1}
-          d="M20 0C6 25 34 50 20 70S14 92 20 100"
-          style={stroke}
-        />
-      </svg>
-    </>
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 200 40"
+      preserveAspectRatio="none"
+      className="career-curve career-curve-x"
+    >
+      <path
+        className="path-draw"
+        pathLength={1}
+        d="M0 18C30 4 70 2 110 16S170 34 200 20"
+        style={{ fill: 'none', stroke: 'var(--primary)', strokeWidth: 3, strokeLinecap: 'round' }}
+      />
+    </svg>
   );
 }
 
+/**
+ * The page is prerendered at build time, so this check runs during the
+ * Vercel build: once the email settings exist there, the next deploy shows
+ * the form. Without them it shows "PDF coming soon", never a broken form.
+ * Only a yes/no reaches the page; no secret does.
+ */
 function DownloadPdf() {
-  if (!resumePdf.href) {
-    // TODO(Kelvin): placeholder until public/resume.pdf exists (no dead link).
+  if (!readResumeConfig(process.env)) {
     return (
       <StatusPill className="border-outline text-on-surface-var min-h-[52px] border px-5 text-base">
         <Icon name="file" size={18} />
-        {resumePdf.pending}
+        {resumeGate.pending}
       </StatusPill>
     );
   }
-  return (
-    <div className="flex flex-col items-start gap-2">
-      <a className="btn state-layer bg-primary text-on-primary" href={resumePdf.href} download>
-        <Icon name="download" />
-        {resumePdf.label}
-      </a>
-      {resumePdf.updated ? (
-        <span className="text-on-surface-var font-mono text-sm">{resumePdf.updated}</span>
-      ) : null}
-    </div>
-  );
+  return <ResumeRequest />;
 }
 
 export function Resume() {
@@ -157,8 +132,10 @@ export function Resume() {
           {/* "Where I'm headed": text cleared for now (content/resume.ts), so
               the banner only holds the drawn path and is hidden from screen
               readers. The row draws as the page scrolls; each step's --step
-              says which part of the scroll belongs to its curve. */}
-          <div {...revealProps(0)} className="flex lg:col-span-2">
+              says which part of the scroll belongs to its curve. Hidden on
+              phones (Kelvin, 2026-11-26): with no words it was only clutter
+              there. */}
+          <div {...revealProps(0)} className="hidden md:flex lg:col-span-2">
             <div
               aria-hidden="true"
               className="card bg-primary-c text-on-primary-c flex flex-1 flex-col"
@@ -172,7 +149,7 @@ export function Resume() {
                   <li
                     key={i}
                     data-scroll-draw=""
-                    className="career-step relative flex items-center gap-4 md:flex-col md:gap-2.5"
+                    className="career-step relative flex flex-col items-center gap-2.5"
                     style={{ '--step': i } as CSSProperties}
                   >
                     {i < careerNodeCount - 1 ? <CareerCurve /> : null}

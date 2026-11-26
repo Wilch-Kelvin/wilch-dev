@@ -37,7 +37,10 @@ test('the hero has no eyebrow chip or "seeking" line (removed 2026-11-26)', asyn
   await expect(page.getByText("Where I'm headed")).toHaveCount(0);
 });
 
-test('the drawn lines follow the scroll: on going down, back off going up', async ({ page }) => {
+test('the drawn lines follow the scroll: on going down, back off going up', async ({
+  page,
+  isMobile,
+}) => {
   await page.goto('/');
   const drawOf = (selector: string) =>
     page
@@ -49,7 +52,9 @@ test('the drawn lines follow the scroll: on going down, back off going up', asyn
     page.locator(selector).evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
   const viewport = page.viewportSize()!.height;
 
-  for (const row of ['ol.timeline', 'ol.career-path']) {
+  // Phones hide the career banner (2026-11-26), so only the timeline draws there.
+  const rows = isMobile ? ['ol.timeline'] : ['ol.timeline', 'ol.career-path'];
+  for (const row of rows) {
     await expect.poll(() => drawOf(row)).toBe(0); // at the top: not drawn yet
 
     // Pen line is 65% down the viewport; put the row's top 60px above it.
@@ -299,4 +304,44 @@ test('on a phone, a project video plays while its card is on screen', async ({
   await page.goto('/');
   await page.getByRole('article', { name: 'ClassPing' }).locator('video').scrollIntoViewIfNeeded();
   await expect.poll(() => videoCalls(page)).toContain('play:classping-1280.mp4');
+});
+
+test('phones drop the clutter: no SKILL.md viewer or career banner, title-only cards', async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto('/');
+  const panel = (name: string) => page.getByRole('article', { name }).getByTestId('project-panel');
+  const career = page.locator('ol.career-path');
+  const skillViewer = page.getByText('Read a real SKILL.md');
+
+  if (isMobile) {
+    await expect(skillViewer).toBeHidden();
+    await expect(career).toBeHidden();
+    // Video cards keep their panel (and autoplay); the others are title-only.
+    await expect(panel('ClassPing')).toBeVisible();
+    await expect(panel('Ro5n3R')).toBeVisible();
+    await expect(panel('NativeX')).toBeHidden();
+    await expect(panel('Skills4u')).toBeHidden();
+  } else {
+    await expect(skillViewer).toBeVisible();
+    await expect(career).toBeVisible();
+    for (const name of ['ClassPing', 'Ro5n3R', 'NativeX', 'Skills4u']) {
+      await expect(panel(name)).toBeVisible();
+    }
+  }
+});
+
+test('resume API: unconfigured builds refuse politely and never leak the PDF', async ({
+  request,
+}) => {
+  // The test build has no email settings, so the gate is off: the request
+  // route says so and a download link goes back to the form.
+  const res = await request.post('/api/resume/request/', { data: { email: 'a@b.co' } });
+  expect(res.status()).toBe(503);
+  expect(await res.json()).toMatchObject({ error: { code: 'not_configured' } });
+
+  const dl = await request.get('/api/resume/download/?t=forged', { maxRedirects: 0 });
+  expect(dl.status()).toBe(303);
+  expect(dl.headers()['location']).toContain('resume=unavailable');
 });

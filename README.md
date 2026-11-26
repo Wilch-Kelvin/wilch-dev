@@ -1,7 +1,7 @@
 # wilch-dev
 
 Kelvin Wilch's portfolio, built for [wilch.dev](https://wilch.dev).
-Next.js 15 (App Router, static export), React 19, TypeScript strict and
+Next.js 15 (App Router, prerendered pages), React 19, TypeScript strict and
 Tailwind CSS v4.
 
 ## Run it
@@ -9,8 +9,8 @@ Tailwind CSS v4.
 ```bash
 npm install
 npm run dev          # http://localhost:3000
-npm run build        # static site in out/
-npm start            # serve out/ on http://127.0.0.1:4173
+npm run build        # prerendered pages + the resume API routes
+npm start            # production server on http://127.0.0.1:4173
 ```
 
 ## Checks

@@ -144,3 +144,13 @@ second table).
 | acad.body | Pursuing a Bachelor's degree at the University of Southern Maine. Here's where things stand. | I finished my associate degree at Southern Maine Community College, then transferred to the University of Southern Maine. Here's where things stand. |
 | resume.cta | "PDF coming soon" pill until `public/resume.pdf` exists | Download PDF button + "[ADD PDF LINK]" note |
 | resume.skills | Languages incl. Swift, plus a Tools group (TODO confirm) | Languages + Web only |
+
+## Resume by email and a calmer phone layout (2026-11-26, branch `feat/mobile-declutter`)
+
+| ID | Before | Now |
+|---|---|---|
+| resume.cta | "PDF coming soon" pill | "Download PDF" opens "Get the PDF by email" (`resumeGate` in `resume.ts`). The pill stays until the email settings are in Vercel |
+| resume.note | — | I'll email you a download link that works for 15 minutes. When you use it, I get a copy of your address, because the PDF has my phone number on it. |
+| resume.sent | — | Check your inbox · The link is on its way to {email}. It works for 15 minutes. Can't see it? Check spam. |
+| resume.email | — | Subject "Kelvin Wilch's resume"; link + 15-minute note + "Didn't ask for this? You can ignore this email." |
+| phones | SKILL.md viewer, career banner, art on every project card | Hidden below 768px. Only ClassPing and Ro5n3R keep their (autoplaying) video panel |

@@ -1,6 +1,6 @@
 # WilchDev (wilch.dev portfolio)
 
-Kelvin Wilch's portfolio. Web only, Next.js 15 App Router, static export, Vercel.
+Kelvin Wilch's portfolio. Web only, Next.js 15 App Router, prerendered pages + two resume API routes, Vercel.
 
 - **Brand:** one palette. Primary `#4F3FD9` (indigo), accent `#D4F26A` (lime).
   Light + **true-black** dark (`#000` canvas, `#0E0E10` / `#1A1A1D` raised).
@@ -21,5 +21,10 @@ Kelvin Wilch's portfolio. Web only, Next.js 15 App Router, static export, Vercel
   Entrances use `backwards` fill. Glyphs over spinning shapes need `relative`.
 - **Checks:** `npm run lint && npm run typecheck && npm test && npm run build`,
   then `npm run test:e2e`. Screenshots: `node scripts/screenshots.mjs <dir>`.
+- **Resume gate:** the PDF is never public. `POST /api/resume/request/` emails a
+  15-minute HMAC-signed link (Resend); `GET /api/resume/download/` streams the
+  PDF from Blob (random path, `scripts/upload-resume.ts`) and emails Kelvin
+  who downloaded it. Env names in `.env.example`; without them the page shows
+  "PDF coming soon". Logic in `src/lib/resume-*.ts`.
 - **Plan:** `docs/PLAN.md`. Build phase by phase, one branch per phase.
 - **Never** commit to or push `main` without asking: a push there is a release.
