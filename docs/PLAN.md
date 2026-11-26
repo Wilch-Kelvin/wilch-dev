@@ -180,8 +180,18 @@ just the wording:
 ## 11. Open questions for Kelvin
 
 1. Which wording do you want changed? (Fill `docs/COPY.md`; the design review
-   in `design-review/` has suggestions.)
+   in `design-review/` has suggestions.) I made the changes already in the COPY.MD
 2. Keep one palette, or keep the palette switcher as a visible feature?
+keep one pelette
 3. OK with the non-true-black dark surface and no glass (section 6)?
+Lets put true black and make sure every element passes for light mode and dark mode
 4. Email link vs contact form, and do you want LinkedIn added?
-5. Domain name for production.
+https://www.linkedin.com/in/kelvin-wilch-5705b1405/
+kelvinmusiomi99@gmail.com
+
+5. Domain name for production: wilch.dev
+
+Change || For the font change it to this one, it will match the roundness and playful of the matrial UI: 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
