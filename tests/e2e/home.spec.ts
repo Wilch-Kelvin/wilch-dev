@@ -331,3 +331,17 @@ test('phones drop the clutter: no SKILL.md viewer or career banner, title-only c
     }
   }
 });
+
+test('resume API: unconfigured builds refuse politely and never leak the PDF', async ({
+  request,
+}) => {
+  // The test build has no email settings, so the gate is off: the request
+  // route says so and a download link goes back to the form.
+  const res = await request.post('/api/resume/request/', { data: { email: 'a@b.co' } });
+  expect(res.status()).toBe(503);
+  expect(await res.json()).toMatchObject({ error: { code: 'not_configured' } });
+
+  const dl = await request.get('/api/resume/download/?t=forged', { maxRedirects: 0 });
+  expect(dl.status()).toBe(303);
+  expect(dl.headers()['location']).toContain('resume=unavailable');
+});

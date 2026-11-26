@@ -6,12 +6,14 @@ import {
   careerNodeCount,
   education,
   resumeHeadings,
+  resumeGate,
   resumeIntro,
-  resumePdf,
   skillGroups,
 } from '@/content/resume';
 import type { CSSProperties } from 'react';
 import { revealProps } from '@/lib/reveal';
+import { readResumeConfig } from '@/lib/resume-config';
+import { ResumeRequest } from './ResumeRequest';
 
 /**
  * The hand-drawn line from this step's node to the next one. pathLength="1"
@@ -39,27 +41,22 @@ function CareerCurve() {
   );
 }
 
+/**
+ * The page is prerendered at build time, so this check runs during the
+ * Vercel build: once the email settings exist there, the next deploy shows
+ * the form. Without them it shows "PDF coming soon", never a broken form.
+ * Only a yes/no reaches the page; no secret does.
+ */
 function DownloadPdf() {
-  if (!resumePdf.href) {
-    // TODO(Kelvin): placeholder until public/resume.pdf exists (no dead link).
+  if (!readResumeConfig(process.env)) {
     return (
       <StatusPill className="border-outline text-on-surface-var min-h-[52px] border px-5 text-base">
         <Icon name="file" size={18} />
-        {resumePdf.pending}
+        {resumeGate.pending}
       </StatusPill>
     );
   }
-  return (
-    <div className="flex flex-col items-start gap-2">
-      <a className="btn state-layer bg-primary text-on-primary" href={resumePdf.href} download>
-        <Icon name="download" />
-        {resumePdf.label}
-      </a>
-      {resumePdf.updated ? (
-        <span className="text-on-surface-var font-mono text-sm">{resumePdf.updated}</span>
-      ) : null}
-    </div>
-  );
+  return <ResumeRequest />;
 }
 
 export function Resume() {
