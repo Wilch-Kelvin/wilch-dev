@@ -217,3 +217,26 @@ Lighthouse (local static build, gzip): mobile 94 / 100 / 100 / 100, desktop
 Still to fill (all marked `TODO(Kelvin)` in `src/content/`): résumé PDF,
 internship season and year, project screenshots, skills to confirm (Swift,
 SwiftUI, Git, Chrome extensions; Linux and a Security group still open).
+
+## 13. Revamp to the mockups (2026-11-26, `feat/revamp-motion`)
+
+Five mockup screenshots from Kelvin; the site already had every section, so
+this is a visual + motion pass, not a rebuild. No new runtime dependency:
+all motion is CSS (spring `linear()` curves, keyframes) plus small hooks.
+
+| Area | Change |
+|---|---|
+| Entrances | Scroll-scrubbed `view()` reveals replaced by triggered spring entrances (`lib/reveal.ts`, `useRevealOnScroll`): staggered, never hide on-screen content, nothing hidden without JS |
+| Nav | Desktop: 4 links, a sliding underline (`lib/indicator.ts`), filled GitHub ↗. Mobile unchanged |
+| Hero | Lime mono eyebrow; Kelvin's photo in the cookie frame (Vercel Blob, metadata-free WebP, K fallback); frame morphs (CSS `d`), shapes pop in, pointer parallax |
+| Projects | Cards collapse to art + title + round chevron; open springs height and staggers the contents |
+| Academics | Squiggle (travelled) + flat (ahead) line, drawn in per item with a clip-path wipe |
+| Resume | Cookie nodes joined by a hand-drawn curve (stroke-dashoffset draw) |
+
+Photo pipeline: `node scripts/prepare-profile.ts` (sips + Pillow, checks no
+EXIF/XMP/ICC) then `node --env-file=.env.local scripts/upload-profile.ts`
+(writes `src/content/profile-photo.ts`). `assets/profile/` is gitignored.
+
+Open for Kelvin: the mockup headings are a wide heavy grotesk (Roboto Flex,
+the original design font); the site keeps Barlow Condensed (decision W-4).
+Mockup wording not applied is listed in `docs/COPY.md`.

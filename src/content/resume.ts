@@ -1,7 +1,6 @@
 import type { CareerStep, Education, SectionIntro, SkillGroup } from './schema';
 
 export const resumeIntro: SectionIntro = {
-  number: '03',
   eyebrow: 'Resume',
   title: 'The short version',
   body: "Where I've studied and the tools I actually use. Grab the PDF for the full thing.",

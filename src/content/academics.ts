@@ -1,7 +1,6 @@
 import type { Milestone, SectionIntro } from './schema';
 
 export const academicsIntro: SectionIntro = {
-  number: '02',
   eyebrow: 'Academics',
   title: 'The Journey',
   // Kelvin's wording with spelling fixed ("Persuing a Bachelors Degree in…").

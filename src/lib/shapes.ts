@@ -30,3 +30,26 @@ export const shapeStroke: Readonly<Record<ShapeName, number>> = {
 export function shapeId(name: ShapeName): string {
   return `s-${name}`;
 }
+
+/**
+ * Builds a scalloped "cookie" path: `lobes` points on a circle of `radius`,
+ * joined by outward arcs of `arcRadius`. A smaller arc radius bulges more,
+ * so the lobes get deeper. Every call with the same `lobes` yields the same
+ * list of commands (M, N × A, Z), which is what lets CSS animate `d` between
+ * two of them: a morph needs matching commands, only the numbers change.
+ */
+export function cookiePath(lobes: number, radius: number, arcRadius: number): string {
+  const point = (i: number) => {
+    const angle = -Math.PI / 2 + (i * 2 * Math.PI) / lobes;
+    return `${(100 + radius * Math.cos(angle)).toFixed(1)} ${(100 + radius * Math.sin(angle)).toFixed(1)}`;
+  };
+  const r = arcRadius.toFixed(1);
+  const arcs = Array.from({ length: lobes }, (_, i) => `A${r} ${r} 0 0 1 ${point(i + 1)}`);
+  return `M${point(0)}${arcs.join('')}Z`;
+}
+
+/** The hero frame breathes between the calm cookie and a puffier one. */
+export const heroMorph = {
+  from: cookiePath(12, 84, 34.8),
+  to: cookiePath(12, 80, 23.5),
+} as const;

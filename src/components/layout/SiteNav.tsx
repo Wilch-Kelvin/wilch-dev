@@ -6,16 +6,16 @@ import { Icon } from '@/components/ui/Icon';
 import { Shape } from '@/components/ui/Shape';
 import { nav } from '@/content/site';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { useSlidingIndicator } from '@/hooks/useSlidingIndicator';
 import { ThemeToggle } from './ThemeToggle';
 
 const sectionIds = nav.items.map((item) => item.target);
-// On desktop the filled Résumé button already covers that link.
-const desktopItems = nav.items.filter((item) => item.target !== nav.cta.target);
 
 /**
- * Sticky liquid-glass pill. From 768px it shows every link; below that it
- * collapses to logo + Résumé + a menu button that opens a glass sheet
- * (review M4), so it never wraps into two or three sticky rows.
+ * Sticky liquid-glass pill. From 768px it shows every link, a sliding
+ * underline under the current section and a filled GitHub button (as in the
+ * 2026-11-26 mockups). Below that it collapses to logo + Résumé + a menu
+ * button that opens a glass sheet (review M4), so it never wraps.
  */
 export function SiteNav() {
   const active = useActiveSection(sectionIds);
@@ -23,6 +23,8 @@ export function SiteNav() {
   const menuId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const indicator = useSlidingIndicator(listRef, active);
 
   // Escape and outside taps close the sheet; focus goes back to the button.
   useEffect(() => {
@@ -65,11 +67,12 @@ export function SiteNav() {
           <span aria-hidden="true">{nav.brand}</span>
         </Link>
 
-        <ul className="m-0 hidden list-none items-center gap-1 p-0 md:flex">
-          {desktopItems.map((item) => (
+        <ul ref={listRef} className="relative m-0 hidden list-none items-center gap-1 p-0 md:flex">
+          {nav.items.map((item) => (
             <li key={item.target}>
               <a
-                className="nav-link state-layer"
+                data-target={item.target}
+                className="nav-link nav-link-underline state-layer"
                 href={`/#${item.target}`}
                 aria-current={active === item.target ? 'true' : undefined}
               >
@@ -77,6 +80,17 @@ export function SiteNav() {
               </a>
             </li>
           ))}
+          {indicator.geometry ? (
+            <li
+              aria-hidden="true"
+              className="nav-indicator"
+              style={{
+                translate: `${indicator.geometry.x}px 0`,
+                width: indicator.geometry.width,
+                opacity: indicator.visible ? 1 : 0,
+              }}
+            />
+          ) : null}
         </ul>
 
         <div className="ml-auto flex items-center gap-1">
@@ -84,14 +98,15 @@ export function SiteNav() {
             <ThemeToggle />
           </span>
           <a
-            className="icon-btn state-layer hidden md:inline-grid"
+            className="btn btn-sm state-layer bg-primary text-on-primary hidden md:inline-flex"
             href={nav.github.href}
             aria-label={nav.githubAria}
           >
-            <Icon name="github" />
+            {nav.github.label}
+            <Icon name="arrowUpRight" size={18} className="nudge-diag" />
           </a>
           <a
-            className="btn btn-sm state-layer bg-primary text-on-primary"
+            className="btn btn-sm state-layer bg-primary text-on-primary md:hidden"
             href={`/#${nav.cta.target}`}
             aria-current={active === nav.cta.target ? 'true' : undefined}
           >
@@ -112,7 +127,7 @@ export function SiteNav() {
 
         <span
           aria-hidden="true"
-          className="scroll-progress bg-primary absolute right-7 bottom-[3px] left-7 h-[3px] rounded-full"
+          className="scroll-progress bg-primary absolute right-7 bottom-[3px] left-7 h-[3px] rounded-full md:invisible"
         />
 
         <div

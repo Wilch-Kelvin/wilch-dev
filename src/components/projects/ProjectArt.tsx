@@ -49,7 +49,7 @@ function Ro5n3RArt() {
       </div>
       <span className="wiggle bg-secondary-c absolute top-[92px] right-[7%] h-[62px] w-[132px] rounded-full" />
       <div className="wiggle wiggle-2 absolute right-[13%] bottom-3.5 h-[70px] w-[70px]">
-        <Shape name="flower6" color="var(--primary)" className="h-full w-full" />
+        <Shape name="flower6" color="var(--ia)" className="h-full w-full" />
       </div>
       <span className="bg-primary absolute bottom-[22px] left-[31%] h-[34px] w-[34px] rounded-full" />
     </>

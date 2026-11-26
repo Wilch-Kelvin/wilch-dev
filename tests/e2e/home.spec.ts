@@ -8,12 +8,12 @@ test('home page: hero, projects, disclosure, contact', async ({ page }) => {
   await expect(page).toHaveTitle(/Kelvin Wilch/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText("Hi, I'm Kelvin.");
 
-  // Four project cards, ClassPing open by default (review M1).
+  // Four project cards, all collapsed to art + name (mockups 2026-11-26).
   const more = page.getByRole('button', { name: /^More about/ });
   await expect(more).toHaveCount(4);
   await expect(page.getByRole('button', { name: 'More about ClassPing' })).toHaveAttribute(
     'aria-expanded',
-    'true',
+    'false',
   );
 
   const ro5n3r = page.getByRole('button', { name: 'More about Ro5n3R' });
@@ -107,16 +107,68 @@ test('loading the page causes almost no layout shift (CLS < 0.1)', async ({ page
   expect(cls).toBeLessThan(0.1);
 });
 
-test('the hero K stays above its spinning shape', async ({ page }) => {
+test('the hero photo sits above its spinning frame and stays upright', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
-  const k = page.getByText('K', { exact: true });
-  const box = (await k.boundingBox())!;
-  const topmost = await page.evaluate(
-    ({ x, y }) => document.elementFromPoint(x, y)?.textContent?.trim(),
-    { x: box.x + box.width * 0.2, y: box.y + box.height * 0.5 },
+  const photo = page.getByRole('img', { name: /^Kelvin Wilch smiling/ });
+  await expect(photo).toBeVisible();
+  // Topmost thing at the centre of the frame is the photo, not the mat.
+  const box = (await page.locator('[data-portrait]').boundingBox())!;
+  const onTop = await page.evaluate(
+    ({ x, y }) => document.elementFromPoint(x, y)?.closest('[data-portrait-face]') !== null,
+    { x: box.x + box.width / 2, y: box.y + box.height / 2 },
   );
-  expect(topmost).toBe('K');
+  expect(onTop).toBe(true);
+  // The frame spins and the photo counter-spins at the same speed, so the
+  // photo's net rotation stays ~0 even halfway through the loop.
+  await page.evaluate(() => {
+    for (const a of document.getAnimations())
+      if ((a as CSSAnimation).animationName === 'spin') a.currentTime = 24_000;
+  });
+  const net = await photo.evaluate((img) => {
+    const angle = (el: Element) => {
+      const m = new DOMMatrix(
+        getComputedStyle(el).rotate === 'none'
+          ? undefined
+          : `rotate(${getComputedStyle(el).rotate})`,
+      );
+      return Math.atan2(m.b, m.a) * (180 / Math.PI);
+    };
+    return angle(img) + angle(img.parentElement!);
+  });
+  expect(Math.abs(net) % 360).toBeLessThan(1);
+});
+
+test('if the photo cannot load, the K monogram takes its place', async ({ page }) => {
+  await page.route('**/*.public.blob.vercel-storage.com/**', (route) => route.abort());
+  await page.goto('/');
+  await expect(page.locator('[data-portrait]').getByText('K', { exact: true })).toBeVisible();
+  await expect(page.getByRole('img', { name: /^Kelvin Wilch smiling/ })).toHaveCount(0);
+});
+
+test('the nav underline slides to the section being read', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'The underline is part of the desktop nav');
+  await page.goto('/#resume');
+  const nav = page.getByRole('navigation', { name: 'Main' });
+  const link = nav.getByRole('link', { name: 'Resume', exact: true });
+  await expect(link).toHaveAttribute('aria-current', 'true');
+  const bar = nav.locator('.nav-indicator');
+  await expect(bar).toHaveCSS('opacity', '1');
+  // Wait for the spring to settle, then the bar must sit under the link.
+  await page.waitForTimeout(900);
+  const [l, b] = [(await link.boundingBox())!, (await bar.boundingBox())!];
+  expect(Math.abs(l.x + l.width / 2 - (b.x + b.width / 2))).toBeLessThan(2);
+});
+
+test('no horizontal scroll at 375px, collapsed or open', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  const width = () => page.evaluate(() => document.documentElement.scrollWidth);
+  expect(await width()).toBeLessThanOrEqual(375);
+  for (const button of await page.getByRole('button', { name: /^More about/ }).all()) {
+    await button.click();
+  }
+  expect(await width()).toBeLessThanOrEqual(375);
 });
 
 test('unknown pages get the friendly 404 with a way home', async ({ page }) => {

@@ -106,3 +106,32 @@ rest of the text behind a "More" button (review M1). The words are unchanged.
 | footer.copy | © 2026 Kelvin | © 2026 Kelvin Wilch (full name, review B2) |
 | footer.tagline | Design Inspired by Flow | |
 | footer.top | Back to top | |
+
+## Revamp to the mockups (2026-11-26, branch `feat/revamp-motion`)
+
+Wording or visibility changes made while matching the five mockups. Kelvin's
+existing copy was kept wherever the mockups showed older wording (see the
+second table).
+
+| ID | Before | Now |
+|---|---|---|
+| hero.eyebrow (new) | | CS + Cybersecurity @ USM (lime mono chip above the greeting) |
+| hero.portraitAlt (new) | | Kelvin Wilch smiling, with shoulder-length locs and a black headband (alt text of the hero photo) |
+| hero.monogram | K (always shown) | K, now only shown if the photo is missing or fails to load |
+| hero.seeking | Lime chip under the buttons | Same words, now a quiet line with a pulsing dot (the lime chip style moved to the eyebrow) |
+| nav.cta (desktop) | Resume (filled), GitHub icon | GitHub ↗ (filled) + Resume as a normal link, as in the mockup. Mobile unchanged: Resume (filled) + menu (review M4) |
+| section numbers | 01 / 02 / 03 inside the shape badges | Removed; plain shape badge + eyebrow, as in the mockups |
+| card.more | "More" + chevron | Round chevron only; accessible name is still "More about {project}" |
+| project summary + chips + link | Always visible (review M1), ClassPing open by default | Behind the chevron for every card (mockup 2). `openByDefault` in `projects.ts` re-opens one |
+| resume.path numbers | 1 / 2 / 3 inside mixed shapes | Removed; three identical cookie nodes joined by a curve |
+
+### Mockup wording **not** applied (Kelvin to decide)
+
+| ID | Live (kept) | Mockup shows |
+|---|---|---|
+| hero.body | …I enjoy WebDev, Agentic Engineering, and I'm working my way toward DevOps and security. | …I build for the web, the browser and iOS, and I'm working my way toward DevOps and security. |
+| hero.cta1 | Curious | See my projects |
+| work.body | Four projects I'm putting hours into right now… | Four projects I'm putting real hours into right now… |
+| acad.body | Pursuing a Bachelor's degree at the University of Southern Maine. Here's where things stand. | I finished my associate degree at Southern Maine Community College, then transferred to the University of Southern Maine. Here's where things stand. |
+| resume.cta | "PDF coming soon" pill until `public/resume.pdf` exists | Download PDF button + "[ADD PDF LINK]" note |
+| resume.skills | Languages incl. Swift, plus a Tools group (TODO confirm) | Languages + Web only |

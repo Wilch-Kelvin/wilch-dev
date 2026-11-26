@@ -13,3 +13,7 @@ next-env.d.ts
 docs/
 design/
 design-review/screenshots/
+
+# Kelvin's raw photo (HEIC can hold GPS) and the processed WebPs.
+# The public copies live on Vercel Blob; see scripts/upload-profile.ts.
+assets/profile/
